@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { Header, Sidebar } from "../Components";
+import { Header } from "../Components";
 import useAuth from "../Hooks/useAuth";
 export const RutaProtegida = () => {
     const { auth, loading } = useAuth();
@@ -12,7 +12,6 @@ export const RutaProtegida = () => {
                 <div className="">
                     <Header />
                     <div className="">
-                        <Sidebar />
                         <main className="p-10 flex-1 ">
                             <Outlet />
                         </main>

@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './style.module.css';
+// import styles from './style.module.css';
 
-const Register = () => {
+export const Register = () => {
   return (
     <div className={styles['register-container']}>
       <div className={styles['register-header']}></div>
@@ -84,4 +84,3 @@ const Register = () => {
   );
 };
 
-export default Register;
