@@ -9,9 +9,9 @@ export const RutaProtegida = () => {
     return (
         <>
             {auth.id ? (
-                <div className="bg-gray-100">
+                <div className="">
                     <Header />
-                    <div className="md:flex md:min-h-screen">
+                    <div className="">
                         <Sidebar />
                         <main className="p-10 flex-1 ">
                             <Outlet />
