@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Login } from "./Pages/Login";
+import { Register } from "./Pages/Register";
 import { AuthLayout, RutaProtegida } from "./Layouts/";
+import {PasswordRecovery} from "./Pages/PasswordRecovery";
 
 const App = () => {
     return (
@@ -8,6 +10,9 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<AuthLayout />}>
                     <Route index element={<Login />} />
+                    <Route path="login" element={<Login />} />
+                    <Route path="singup" element={<Register />} />
+                    <Route path="password-recovery" element={<PasswordRecovery />} />
                    {/*  <Route path="registrar" element={<RegisterPage />} />
                     <Route
                         path="olvidar-password"

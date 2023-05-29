@@ -1,5 +1,5 @@
-import React from "react";
 import styles from "./style.module.css";
+import { Link } from "react-router-dom";
 
 export const Login = () => {
     return (
@@ -36,9 +36,9 @@ export const Login = () => {
                             />
                         </fieldset>
 
-                        <a className={styles["forgot-password"]} href="#">
+                        <Link className={styles["forgot-password"]} to={"password-recovery"}>
                             Olvidé mi Contraseña
-                        </a>
+                        </Link>
                         <div className={styles["btn"]}>
                             <input
                                 className={styles["login-input"]}
@@ -47,9 +47,13 @@ export const Login = () => {
                             />
                         </div>
                         <div className={styles["btn"]}>
-                            <a className={styles["register-link"]} href="#">
+                            <Link
+                                className={styles["register-link"]}
+                                to={"singup"}
+                            >
+                               
                                 Registro
-                            </a>
+                            </Link>
                         </div>
                     </form>
                 </div>

@@ -6,7 +6,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState({});
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     useEffect(() => {
         (async () => {
             const token = localStorage.getItem("token");
@@ -17,12 +17,10 @@ export const AuthProvider = ({ children }) => {
                     Authorization: `Bearer ${token}`,
                 },
             };
-            // console.log(config, "confog")
             try {
-                const { data } = await ApiBackend("users/perfil", config);
-                // console.log(da ta);
+                const { data } = await ApiBackend("me", config);
                 setAuth(data.msj);
-                navigate("/proyectos")
+                navigate("/proyectos");
             } catch (error) {
                 setAuth({});
                 console.log(error);
