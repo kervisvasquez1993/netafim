@@ -4,7 +4,6 @@ import { Header } from "../Components";
 import useAuth from "../Hooks/useAuth";
 export const RutaProtegida = () => {
     const { auth, loading } = useAuth();
-    console.log(auth, "auth desde ruta protegida");
     if (loading) return "Cargando....";
     return (
         <>

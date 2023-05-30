@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import CustomersProvider from "../Context/CustomersProvider";
+import CustomersContext from "../Context/CustomersProvider";
 const useCustomers = () => {
-    return useContext(CustomersProvider);
+    return useContext(CustomersContext);
 };
 
 export default useCustomers;

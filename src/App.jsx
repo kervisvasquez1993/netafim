@@ -6,7 +6,7 @@ import { PasswordRecovery } from "./Pages/PasswordRecovery";
 import { AuthProvider } from "./Context/AuthProvider";
 import { Home } from "./Pages/Home";
 import { ListCustomers } from "./Pages/Customers/index";
-import CustomersProvider from "./Context/CustomersProvider";
+import {CustomersProvider} from "./Context/CustomersProvider";
 
 const App = () => {
     return (
