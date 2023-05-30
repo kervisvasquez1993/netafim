@@ -19,8 +19,9 @@ export const AuthProvider = ({ children }) => {
             };
             try {
                 const { data } = await ApiBackend("me", config);
-                setAuth(data.msj);
-                navigate("/proyectos");
+                console.log(data)
+                setAuth(data);
+                navigate("/home");
             } catch (error) {
                 setAuth({});
                 console.log(error);

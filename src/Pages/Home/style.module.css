@@ -1,0 +1,152 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: sans-serif;
+  }
+  
+  a {
+    text-align: center;
+    text-decoration: none;
+    color: #000;
+    display: block;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+  }
+  
+  .home-container {
+    background-image: url(../img/malla\ fondo.png);
+  }
+  
+  .header-container {
+    margin-top: 1rem;
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) 3rem;
+    margin-inline: auto;
+  }
+  
+  .home-logo {
+    background-image: url(../img/Logo\ netafim.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    grid-column: 1 / 3;
+    padding-inline: 0.5rem;
+  }
+  .home-bell {
+    background-image: url(../img/Back.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 3rem;
+    height: 3rem;
+    padding-left: 1rem;
+  
+    grid-column: 3 / 4;
+    align-self: flex-start;
+    justify-self: flex-end;
+  }
+  
+  @media (min-width: 600px){
+    .home-bell{
+      background-image: none;
+    }
+  }
+  
+  .form-title {
+    text-align: center;
+  }
+  
+  .form-container{
+    margin-top: 4rem;
+  }
+  
+  .log-in-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .log-in {
+    box-shadow: 1px 1px 12px -2px rgba(0,0,0,0.5);
+    border-radius: 1rem;
+    padding: 1rem .5rem;
+    background-color: #fff;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  @media (min-width: 800px){
+    .log-in{
+      padding-inline: 2rem;
+    }
+  }
+  
+  
+  
+  .img{
+    background-repeat:no-repeat;
+    background-position: center;
+    height: 6rem;
+    width: 6rem;
+    margin: 1rem 0;
+  }
+  
+  @media (min-width: 800px){
+    .img {
+      margin-bottom: 2.5rem;
+    }
+  }
+  
+  .img-one{
+    background-image: url(../img/añadir\ cliente.svg);
+  }
+  
+  .img-two{
+  background-image: url(../img/clientes.svg);
+  }
+  
+  .img-three{
+    background-image: url(../img/perfil.svg);
+  }
+  
+  
+  
+  .register {
+    border: none;
+    width: 10rem;
+    margin-top: 1rem;
+    padding: 0.6rem 0;
+    border-radius: 0.5rem;
+    background-color: #0a7dd6;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
+  .btn-link{
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+  }
+  
+  .register-link {
+    width: 14rem;
+    margin-inline: auto;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid #0a7dd6;
+    color: #0a7dd6;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
