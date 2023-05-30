@@ -1,0 +1,140 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: sans-serif;
+  }
+  
+  a {
+    text-align: center;
+    text-decoration: none;
+    color: #000;
+    display: block;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 10px;
+  }
+  
+  .register-container {
+    background-image: url(../img/malla\ fondo.png);
+  }
+  
+  .register-header {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .register-header {
+    background-image: url(../img/Logo\ netafim.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 100%;
+    height: 3rem;
+  }
+  @media (min-width: 600px) {
+    .register-header {
+      height: 4rem;
+    }
+  }
+  
+  .main {
+    margin-bottom: 3rem;
+  }
+  
+  /* TITLE PRINCIPAL */
+  .title {
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 1rem;
+  }
+  @media (min-width: 800px) {
+    .title {
+      padding: 0 1rem;
+      margin-inline: auto;
+      width: 100%;
+      display: grid;
+      grid-template-rows: 2rem 4rem;
+    }
+  }
+  
+  .arrow {
+    background-image: url(../img/Back.svg);
+    background-repeat: no-repeat;
+    width: 2rem;
+    height: 2rem;
+    color: #0a7dd6;
+    cursor: pointer;
+  
+    grid-column: 1 / 2;
+    align-self: start;
+  }
+  
+  @media (min-width: 800px) {
+    .arrow {
+      grid-row: 1 /2;
+      align-self: center;
+    }
+  }
+  
+  .form-title {
+    margin: 0;
+    font-weight: lighter;
+    text-align: center;
+    grid-column: 2/ 3;
+    justify-self: center;
+  }
+  @media (min-width: 800px) {
+    .form-title {
+      width: 40%;
+      grid-row: 2 /3;
+      justify-self: center;
+    }
+  }
+  /* FIN TITLE PRINCIPAL */
+  
+  .section-tarjetas {
+    margin-top: 3rem;
+    padding: 0.5rem;
+    background-color: #fff;
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 100px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (min-width: 800px) {
+    .section-tarjetas {
+      margin-inline: auto;
+      width: 50%;
+    }
+  }
+  
+  .trj {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    width: 100%;
+    border-radius: 1rem;
+    background-color: #bad6ed;
+  
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .trj-img {
+    background-image: url(../img/tarjeta.svg);
+    background-repeat: no-repeat;
+    width: 5rem;
+    height: 3rem;
+    background-position: center;
+  }
+  
