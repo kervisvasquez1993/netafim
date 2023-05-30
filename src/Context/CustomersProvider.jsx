@@ -7,13 +7,15 @@ const CustomersContext = createContext();
 export const CustomersProvider = ({ children }) => {
     const [customers, setCustomers] = useState([]);
     const [customer, setCustomer] = useState([]);
-    const [loadingProject, setLoadingProject] = useState(false);
-    const [test, setTest] = useState("test");
+    const [loadingCustomers, setLoadingCustomers] = useState(false);
+    const config = configHeaderToken();
     useEffect(() => {
         const getCustomers = async () => {
-            setLoadingProject(true);
+            setLoadingCustomers(true);
             try {
+                console.log("kervis");
                 if (!config) {
+                    console.log("no tienes permiso");
                     mostrarAlerta({
                         message: "No tienes permiso",
                         error: true,
@@ -24,19 +26,20 @@ export const CustomersProvider = ({ children }) => {
                     "/clientes?activos=1",
                     config
                 );
-                console.log(data);
-                // setProyectos(data.projects);
-                // setLoadingProject(false);
+                setCustomers(data);
+                setLoadingCustomers(false);
             } catch (error) {
                 console.log(error);
             } finally {
-                setLoadingProject(false);
+                setLoadingCustomers(false);
             }
         };
         getCustomers();
     }, [customer]);
     return (
-        <CustomersContext.Provider value={{ customers, customer, test }}>
+        <CustomersContext.Provider
+            value={{ customers, customer, loadingCustomers }}
+        >
             {children}
         </CustomersContext.Provider>
     );
