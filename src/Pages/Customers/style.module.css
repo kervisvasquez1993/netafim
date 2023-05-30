@@ -13,7 +13,8 @@
     color: #000;
     display: block;
   }
-  
+
+
   .container {
     max-width: 1200px;
     margin-inline: auto;
@@ -305,7 +306,7 @@
     height: 2rem;
   }
   
-  #cultivo {
+  .cultivo {
     border: none;
     width: 100%;
     background-color: #fff;
@@ -317,11 +318,11 @@
     justify-content: space-between;
     align-items: baseline;
   }
-  #tamaño-cultivo {
+  .tamaño-cultivo {
     width: 50%;
     padding-left: 0.5rem;
   }
-  #tamaño-cultiv {
+  .tamaño-cultiv {
     padding: 0.7rem;
     background-color: #fff;
     border: 1px solid #d1c8c8;
@@ -367,4 +368,6 @@
     background-color: #0a7dd6;
     border-radius: 0.2rem;
   }
+
+  
   

@@ -1,0 +1,203 @@
+.register-container {
+    background-image: url(../img/malla\ fondo.png);
+}
+
+.register-header {
+    margin: 0;
+    padding: 0;
+}
+
+.register-header {
+    background-image: url(../img/Logo\ netafim.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 100%;
+    height: 3rem;
+}
+
+.register-form {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+@media (min-width: 600px) {
+    .register-form {
+        width: 50%;
+        margin-inline: auto;
+    }
+}
+
+/* TITLE PRINCIPAL */
+.title {
+    width: 100vw;
+    text-align: center;
+}
+
+
+.arrow {
+    background-image: url(../img/Back.svg);
+    background-repeat: no-repeat;
+    width: 2rem;
+    height: 2rem;
+    color: #0a7dd6;
+    grid-column: 1 / 2;
+    align-self: center;
+}
+
+@media (min-width: 800px) {
+    .arrow {
+        grid-column: unset;
+        grid-row: 1 /2;
+        align-self: center;
+    }
+}
+
+.form-title {
+    margin: 0;
+    font-weight: lighter;
+    text-align: center;
+    grid-column: 2/ 4;
+    justify-self: center;
+}
+
+@media (min-width: 800px) {
+    .form-title {
+        grid-column: unset;
+        grid-row: 2 /3;
+        justify-self: center;
+    }
+}
+
+/* FIN TITLE PRINCIPAL */
+
+@media (min-width: 800px) {
+    .btn-header {
+        margin-bottom: 3rem;
+        margin-top: 0.5rem;
+        display: block;
+    }
+}
+
+.añadir-clientes {
+    width: 16rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: #0a7dd6;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.form-container {
+    width: 100%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
+
+    padding-bottom: 3rem;
+}
+
+@media (min-width: 800px) {
+    form {
+        gap: 2rem;
+    }
+}
+
+.input {
+    width: 20rem;
+    border-radius: 0.8rem;
+    border: 1px solid #0a7dd6;
+}
+
+@media (min-width: 800px) {
+    .input {
+        width: 100%;
+    }
+}
+
+legend {
+    font-weight: 700;
+    color: #0a7dd6;
+}
+
+.input input {
+    border: none;
+    width: 100%;
+    height: 2rem;
+}
+
+.cultivo {
+    border: none;
+    width: 100%;
+    background-color: #fff;
+}
+
+.tamaño-cult {
+    padding: 0 0.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.tamaño-cultivo {
+    width: 50%;
+    padding-left: 0.5rem;
+}
+
+.tamaño-cultiv {
+    padding: 0.7rem;
+    background-color: #fff;
+    border: 1px solid #d1c8c8;
+    border-radius: 0.5rem;
+    margin-top: -3rem;
+    color: #0a7dd6;
+}
+
+.btn {
+    margin-top: 2.5rem;
+}
+
+.register-link {
+    border-radius: 0.5rem;
+    padding: 1rem 1.5rem;
+    width: 15rem;
+    background-color: #0a7dd6;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-dos {
+    margin-top: 0;
+}
+
+.white {
+    background-color: #fff;
+    border: 1px solid #0a7dd6;
+    color: #0a7dd6;
+}
+
+.extra {
+    display: flex;
+    align-items: center;
+    color: #0a7dd6;
+}
+
+.extra input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 1.8rem;
+    height: 1.8rem;
+    background-color: #0a7dd6;
+    border-radius: 0.2rem;
+}

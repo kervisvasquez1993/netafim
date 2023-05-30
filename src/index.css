@@ -1,3 +1,44 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
+input:focus {
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+
+
+.container-element {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.center-element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 90vh;
+  margin: 20px;
+}
+
+@media (min-width: 800px) {
+  .form-container {
+
+    min-height: 60vh;
+  }
+}

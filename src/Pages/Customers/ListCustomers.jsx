@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 
 export const ListCustomers = () => {
     const { customers, loadingCustomers } = useCustomers();
-    const { data, message } = customers;
+    console.log(customers)
+    // console.log(data)
     if (loadingCustomers) return <div>loading...</div>;
     return (
         <div
@@ -21,8 +22,8 @@ export const ListCustomers = () => {
                 </div>
 
                 <div className={styles["section-tarjetas"]}>
-                    {data &&
-                        data.map((customers) => (
+                    {customers?.data &&
+                        customers?.data.map((customers) => (
                             
                                 <Link
                                     key={customers.id}
@@ -34,7 +35,7 @@ export const ListCustomers = () => {
                                 </Link>
                             
                         ))}
-                    {message && <div className={styles["trj"]}>{message}</div>}
+                    {customers?.message && <div className={styles["trj"]}>{customers.message}</div>}
                 </div>
             </div>
         </div>
