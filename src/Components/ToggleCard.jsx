@@ -1,15 +1,19 @@
 import { useState } from "react";
 import CardCustomer from "./Cardcustomer";
+import { Link } from "react-router-dom";
+import Button from "./Button";
 
 const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
     const [activeTab, setActiveTab] = useState(1);
     const handleTabClick = (tabIndex) => {
         setActiveTab(tabIndex);
     };
-
+    const test =() =>{
+    console.log("test");
+    }
     return (
         <>
-            <div className="border rounded-xl overflow-hidden shadow-md">
+            <div className="border rounded-xl overflow-hidden shadow-sm min-h-3000">
                 <div className="flex">
                     <div
                         className={`w-1/2 p-4 cursor-pointer ${
@@ -50,14 +54,21 @@ const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
                         </h3>
                     </div>
                 </div>
-                <div className="border-t border-b p-4">
+
+                <div className="border-t border-b p-4 text-center">
+                    <Button text={"Descargar Datos"} onClick={test} variant={"primary"}/>
                     {data &&
-                        data.data.map((ele) => (
-                            <CardCustomer
-                                cardTitle={"teswt"}
-                                cardSubtitle={"subTitle"}
-                            />
-                        ))}
+                        data.data.map((ele) => {
+                            return (
+                                <Link to={`${ele.id}`}>
+                                    <CardCustomer
+                                        key={ele.id}
+                                        cardTitle={ele.nombre}
+                                        cardSubtitle={ele.empresa}
+                                    />{" "}
+                                </Link>
+                            );
+                        })}
                 </div>
             </div>
         </>

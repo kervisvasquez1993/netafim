@@ -22,25 +22,18 @@ const CardList = () => {
 export const ListCustomers = () => {
     const { customers, loadingCustomers, customersInactivo } = useCustomers();
     const [dato, setDatos] = useState(customers);
-    console.log(customers);
-    console.log(customersInactivo);
-    let datosClientes;
     if (loadingCustomers) return <div>loading...</div>;
-    // return (
-
-    //     <CardCustomer cardTitle={"ejemplo"} cardSubtitle={"ejemplo2"}/>
-    // );
-    const test = () => {
+    const handlessCustomers = () => {
         setDatos(customers);
     };
-    const test2 = () => {
+    const handlessCustomersInactivo = () => {
         setDatos(customersInactivo);
     };
 
     return (
         <ToggleCard
-            handleLeftClick={test}
-            handleRightClick={test2}
+            handleLeftClick={handlessCustomers}
+            handleRightClick={handlessCustomersInactivo}
             data={dato}
         />
     );

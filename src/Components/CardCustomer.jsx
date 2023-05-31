@@ -19,8 +19,12 @@ const CardCustomer = ({ cardTitle, cardSubtitle }) => {
                     </svg>
                 </div>
                 <div className="flex-1">
-                    <h3 className="text-lg font-semibold">{cardTitle}</h3>
-                    <h3 className="text-lg font-semibold">{cardSubtitle}</h3>
+                    <h3 className=" text-left font-light text-2xl">
+                        {cardTitle}
+                    </h3>
+                    <h3 className=" text-left font-light text-2xl ">
+                        {cardSubtitle}
+                    </h3>
                 </div>
             </div>
         </div>
