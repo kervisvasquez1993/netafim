@@ -6,11 +6,10 @@ import { ApiBackend } from "../apis/ApiBackend";
 const CustomersContext = createContext();
 export const CustomersProvider = ({ children }) => {
     const [customers, setCustomers] = useState([]);
+    const [customersInactivo, setCustomersInactivo] = useState([]);
     const [customer, setCustomer] = useState([]);
     const [loadingCustomers, setLoadingCustomers] = useState(false);
     const config = configHeaderToken();
-
-
 
     // const submitProyecto = async (proyecto) => {
     //     const { id } = proyecto;
@@ -23,12 +22,11 @@ export const CustomersProvider = ({ children }) => {
     //     return;
     // };
     const submitChangeStatus = async (customer) => {
-        
-        await activarDesactivarCliente(customer)
+        await activarDesactivarCliente(customer);
         return;
     };
     useEffect(() => {
-        const getCustomers = async () => {
+        const fetchData = async () => {
             setLoadingCustomers(true);
             try {
                 if (!config) {
@@ -39,22 +37,23 @@ export const CustomersProvider = ({ children }) => {
                     });
                     return;
                 }
-                const {data}  = await ApiBackend.get(
-                    "/clientes?activos=1",
-                    config
-                );
-                console.log(data,"data")
-                setCustomers(data);
-                console.log(customers)
-                setLoadingCustomers(false);
+
+                const [activeData, inactiveData] = await Promise.all([
+                    ApiBackend.get("/clientes?activos=1", config),
+                    ApiBackend.get("/clientes?activos=0", config),
+                ]);
+
+                setCustomers(activeData.data);
+                setCustomersInactivo(inactiveData.data);
             } catch (error) {
                 console.log(error);
             } finally {
                 setLoadingCustomers(false);
             }
         };
-        getCustomers();
-    }, [customer]);
+
+        fetchData();
+    }, []);
 
     const getCustomer = async (id) => {
         setLoadingCustomers(true);
@@ -77,18 +76,18 @@ export const CustomersProvider = ({ children }) => {
     };
 
     const activarDesactivarCliente = async (customer) => {
-        let updateValue ;
-        const { id, activo  } = customer;
+        let updateValue;
+        const { id, activo } = customer;
 
         if (activo == 1) {
-            updateValue =  0;
-          } else if (activo == 0) {
+            updateValue = 0;
+        } else if (activo == 0) {
             updateValue = 1;
-          } 
+        }
         // console.log(updateValue);
         const dataSubmit = {
-            activo : updateValue
-        }
+            activo: updateValue,
+        };
 
         try {
             if (!config) {
@@ -101,18 +100,18 @@ export const CustomersProvider = ({ children }) => {
                 dataSubmit,
                 config
             );
-            console.log(data)
+            console.log(data);
             // console.log(data)
             // sincronizar el state
             // console.log(customers.data)
             // const test = customers.data.map( obj => obj)
             // console.log(test)
-    
+
             const customerUpdate = customers.data((customerState) => {
                 // console.log(customerState)
 
                 if (customerState.id === data.data.id) {
-                    setCustomer(data.data); 
+                    setCustomer(data.data);
                 } else {
                     return customerState;
                 }
@@ -132,7 +131,8 @@ export const CustomersProvider = ({ children }) => {
                 loadingCustomers,
                 getCustomer,
                 activarDesactivarCliente,
-                submitChangeStatus
+                submitChangeStatus,
+                customersInactivo,
             }}
         >
             {children}

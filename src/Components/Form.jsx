@@ -21,7 +21,7 @@ console.log(ubicacion_zona)
           Nombre:
         </label>
         <input
-          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-70"
+          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
           type="text"
           id="nombre"
           readOnly
@@ -33,7 +33,7 @@ console.log(ubicacion_zona)
           Apellido:
         </label>
         <input
-          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-70"
+          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
           type="text"
           id="apellido"
           value={apellido}
@@ -46,7 +46,7 @@ console.log(ubicacion_zona)
           Correo:
         </label>
         <input
-          className="  border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-70 text-blue-500 opacity-70"
+          className="  border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40 text-blue-500 opacity-40"
           type="text"
           id="correo"
           value={correo}
@@ -59,7 +59,7 @@ console.log(ubicacion_zona)
           Cultivo:
         </label>
         <input
-          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-70"
+          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
           type="text"
           id="cultivo"
           value={cultivo}
@@ -72,7 +72,7 @@ console.log(ubicacion_zona)
           Número de teléfono:
         </label>
         <input
-          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-70"
+          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
           type="text"
           id="numero_telefono"
           readOnly
@@ -85,7 +85,7 @@ console.log(ubicacion_zona)
           País:
         </label>
         <input
-          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-70"
+          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
           type="text"
           defaultValue={pais}
           id="pais"
@@ -98,7 +98,7 @@ console.log(ubicacion_zona)
           Tamaño de cultivo:
         </label>
         <input
-          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-70"
+          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
           type="text"
           
           id="tamano_de_cultivo"
@@ -111,7 +111,7 @@ console.log(ubicacion_zona)
           Ubicación / Zona:
         </label>
         <input
-          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-70"
+          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
           type="text"
           id="ubicacion_zona"
           readOnly
@@ -123,7 +123,7 @@ console.log(ubicacion_zona)
           Empresa:
         </label>
         <input
-          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-70"
+          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
           type="text"
           id="empresa"
           readOnly
