@@ -11,6 +11,7 @@ const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
     const test =() =>{
     console.log("test");
     }
+    console.log(data, "data")
     return (
         <>
             <div className="border rounded-xl overflow-hidden shadow-sm min-h-3000">
@@ -57,8 +58,20 @@ const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
 
                 <div className="border-t border-b p-4 text-center">
                     <Button text={"Descargar Datos"} onClick={test} variant={"primary"}/>
-                    {!data.data && <div>Sin Clientes</div>}
-                    {data.data &&
+                    {!data && <div>Sin Clientes</div>}
+                    {data &&
+                        data.map((ele) => {
+                            return (
+                                <Link to={`${ele.id}`}>
+                                    <CardCustomer
+                                        key={ele.id}
+                                        cardTitle={ele.nombre}
+                                        cardSubtitle={ele.empresa}
+                                    />{" "}
+                                </Link>
+                            );
+                        })}
+                         {data.data &&
                         data.data.map((ele) => {
                             return (
                                 <Link to={`${ele.id}`}>

@@ -38,13 +38,22 @@ const FormSubmit = () => {
         empresa: "",
     });
     const handleInputChange = (e) => {
-        // console.log(e.target.value, "e.target.value");
         setCustomer({ ...customer, [e.target.name]: e.target.value });
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(customer);
         submitNewCliente(customer);
+        setCustomer({
+            nombre: "",
+            apellido: "",
+            correo: "",
+            cultivo: "",
+            numero_telefono: "",
+            pais: "",
+            tamano_de_cultivo: "",
+            ubicacion_zona: "",
+            empresa: "",
+        });
     };
     return (
         <form onSubmit={handleSubmit}>

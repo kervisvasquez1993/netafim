@@ -4,6 +4,7 @@ import useCustomers from "../../Hooks/useCustomers";
 import { Link } from "react-router-dom";
 import HeaderWithButton from "../../Components/HeaderWithButton";
 import ToggleCard from "../../Components/ToggleCard";
+import { HeadersTwo } from "../../Wiews/HeadersTwo";
 const CardList = () => {
     return (
         <div className="mt-4">
@@ -31,10 +32,13 @@ export const ListCustomers = () => {
     };
 
     return (
-        <ToggleCard
-            handleLeftClick={handlessCustomers}
-            handleRightClick={handlessCustomersInactivo}
-            data={dato}
-        />
+        <>
+        <HeadersTwo/>
+            <ToggleCard
+                handleLeftClick={handlessCustomers}
+                handleRightClick={handlessCustomersInactivo}
+                data={dato}
+            />
+        </>
     );
 };

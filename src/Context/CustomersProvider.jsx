@@ -49,8 +49,8 @@ export const CustomersProvider = ({ children }) => {
                     ApiBackend.get("/clientes?activos=0", config),
                 ]);
 
-                setCustomers(activeData.data);
-                setCustomersInactivo(inactiveData.data);
+                setCustomers(activeData.data.data);
+                setCustomersInactivo(inactiveData.data.data);
             } catch (error) {
                 console.log(error);
             } finally {
@@ -82,55 +82,35 @@ export const CustomersProvider = ({ children }) => {
     };
 
     const activarDesactivarCliente = async (customer) => {
-        let updateValue;
-        const { id, activo } = customer;
-
-        if (activo == 1) {
-            updateValue = 0;
-        } else if (activo == 0) {
-            updateValue = 1;
-        }
-        // console.log(updateValue);
-        const dataSubmit = {
-            activo: updateValue,
-        };
-
-        try {
-            if (!config) {
-                mostrarAlerta({ message: "No tienes permiso", error: true });
-                return;
-            }
-
-            const { data } = await ApiBackend.put(
-                `/clientes/${id}`,
-                dataSubmit,
-                config
-            );
-            console.log(data.data);
-            setCustomer(data.data);
-            console.log(customers.data, "cuatomers");
-            console.log(customersInactivo.data, "customersInactivo");
-            return;
-
-            // sincronizar el state
-            // const test = customers.data.map( obj => obj)
-            // console.log(test)
-
-            const customerUpdate = customers.data.map((customerState) => {
-                // console.log(customerState)
-                // if (customerState.id === data.data.id) {
-                //     setCustomer(data.data);
-                // } else {
-                //     return customerState;
-                // }
-            });
-            // console.log(customerUpdate)
-            setProyectos(customerUpdate);
-            // mostrarAlerta({ message: "Proyecto Editado", error: false });
-        } catch (error) {
-            console.log(error);
-        }
+    const { id, activo } = customer;
+    const updateValue = activo === 1 ? 0 : 1;
+  
+    const dataSubmit = {
+      activo: updateValue,
     };
+  
+    try {
+      if (!config) {
+        mostrarAlerta({ message: "No tienes permiso", error: true });
+        return;
+      }
+  
+      const { data } = await ApiBackend.put(`/clientes/${id}`, dataSubmit, config);
+  
+      if (updateValue === 0) {
+        setCustomers(customers.filter((c) => c.id !== data.data.id));
+        setCustomersInactivo([...customersInactivo, data.data]);
+        console.log("ejecuto el inactivo");
+      } else {
+        setCustomersInactivo(customersInactivo.filter((c) => c.id !== data.data.id));
+        setCustomers([...customers, data.data]);
+        console.log("ejecuto el activo");
+      }
+      setCustomer(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
     const newCliente = async (cliente) => {
         // const dataSubmit = bodySubmit(cliente);
@@ -145,8 +125,10 @@ export const CustomersProvider = ({ children }) => {
             const respuesta = await ApiBackend.post("/clientes", cliente, config);
             // mostrarAlerta({ message: "cliente Creado", error: false });
             console.log("cliente Creado");
-            console.log(respuesta);
-
+            
+            console.log(respuesta.data.data, "respuesta");
+            setCustomers([...customers, respuesta.data.data]);
+            console.log(customers, "cliente");
         } catch (error) {
             console.log(error);
         }
