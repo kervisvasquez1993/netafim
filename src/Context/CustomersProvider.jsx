@@ -27,10 +27,18 @@ export const CustomersProvider = ({ children }) => {
         return;
     };
     const submitNewCliente = async (customer) => {
-        console.log(customer, "customer desde submitNewCliente");
+        // console.log(customer, "customer desde submitNewCliente");
         await newCliente(customer);
         return;
     };
+
+    // tarjetas
+    const submitNewTaerjeta = async (card, id) => {
+        await newTarjeta(card, id);
+        return;
+    };
+
+    // fin de tarjetas
     useEffect(() => {
         const fetchData = async () => {
             setLoadingCustomers(true);
@@ -82,38 +90,45 @@ export const CustomersProvider = ({ children }) => {
     };
 
     const activarDesactivarCliente = async (customer) => {
-    const { id, activo } = customer;
-    const updateValue = activo === 1 ? 0 : 1;
-  
-    const dataSubmit = {
-      activo: updateValue,
+        const { id, activo } = customer;
+        const updateValue = activo === 1 ? 0 : 1;
+
+        const dataSubmit = {
+            activo: updateValue,
+        };
+
+        try {
+            if (!config) {
+                mostrarAlerta({ message: "No tienes permiso", error: true });
+                return;
+            }
+
+            const { data } = await ApiBackend.put(
+                `/clientes/${id}`,
+                dataSubmit,
+                config
+            );
+
+            if (updateValue === 0) {
+                setCustomers(customers.filter((c) => c.id !== data.data.id));
+                setCustomersInactivo([...customersInactivo, data.data]);
+                console.log("ejecuto el inactivo");
+            } else {
+                setCustomersInactivo(
+                    customersInactivo.filter((c) => c.id !== data.data.id)
+                );
+                setCustomers([...customers, data.data]);
+                console.log("ejecuto el activo");
+            }
+            setCustomer(data.data);
+        } catch (error) {
+            console.log(error);
+        }
     };
-  
-    try {
-      if (!config) {
-        mostrarAlerta({ message: "No tienes permiso", error: true });
-        return;
-      }
-  
-      const { data } = await ApiBackend.put(`/clientes/${id}`, dataSubmit, config);
-  
-      if (updateValue === 0) {
-        setCustomers(customers.filter((c) => c.id !== data.data.id));
-        setCustomersInactivo([...customersInactivo, data.data]);
-        console.log("ejecuto el inactivo");
-      } else {
-        setCustomersInactivo(customersInactivo.filter((c) => c.id !== data.data.id));
-        setCustomers([...customers, data.data]);
-        console.log("ejecuto el activo");
-      }
-      setCustomer(data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
     const newCliente = async (cliente) => {
         // const dataSubmit = bodySubmit(cliente);
+
         console.log(cliente, "dataSubmit desde formulario");
         // console.log(dataSubmit, "dataSubmit desde formulario");
         try {
@@ -122,10 +137,45 @@ export const CustomersProvider = ({ children }) => {
                 return;
             }
 
-            const respuesta = await ApiBackend.post("/clientes", cliente, config);
+            const respuesta = await ApiBackend.post(
+                "/clientes",
+                cliente,
+                config
+            );
             // mostrarAlerta({ message: "cliente Creado", error: false });
             console.log("cliente Creado");
-            
+
+            console.log(respuesta.data.data, "respuesta");
+            setCustomers([...customers, respuesta.data.data]);
+            console.log(customers, "cliente");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const newTarjeta = async (tarjeta, id) => {
+        console.log(tarjeta, "dataSubmit desde formulario");
+        
+        const formData = new FormData();
+            formData.append("file", tarjeta);
+            formData.append("id", id);
+            console.log(formData,  "desde tarjeta")
+        try {
+            if (!config) {
+                mostrarAlerta({ message: "No tienes permiso", error: true });
+                return;
+            }
+            // console.log(formData, "tarjeta desde el context");
+            const respuesta = await ApiBackend.post(
+                `cliente/${id}/tarjeta`,
+                tarjeta,
+                config
+            );
+            // mostrarAlerta({ message: "tarjeta Creado", error: false });
+            console.log("cliente Creado");
+            console.log(respuesta, "cliente Creado");
+            return;
+
             console.log(respuesta.data.data, "respuesta");
             setCustomers([...customers, respuesta.data.data]);
             console.log(customers, "cliente");
@@ -143,7 +193,8 @@ export const CustomersProvider = ({ children }) => {
                 activarDesactivarCliente,
                 submitChangeStatus,
                 customersInactivo,
-                submitNewCliente
+                submitNewCliente,
+                submitNewTaerjeta,
             }}
         >
             {children}

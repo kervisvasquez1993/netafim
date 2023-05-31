@@ -10,7 +10,8 @@ export const RutaProtegida = () => {
             {auth.id ? (
                 <div
                     className="mx-auto p-5"
-                    style={{ maxWidth: "100vw", width: "100vw" }}
+                    style={{ maxWidth: "100vw", width: "100vw"  }}
+                    
                 >
                     <Outlet />{" "}
                 </div>
