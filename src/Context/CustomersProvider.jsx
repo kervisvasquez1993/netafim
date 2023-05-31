@@ -100,21 +100,24 @@ export const CustomersProvider = ({ children }) => {
                 dataSubmit,
                 config
             );
-            console.log(data);
-            // console.log(data)
+            console.log(data.data);
+            setCustomer(data.data);
+            console.log(customers.data, "cuatomers");
+            console.log(customersInactivo.data, "customersInactivo");
+            return
+            
             // sincronizar el state
-            // console.log(customers.data)
             // const test = customers.data.map( obj => obj)
             // console.log(test)
 
-            const customerUpdate = customers.data((customerState) => {
+            const customerUpdate = customers.data.map((customerState) => {
                 // console.log(customerState)
-
-                if (customerState.id === data.data.id) {
-                    setCustomer(data.data);
-                } else {
-                    return customerState;
-                }
+                
+                // if (customerState.id === data.data.id) {
+                //     setCustomer(data.data);
+                // } else {
+                //     return customerState;
+                // }
             });
             // console.log(customerUpdate)
             setProyectos(customerUpdate);

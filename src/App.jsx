@@ -7,6 +7,7 @@ import { AuthProvider } from "./Context/AuthProvider";
 import { Home } from "./Pages/Home";
 import { ListCustomers, ShowCustomers } from "./Pages/Customers/index";
 import {CustomersProvider} from "./Context/CustomersProvider";
+import { CreateCustomers } from "./Pages/Customers/CreateCustomers";
 
 const App = () => {
     return (
@@ -27,6 +28,7 @@ const App = () => {
                         <Route path="/home" element={<RutaProtegida />}>
                             <Route index element={<Home />} />
                             <Route path="customers" element={<ListCustomers />} />
+                            <Route path="add-customers" element={<CreateCustomers />} />
                             <Route path="customers/:id" element={<ShowCustomers />} />
                         </Route>
                     </Routes>

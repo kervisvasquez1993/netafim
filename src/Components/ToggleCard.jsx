@@ -57,7 +57,8 @@ const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
 
                 <div className="border-t border-b p-4 text-center">
                     <Button text={"Descargar Datos"} onClick={test} variant={"primary"}/>
-                    {data &&
+                    {!data.data && <div>Sin Clientes</div>}
+                    {data.data &&
                         data.data.map((ele) => {
                             return (
                                 <Link to={`${ele.id}`}>

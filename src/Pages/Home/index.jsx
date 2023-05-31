@@ -27,9 +27,12 @@ export const Home = () => {
                             <div
                                 className={`${styles["btn-log-in"]} ${styles["btn"]}`}
                             >
-                                <a className={styles["register"]} href="#">
-                                    Añadir cliente
-                                </a>
+                                <Link
+                                    className={styles["register"]}
+                                    to={"add-customers"}
+                                >
+                                    Añadir Cliente
+                                </Link>
                             </div>
                         </div>
 
