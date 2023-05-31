@@ -2,6 +2,7 @@ import { useEffect, useState, createContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { configHeaderToken } from "../Helpers";
 import { ApiBackend } from "../apis/ApiBackend";
+import { data } from "autoprefixer";
 
 const CustomersContext = createContext();
 export const CustomersProvider = ({ children }) => {
@@ -23,6 +24,11 @@ export const CustomersProvider = ({ children }) => {
     // };
     const submitChangeStatus = async (customer) => {
         await activarDesactivarCliente(customer);
+        return;
+    };
+    const submitNewCliente = async (customer) => {
+        console.log(customer, "customer desde submitNewCliente");
+        await newCliente(customer);
         return;
     };
     useEffect(() => {
@@ -104,15 +110,14 @@ export const CustomersProvider = ({ children }) => {
             setCustomer(data.data);
             console.log(customers.data, "cuatomers");
             console.log(customersInactivo.data, "customersInactivo");
-            return
-            
+            return;
+
             // sincronizar el state
             // const test = customers.data.map( obj => obj)
             // console.log(test)
 
             const customerUpdate = customers.data.map((customerState) => {
                 // console.log(customerState)
-                
                 // if (customerState.id === data.data.id) {
                 //     setCustomer(data.data);
                 // } else {
@@ -122,6 +127,26 @@ export const CustomersProvider = ({ children }) => {
             // console.log(customerUpdate)
             setProyectos(customerUpdate);
             // mostrarAlerta({ message: "Proyecto Editado", error: false });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const newCliente = async (cliente) => {
+        // const dataSubmit = bodySubmit(cliente);
+        console.log(cliente, "dataSubmit desde formulario");
+        // console.log(dataSubmit, "dataSubmit desde formulario");
+        try {
+            if (!config) {
+                mostrarAlerta({ message: "No tienes permiso", error: true });
+                return;
+            }
+
+            const respuesta = await ApiBackend.post("/clientes", cliente, config);
+            // mostrarAlerta({ message: "cliente Creado", error: false });
+            console.log("cliente Creado");
+            console.log(respuesta);
+
         } catch (error) {
             console.log(error);
         }
@@ -136,6 +161,7 @@ export const CustomersProvider = ({ children }) => {
                 activarDesactivarCliente,
                 submitChangeStatus,
                 customersInactivo,
+                submitNewCliente
             }}
         >
             {children}
