@@ -1,134 +1,137 @@
-import React from 'react';
+import React from "react";
 
-export const Form = () => {
+function Form({data}) {
+  const defaultValueTamanoCultivo = "Mediano";
+  const {
+    nombre,
+    apellido,
+    correo,
+    cultivo,
+    numero_telefono,
+    pais,
+    tamano_de_cultivo,
+    ubicacion_zona,
+    empresa,
+} = data;
+console.log(ubicacion_zona)
   return (
-    <form>
-      <fieldset className="input">
-        <legend>Nombre</legend>
+    <div className="max-w-md mx-auto">
+      <div className="mb-4">
+        <label htmlFor="nombre" className="block font-normal mb-2 text-blue-500 ">
+          Nombre:
+        </label>
         <input
+          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-70"
           type="text"
           id="nombre"
-          name="nombre"
-          placeholder="Juan"
-          required
+          readOnly
+          defaultValue={nombre}
         />
-      </fieldset>
-
-      <fieldset className="input">
-        <legend>Apellidos</legend>
+      </div>
+      <div className="mb-4">
+        <label htmlFor="apellido" className="block font-normal mb-2 text-blue-500  ">
+          Apellido:
+        </label>
         <input
+          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-70"
           type="text"
-          id="apellidos"
-          name="apellidos"
-          placeholder="Hernández Perez"
-          required
+          id="apellido"
+          value={apellido}
+          readOnly
+       
         />
-      </fieldset>
-
-      <fieldset className="input">
-        <legend>Empresa</legend>
+      </div>
+      <div className="mb-4">
+        <label htmlFor="correo" className="block font-normal mb-2 text-blue-500 ">
+          Correo:
+        </label>
         <input
+          className="  border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-70 text-blue-500 opacity-70"
           type="text"
-          id="Empresa"
-          name="Empresa"
-          placeholder="Nombre de empresa"
-          required
+          id="correo"
+          value={correo}
+          readOnly
+          
         />
-      </fieldset>
-
-      <fieldset className="input">
-        <legend>Número de teléfono</legend>
+      </div>
+      <div className="mb-4">
+        <label htmlFor="cultivo" className="block font-normal mb-2 text-blue-500 ">
+          Cultivo:
+        </label>
         <input
-          type="tel"
-          id="tlf"
-          name="tlf"
-          placeholder="+506 8832 8823"
-          required
-        />
-      </fieldset>
-
-      <fieldset className="input">
-        <legend>Correo electrónico</legend>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="ejemplo@netafim.com"
-          required
-        />
-      </fieldset>
-
-      <fieldset className="input">
-        <legend>Cultivo</legend>
-
-        <select name="cultivo" id="cultivo" required>
-          <option disabled>Elegir cultivo</option>
-          <option>cultivo 1</option>
-          <option>cultivo 2</option>
-          <option>cultivo 3</option>
-          <option>cultivo 4</option>
-          <option>cultivo 5</option>
-        </select>
-      </fieldset>
-
-      <fieldset className="input">
-        <legend>Ubicación/zona</legend>
-        <input
+          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-70"
           type="text"
-          id="ubicacion"
-          name="ubicacion"
-          placeholder="Zona del cultivo"
-          required
+          id="cultivo"
+          value={cultivo}
+          readOnly
+          
         />
-      </fieldset>
-
-      <fieldset className="input">
-        <legend>País</legend>
+      </div>
+      <div className="mb-4">
+        <label htmlFor="numero_telefono" className="block font-normal mb-2 text-blue-500 ">
+          Número de teléfono:
+        </label>
         <input
+          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-70"
           type="text"
+          id="numero_telefono"
+          readOnly
+          value={numero_telefono}
+          
+        />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="pais" className="block font-normal mb-2 text-blue-500 ">
+          País:
+        </label>
+        <input
+          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-70"
+          type="text"
+          defaultValue={pais}
           id="pais"
-          name="pais"
-          placeholder="País"
-          required
+          readOnly
+          
         />
-      </fieldset>
-
-      <fieldset className="input tamaño-cult">
-        <legend>Tamaño del cultivo</legend>
+      </div>
+      <div className="mb-4">
+        <label htmlFor="tamano_de_cultivo" className="block font-normal mb-2 text-blue-500 ">
+          Tamaño de cultivo:
+        </label>
         <input
+          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-70"
           type="text"
-          id="tamaño-cultivo"
-          name="tamaño-cultivo"
-          placeholder="9999"
-          required
+          
+          id="tamano_de_cultivo"
+          readOnly
+          defaultValue={tamano_de_cultivo}
         />
-
-        <select name="tamaño-cultivo" id="tamaño-cultiv" required>
-          <option>Unidad</option>
-          <option>cultivo 1</option>
-          <option>cultivo 2</option>
-          <option>cultivo 3</option>
-          <option>cultivo 4</option>
-          <option>cultivo 5</option>
-        </select>
-      </fieldset>
-
-      <label className="extra">
-        <input type="checkbox" id="extra" name="extra" /> ¿Desea recibir información por correo?
-      </label>
-
-      <div className="btn">
-        <a className="register-link" href="#">
-          Activar cliente
-        </a>
       </div>
-      <div className="btn btn-dos">
-        <a className="register-link white" href="#">
-          Eliminar cliente
-        </a>
+      <div className="mb-4">
+        <label htmlFor="ubicacion_zona" className="block font-normal mb-2 text-blue-500 ">
+          Ubicación / Zona:
+        </label>
+        <input
+          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-70"
+          type="text"
+          id="ubicacion_zona"
+          readOnly
+          value={ubicacion_zona}
+        />
       </div>
-    </form>
+      <div className="mb-4">
+        <label htmlFor="empresa" className="block font-normal mb-2 text-blue-500 ">
+          Empresa:
+        </label>
+        <input
+          className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-70"
+          type="text"
+          id="empresa"
+          readOnly
+          value={empresa}
+        />
+      </div>
+    </div>
   );
-};
+}
 
-
+export default Form

@@ -10,6 +10,7 @@ import {CustomersProvider} from "./Context/CustomersProvider";
 
 const App = () => {
     return (
+        
         <BrowserRouter>
             <AuthProvider>
                 <CustomersProvider>
