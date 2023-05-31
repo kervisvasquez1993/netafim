@@ -6,12 +6,13 @@ import { PasswordRecovery } from "./Pages/PasswordRecovery";
 import { AuthProvider } from "./Context/AuthProvider";
 import { Home } from "./Pages/Home";
 import { ListCustomers, ShowCustomers } from "./Pages/Customers/index";
-import {CustomersProvider} from "./Context/CustomersProvider";
+import { CustomersProvider } from "./Context/CustomersProvider";
 import { CreateCustomers } from "./Pages/Customers/CreateCustomers";
+import CreateBusinessCard from "./Pages/BusinessCard/CreateBusinessCard";
+import CreateCard from "./Pages/BusinessCard/CreateCard";
 
 const App = () => {
     return (
-        
         <BrowserRouter>
             <AuthProvider>
                 <CustomersProvider>
@@ -27,9 +28,24 @@ const App = () => {
                         </Route>
                         <Route path="/home" element={<RutaProtegida />}>
                             <Route index element={<Home />} />
-                            <Route path="customers" element={<ListCustomers />} />
-                            <Route path="add-customers" element={<CreateCustomers />} />
-                            <Route path="customers/:id" element={<ShowCustomers />} />
+                            <Route
+                                path="customers"
+                                element={<ListCustomers />}
+                            />
+                            <Route
+                                path="add-customers"
+                                element={<CreateCustomers />}
+                            />
+                            <Route
+                                path="customers/:id"
+                                element={<ShowCustomers />}
+                            />
+                            <Route
+                                path="customers-card-business/:id"
+                                element={<CreateBusinessCard />}
+                            />
+
+                            
                         </Route>
                     </Routes>
                 </CustomersProvider>

@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import useCustomers from "../../Hooks/useCustomers";
 import Form from "../../Components/Form";
 import HeaderWithButton from "../../Components/HeaderWithButton";
 import TwoButtons from "../../Components/TwoButtons";
 import Button from "../../Components/Button";
+import { HeadersOne } from "../../Wiews/HeadersOne";
 
 export const ShowCustomers = () => {
     const params = useParams();
     const [txtStatus, setTxtStatus] = useState("");
+    const navigate = useNavigate();
     const { getCustomer, customer, loadingCustomers, submitChangeStatus } =
         useCustomers();
     useEffect(() => {
@@ -22,10 +24,10 @@ export const ShowCustomers = () => {
         }
     }, [customer]);
     const onSaludar = () => {
-        console.log("saludar");
+        navigate(`/home/customers-card-business/${params.id}`);
     };
     function handleArchiveClientClick() {
-        submitChangeStatus(customer)
+        submitChangeStatus(customer);
         console.log("Cambio de status ");
     }
 
@@ -35,6 +37,7 @@ export const ShowCustomers = () => {
     if (loadingCustomers) return <div>loading...</div>;
     return (
         <>
+            <HeadersOne />
             <HeaderWithButton
                 title={"Datos del cliente"}
                 buttonText={"Añadir tarjeta"}
