@@ -1,6 +1,6 @@
 import React from "react";
 import useCard from "../../Hooks/useCard";
-import CardCustomer from "../../Components/Cardcustomer";
+import CardCustomer from "../../Components/CardCustomer";
 import { Link } from "react-router-dom";
 import tarjetaicono from "../../assets/svg/tarjeta.svg";
 import { HeadersOne } from "../../Wiews/HeadersOne";
