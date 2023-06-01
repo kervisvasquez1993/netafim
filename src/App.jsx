@@ -26,10 +26,10 @@ const App = () => {
                                 <Route index element={<Login />} />
                                 <Route path="login" element={<Login />} />
                                 <Route path="singup" element={<Register />} />
-                                <Route
+                                {/* <Route
                                     path="password-recovery"
                                     element={<PasswordRecovery />}
-                                />
+                                /> */}
                             </Route>
                             <Route path="/home" element={<RutaProtegida />}>
                                 <Route index element={<Home />} />
