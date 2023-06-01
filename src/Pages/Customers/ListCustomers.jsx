@@ -7,20 +7,7 @@ import ToggleCard from "../../Components/ToggleCard";
 import { HeadersTwo } from "../../Wiews/HeadersTwo";
 import { TitleHeaders } from "../../Components/TitleHeaders";
 import Button from "../../Components/Button";
-const CardList = () => {
-    return (
-        <div className="mt-4">
-            <CardCustomer
-                cardTitle="Título de la tarjeta 1"
-                cardSubtitle="Subtítulo de la tarjeta 1"
-            />
-            <CardCustomer
-                cardTitle="Título de la tarjeta 2"
-                cardSubtitle="Subtítulo de la tarjeta 2"
-            />
-        </div>
-    );
-};
+
 
 export const ListCustomers = () => {
     const { customers, loadingCustomers, customersInactivo } = useCustomers();

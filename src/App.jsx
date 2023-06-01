@@ -12,6 +12,8 @@ import { CreateCustomers } from "./Pages/Customers/CreateCustomers";
 import CreateBusinessCard from "./Pages/BusinessCard/CreateBusinessCard";
 import CreateCard from "./Pages/BusinessCard/CreateCard";
 import ListBusinessCard from "./Pages/BusinessCard/ListBusinessCard";
+import { ShowBusinessCard } from "./Pages/BusinessCard/ShowBusinessCard";
+import CreateCustoWithCard from "./Pages/BusinessCard/CreateCustoWithCard";
 
 const App = () => {
     return (
@@ -50,6 +52,14 @@ const App = () => {
                                 <Route
                                     path="card-business"
                                     element={<ListBusinessCard />}
+                                />
+                                <Route
+                                    path="card-business/:id"
+                                    element={<ShowBusinessCard />}
+                                />
+                                <Route
+                                    path="card-business-customers/:id"
+                                    element={<CreateCustoWithCard/>}
                                 />
                             </Route>
                         </Routes>

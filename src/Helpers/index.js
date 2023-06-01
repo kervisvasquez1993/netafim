@@ -24,3 +24,5 @@ export const formDate = (date) => {
 
     return newDate.toLocaleDateString("es-ES", options);
 };
+
+export const baseUrlaws = "https://srmdnamics-laravel-file.s3.us-east-2.amazonaws.com"

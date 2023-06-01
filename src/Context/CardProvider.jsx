@@ -24,6 +24,7 @@ export const CardProvider = ({ children }) => {
     const [cardBusiness, setCardBuiness] = useState([]);
     const [loadingCustomers, setLoadingCustomers] = useState(false);
     const configFile = tokenForFile();
+    const config = configHeaderToken();
     const submitNewTaerjeta = async (card, id) => {
         await newTarjetaWithCustomer(card, id);
         return;
@@ -44,7 +45,8 @@ export const CardProvider = ({ children }) => {
                 const { data } = await ApiBackend.get("/tarjetas", config);
                 // setProyectos(data.projects);
                 // setLoadingCustomers(false);
-                console.log(data, "data. decard businness")
+                setCardsBusiness(data.data, "data de rpovider");
+                console.log(data, "data. decard businness");
             } catch (error) {
                 console.log(error);
             } finally {
@@ -74,8 +76,36 @@ export const CardProvider = ({ children }) => {
             console.log(error);
         }
     };
+
+    const getCard = async (id) => {
+        setLoadingCustomers(true);
+        try {
+            if (!config) {
+                mostrarAlerta({ message: "No tienes permiso", error: true });
+                return;
+            }
+
+            const { data } = await ApiBackend.get(`/tarjetas/${id}`, config);
+
+            setCardBuiness(data.data);
+
+            return;
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoadingCustomers(false);
+        }
+    };
     return (
-        <CardContext.Provider value={{ submitNewTaerjeta }}>
+        <CardContext.Provider
+            value={{
+                submitNewTaerjeta,
+                cardsBusiness,
+                getCard,
+                cardBusiness,
+                loadingCustomers,
+            }}
+        >
             {children}
         </CardContext.Provider>
     );
