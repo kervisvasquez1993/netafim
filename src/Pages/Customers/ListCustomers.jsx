@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CardCustomer from "../../Components/Cardcustomer";
+import ShowCard from "../../Components/ShowCard";
 import useCustomers from "../../Hooks/useCustomers";
 import { Link, useNavigate } from "react-router-dom";
 import HeaderWithButton from "../../Components/HeaderWithButton";

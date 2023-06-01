@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CardCustomer from "./Cardcustomer";
+import ShowCard from "./ShowCard";
 import { Link } from "react-router-dom";
 import Button from "./Button";
 import persona from "../assets/svg/perfil.svg";
@@ -69,7 +69,7 @@ const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
                         data.map((ele) => {
                             return (
                                 <Link to={`${ele.id}`} key={ele.id}>
-                                    <CardCustomer
+                                    <ShowCard
                                         cardTitle={ele.nombre}
                                         tarjeta={persona}
                                         cardSubtitle={ele.empresa}
@@ -81,7 +81,7 @@ const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
                         data.map((ele) => {
                             return (
                                 <Link to={`${ele.id}`} key={ele.id}>
-                                    <CardCustomer
+                                    <ShowCard
                                         cardTitle={ele.nombre}
                                         cardSubtitle={ele.empresa}
                                     />{" "}

@@ -1,6 +1,6 @@
 import React from "react";
 import useCard from "../../Hooks/useCard";
-import CardCustomer from "../../Components/CardCustomer";
+import ShowCard from "../../Components/ShowCard";
 import { Link } from "react-router-dom";
 import tarjetaicono from "../../assets/svg/tarjeta.svg";
 import { HeadersOne } from "../../Wiews/HeadersOne";
@@ -21,7 +21,7 @@ const ListBusinessCard = () => {
                         cardsBusiness.map((ele) => {
                             return (
                                 <Link to={`${ele.id}`} key={ele.id}>
-                                    <CardCustomer
+                                    <ShowCard
                                         tarjeta={tarjetaicono}
                                         cardTitle={`Tarjeta ${ele.id}`}
                                         // cardSubtitle={ele.empresa}
