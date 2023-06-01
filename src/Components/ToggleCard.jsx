@@ -3,7 +3,9 @@ import CardCustomer from "./Cardcustomer";
 import { Link } from "react-router-dom";
 import Button from "./Button";
 import  persona from "../assets/svg/perfil.svg";
+import useCustomers from "../Hooks/useCustomers";
 const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
+    const {descarga} = useCustomers()
     const [activeTab, setActiveTab] = useState(1);
     const handleTabClick = (tabIndex) => {
         setActiveTab(tabIndex);
@@ -57,7 +59,7 @@ const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
                 </div>
 
                 <div className="border-t border-b p-4 text-center">
-                    <Button text={"Descargar Datos"} onClick={test} variant={"primary"}/>
+                    <Button text={"Descargar Datos"} onClick={descarga} variant={"primary"}/>
                     {!data && <div>Sin Clientes</div>}
                     {data &&
                         data.map((ele) => {

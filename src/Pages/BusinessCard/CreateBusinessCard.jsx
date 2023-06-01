@@ -13,9 +13,14 @@ const CreateBusinessCard = () => {
             <HeadersOne />
             <TitleHeaders
                 title={
-                    "Puede tomar foto de una Tarjeta de Presentación y luego transcribir los datos "
+                    "Subir Tarjeta "
                 }
             />
+            {/* <TitleHeaders
+                title={
+                    "Puede tomar foto de una Tarjeta de Presentación y luego transcribir los datos "
+                }
+            /> */}
 
             <ImageUploader />
         </>

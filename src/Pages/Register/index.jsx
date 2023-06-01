@@ -1,86 +1,140 @@
-import React from 'react';
-import styles from './style.module.css';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export const Register = () => {
+
+export const  Register =() => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: '',
+    last_name: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    // Validar campos requeridos
+    const requiredFields = ['name', 'last_name', 'email', 'password', 'password_confirmation'];
+    const formErrors = {};
+    requiredFields.forEach((field) => {
+      if (!formData[field]) {
+        formErrors[field] = 'Este campo es requerido';
+      }
+    });
+
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+      return;
+    }
+
+    // Enviar datos al backend
+    const url = `${import.meta.env.VITE_BACKEND}register`;
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+
+      // Manejar errores de la respuesta del backend
+      if (error.response) {
+        setErrors(error.response.data.errors);
+      } else {
+        setErrors({ general: 'Hubo un error al registrar el usuario' });
+      }
+    }
+
+    navigate("/login")
+  };
+
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+    setErrors({ ...errors, [event.target.name]: null });
+  };
+
   return (
-    <div className={styles['register-container']}>
-      <div className={styles['register-header']}></div>
-
-      <div className={styles['register-form']}>
-        <div className={styles['title']}>
-          <div className={styles['arrow']}></div>
-          <h2 className={styles['form-title']}>Registro</h2>
-        </div>
-
-        <div className={styles['form-container']}>
-          <form>
-            <fieldset className={styles['input']}>
-              <legend>Nombre</legend>
-              <input
-                type="text"
-                id="nombre"
-                name="nombre"
-                placeholder="Juan"
-                required
-              />
-            </fieldset>
-
-            <fieldset className={styles['input']}>
-              <legend>Apellidos</legend>
-              <input
-                type="text"
-                id="apellidos"
-                name="apellidos"
-                placeholder="Hernández Perez"
-                required
-              />
-            </fieldset>
-
-            <fieldset className={styles['input']}>
-              <legend>Correo electrónico</legend>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="ejemplo@netafim.com"
-                required
-              />
-            </fieldset>
-            <div className={styles['email-bottom-title']}>
-              <p>Solo correos @netafim.com se pueden registrar*</p>
-            </div>
-
-            <fieldset className={styles['input']}>
-              <legend>Contraseña</legend>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="*********"
-                required
-              />
-            </fieldset>
-
-            <fieldset className={styles['input']}>
-              <legend>Confirmar contraseña</legend>
-              <input
-                type="password"
-                id="confirm-password"
-                name="confirm-password"
-                placeholder="*********"
-                required
-              />
-            </fieldset>
-
-            <div className={styles['btn']}>
-              <a className={styles['register-link']} href="#">
-                Registrar
-              </a>
-            </div>
-          </form>
-        </div>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="name">Nombre</label>
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          className={`border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40 ${
+            errors.name ? 'border-red-500' : ''
+          }`}
+        />
+        {errors.name && <span className="text-red-500">{errors.name}</span>}
       </div>
-    </div>
+      <div>
+        <label htmlFor="last_name">Apellido</label>
+        <input
+          type="text"
+          name="last_name"
+          value={formData.last_name}
+          onChange={handleChange}
+          className={`border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40 ${
+            errors.last_name ? 'border-red-500' : ''
+          }`}
+        />
+        {errors.last_name && <span className="text-red-500">{errors.last_name}</span>}
+      </div>
+      <div>
+        <label htmlFor="email">Email</label>
+        <input
+          type="text"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          className={`border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40 ${
+            errors.email ? 'border-red-500' : ''
+          }`}
+        />
+        {errors.email && <span className="text-red-500">{errors.email}</span>}
+      </div>
+      <div>
+        <label htmlFor="password">Contraseña</label>
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          className={`border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40 ${
+            errors.password ? 'border-red-500' : ''
+          }`}
+        />
+        {errors.password && <span className="text-red-500">{errors.password}</span>}
+      </div>
+      <div>
+        <label htmlFor="password_confirmation">Confirmar Contraseña</label>
+        <input
+          type="password"
+          name="password_confirmation"
+          value={formData.password_confirmation}
+          onChange={handleChange}
+          className={`border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40 ${
+            errors.password_confirmation ? 'border-red-500' : ''
+          }`}
+        />
+        {errors.password_confirmation && (
+          <span className="text-red-500">{errors.password_confirmation}</span>
+        )}
+      </div>
+      <button type="submit" className="bg-blue-500 text-white rounded-md px-4 py-2 mt-4">
+        Registrarse
+      </button>
+    </form>
   );
-};
+}
 

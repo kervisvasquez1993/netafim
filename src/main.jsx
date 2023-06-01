@@ -11,7 +11,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 backgroundImage: `url(${backgroundImage})`,
                 backgroundSize: "250%",
                 backgroundPosition: 'center',
-                height: '100vh',
+                minHeight: '100vh',
             }}
         >
             <App />

@@ -222,11 +222,14 @@ const FormSubmit = () => {
                         value={customer.empresa}
                     />
                 </div>
-                <input
-                    type="submit"
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                    value="enviar"
-                />
+                <div className="flex flex-col items-center justify-center py-10 ">
+                    <input
+                        style={{minWidth: "250px"}}
+                        type="submit"
+                        className="bg-blue-500 text-white font-semibold py-2 px-4 rounded border-2 border-blue-500 mb-4"
+                        value="enviar"
+                    />
+                </div>
             </div>
         </form>
     );

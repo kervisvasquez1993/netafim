@@ -7,9 +7,9 @@ import useCard from "../Hooks/useCard";
 function ImageUploader() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [imageSrc, setImageSrc] = useState(imagenUpload);
-    const {submitNewTaerjeta} = useCard();
+    const { submitNewTaerjeta } = useCard();
     const params = useParams();
-    const handleSubmit =  (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
 
         if (!selectedFile) {
@@ -20,7 +20,7 @@ function ImageUploader() {
         try {
             const formData = new FormData();
             formData.append("src_img", selectedFile);
-             submitNewTaerjeta(formData, params.id);
+            submitNewTaerjeta(formData, params.id);
         } catch (error) {
             console.error("Error al enviar la imagen:", error);
         }
@@ -41,8 +41,8 @@ function ImageUploader() {
     };
 
     return (
-        <div className="bg-white rounded-lg border border-gray-400 p-6">
-            <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
+            <div className="bg-white rounded-lg border border-gray-400 p-6">
                 <label htmlFor="file-input" className="block mb-4">
                     <div className="border-dashed border-2 border-gray-400 rounded-lg p-4">
                         <img
@@ -60,15 +60,20 @@ function ImageUploader() {
                     name="src_img"
                     onChange={handleFileChange}
                 />
+            </div>
 
+            <div className={`flex justify-center pt-10 pb-5`}>
                 <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+                    className={
+                        "px-4 py-2 rounded-md font-medium border bg-blue-500 text-white hover:bg-blue-600"
+                    }
+                    style={{ minWidth: "200px", height: "50px" }}
                     type="submit"
                 >
-                    Enviar
+                   Subir Archivo
                 </button>
-            </form>
-        </div>
+            </div>
+        </form>
     );
 }
 

@@ -8,7 +8,7 @@ const Button = ({ text, onClick, variant, pt = 5, pb = 5 }) => {
             break;
         case "secondary":
             className +=
-                "border bg-white-300  hover:bg-blue-500 hover:text-white";
+                "border border-blue-500 bg-white text-blue-500 rounded px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-blue-500 hover:text-white focus:outline-none focus:shadow-outline";
             break;
         default:
             break;
@@ -16,7 +16,11 @@ const Button = ({ text, onClick, variant, pt = 5, pb = 5 }) => {
 
     return (
         <div className={`flex justify-center pt-${pt} pb-${pb}`}>
-            <button className={className} onClick={onClick}>
+            <button
+                className={className}
+                style={{ minWidth: "200px", height: "50px" }}
+                onClick={onClick}
+            >
                 {text}
             </button>
         </div>

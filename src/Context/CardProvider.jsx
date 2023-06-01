@@ -2,7 +2,7 @@ import { useState, useEffect, createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ApiBackend } from "../apis/ApiBackend";
 import { configHeaderToken } from "../Helpers";
-import useCustomers from "../hooks/useCustomers";
+import useCustomers from "../Hooks/useCustomers";
 
 export const tokenForFile = (params = {}) => {
     const token = localStorage.getItem("token");
@@ -80,6 +80,7 @@ export const CardProvider = ({ children }) => {
             console.log(respuesta.data.data, "respuesta");
             setCustomers([...customers, respuesta.data.data]);
             console.log(customers, "cliente");
+            navigate
         } catch (error) {
             console.log(error);
         }

@@ -10,10 +10,9 @@ export const CustomersProvider = ({ children }) => {
     const [customersInactivo, setCustomersInactivo] = useState([]);
     const [customer, setCustomer] = useState([]);
     const [loadingCustomers, setLoadingCustomers] = useState(false);
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     const config = configHeaderToken();
 
-    
     const submitChangeStatus = async (customer) => {
         await activarDesactivarCliente(customer);
         return;
@@ -21,6 +20,35 @@ export const CustomersProvider = ({ children }) => {
     const submitNewCliente = async (customer) => {
         await newCliente(customer);
         return;
+    };
+    const descarga = async () => {
+        await descargarArchivo()
+    }
+    const descargarArchivo = async () => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            console.log("No Tiene Permiso");
+            return false;
+        }
+    
+        try {
+            const response = await ApiBackend.get("/generartxt", {responseType: 'blob',
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },});
+            console.log(response)
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "informacion.txt";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        } catch (error) {
+            // Manejo de errores
+            console.log(error)
+        }
     };
     useEffect(() => {
         const fetchData = async () => {
@@ -114,8 +142,6 @@ export const CustomersProvider = ({ children }) => {
 
         console.log(cliente, "dataSubmit desde formulario");
 
-        
-       
         // console.log(dataSubmit, "dataSubmit desde formulario");
         try {
             if (!config) {
@@ -134,13 +160,12 @@ export const CustomersProvider = ({ children }) => {
             console.log(respuesta.data.data, "respuesta");
             setCustomers([...customers, respuesta.data.data]);
             console.log(customers, "cliente");
-            navigate(-1)
+            navigate(-1);
         } catch (error) {
             console.log(error);
         }
     };
 
-    
     return (
         <CustomersContext.Provider
             value={{
@@ -153,7 +178,7 @@ export const CustomersProvider = ({ children }) => {
                 submitChangeStatus,
                 customersInactivo,
                 submitNewCliente,
-                
+                descarga
             }}
         >
             {children}
