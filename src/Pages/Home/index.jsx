@@ -11,8 +11,8 @@ export const Home = () => {
     return (
         <>
         <HeadersOne />
-        <TitleHeaders title="Bienvenido"/>
-        <div className="flex flex-wrap justify-center md:justify-start md:flex items-center" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
+        <TitleHeaders title="Bienvenido" isBack={false}/>
+        <div className="flex flex-wrap justify-center md:justify-start md:flex items-center" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '40vh' }}>
             <div className="w-full md:w-1/3 lg:w-1/4 p-4">
                 <Card icon={addCliente} buttonText={"Agregar cliente"} ruta={"add-customers"} />
                 {/* <img src={addCliente}   alt="icon"/> */}

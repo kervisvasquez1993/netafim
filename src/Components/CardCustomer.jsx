@@ -1,22 +1,16 @@
-const CardCustomer = ({ cardTitle, cardSubtitle }) => {
+import { useParams } from "react-router-dom";
+import  persona from "../assets/svg/perfil.svg";
+import tarjetaicono from "../assets/svg/tarjeta.svg";
+import { useState } from "react";
+
+const CardCustomer = ({ cardTitle, cardSubtitle, tarjeta }) => {
+    // console.log(useParams())
+   
     return (
         <div className="bg-blue-200 rounded-lg overflow-hidden shadow-lg my-5">
             <div className="flex items-center p-4">
                 <div className="mr-4">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="white"
-                        className="w-12 h-12"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-                        />
-                    </svg>
+                    <img src={tarjeta} alt="imagen de perfil" />
                 </div>
                 <div className="flex-1">
                     <h3 className=" text-left font-light text-2xl">

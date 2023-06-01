@@ -29,6 +29,9 @@ export const ListCustomers = () => {
                 text={"Ver las Tarjetas de clientes"}
                 variant={"primary"}
                 onClick={() => navigate("/home/card-business")}
+                pt={5}
+                pb={10}
+
             />
             <ToggleCard
                 handleLeftClick={handlessCustomers}

@@ -1,5 +1,5 @@
 import React from "react";
-import imagen from "../assets/logo2.png";
+import imagen from "../assets/svg/logonetafimmasorbia.svg";
 
 export const HeadersTwo = () => {
     return (

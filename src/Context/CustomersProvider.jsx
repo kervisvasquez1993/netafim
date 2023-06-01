@@ -10,6 +10,7 @@ export const CustomersProvider = ({ children }) => {
     const [customersInactivo, setCustomersInactivo] = useState([]);
     const [customer, setCustomer] = useState([]);
     const [loadingCustomers, setLoadingCustomers] = useState(false);
+    const navigate = useNavigate(); 
     const config = configHeaderToken();
 
     
@@ -133,6 +134,7 @@ export const CustomersProvider = ({ children }) => {
             console.log(respuesta.data.data, "respuesta");
             setCustomers([...customers, respuesta.data.data]);
             console.log(customers, "cliente");
+            navigate(-1)
         } catch (error) {
             console.log(error);
         }
