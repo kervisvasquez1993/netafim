@@ -37,7 +37,7 @@ export const Login = () => {
     const { message } = alerta;
 
     return (
-        <div className="flex justify-center items-center h-screen bg-gray-100">
+        <div className="flex justify-center items-center h-screen">
             <div className="w-full max-w-xs">
                 <h2 className="text-2xl text-center font-bold mb-4">
                     Inicia sesión para registrar clientes
