@@ -12,33 +12,15 @@ export const CustomersProvider = ({ children }) => {
     const [loadingCustomers, setLoadingCustomers] = useState(false);
     const config = configHeaderToken();
 
-    // const submitProyecto = async (proyecto) => {
-    //     const { id } = proyecto;
-    //     if (id) {
-    //         await editProyecto(proyecto);
-    //     } else {
-    //         await newProject(proyecto);
-    //     }
-
-    //     return;
-    // };
+    
     const submitChangeStatus = async (customer) => {
         await activarDesactivarCliente(customer);
         return;
     };
     const submitNewCliente = async (customer) => {
-        // console.log(customer, "customer desde submitNewCliente");
         await newCliente(customer);
         return;
     };
-
-    // tarjetas
-    const submitNewTaerjeta = async (card, id) => {
-        await newTarjeta(card, id);
-        return;
-    };
-
-    // fin de tarjetas
     useEffect(() => {
         const fetchData = async () => {
             setLoadingCustomers(true);
@@ -130,6 +112,9 @@ export const CustomersProvider = ({ children }) => {
         // const dataSubmit = bodySubmit(cliente);
 
         console.log(cliente, "dataSubmit desde formulario");
+
+        
+       
         // console.log(dataSubmit, "dataSubmit desde formulario");
         try {
             if (!config) {
@@ -153,36 +138,7 @@ export const CustomersProvider = ({ children }) => {
         }
     };
 
-    const newTarjeta = async (tarjeta, id) => {
-        console.log(tarjeta, "dataSubmit desde formulario");
-        
-        const formData = new FormData();
-            formData.append("file", tarjeta);
-            formData.append("id", id);
-            console.log(formData,  "desde tarjeta")
-        try {
-            if (!config) {
-                mostrarAlerta({ message: "No tienes permiso", error: true });
-                return;
-            }
-            // console.log(formData, "tarjeta desde el context");
-            const respuesta = await ApiBackend.post(
-                `cliente/${id}/tarjeta`,
-                tarjeta,
-                config
-            );
-            // mostrarAlerta({ message: "tarjeta Creado", error: false });
-            console.log("cliente Creado");
-            console.log(respuesta, "cliente Creado");
-            return;
-
-            console.log(respuesta.data.data, "respuesta");
-            setCustomers([...customers, respuesta.data.data]);
-            console.log(customers, "cliente");
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    
     return (
         <CustomersContext.Provider
             value={{
@@ -194,7 +150,7 @@ export const CustomersProvider = ({ children }) => {
                 submitChangeStatus,
                 customersInactivo,
                 submitNewCliente,
-                submitNewTaerjeta,
+                
             }}
         >
             {children}
