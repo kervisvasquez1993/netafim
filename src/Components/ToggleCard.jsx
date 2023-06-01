@@ -68,9 +68,8 @@ const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
                     {data &&
                         data.map((ele) => {
                             return (
-                                <Link to={`${ele.id}`}>
+                                <Link to={`${ele.id}`} key={ele.id}>
                                     <CardCustomer
-                                        key={ele.id}
                                         cardTitle={ele.nombre}
                                         tarjeta={persona}
                                         cardSubtitle={ele.empresa}
@@ -81,9 +80,8 @@ const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
                     {data &&
                         data.map((ele) => {
                             return (
-                                <Link to={`${ele.id}`}>
+                                <Link to={`${ele.id}`} key={ele.id}>
                                     <CardCustomer
-                                        key={ele.id}
                                         cardTitle={ele.nombre}
                                         cardSubtitle={ele.empresa}
                                     />{" "}

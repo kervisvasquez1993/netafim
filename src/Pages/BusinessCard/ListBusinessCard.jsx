@@ -18,9 +18,9 @@ const ListBusinessCard = () => {
                     {cardsBusiness &&
                         cardsBusiness.map((ele) => {
                             return (
-                                <Link to={`${ele.id}`}>
+                                <Link to={`${ele.id}`} key={ele.id}>
                                     <CardCustomer
-                                        key={ele.id}
+                                        
                                         tarjeta={tarjetaicono}
                                         cardTitle={`Tarjeta ${ele.id}`}
                                         // cardSubtitle={ele.empresa}

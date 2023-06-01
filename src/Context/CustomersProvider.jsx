@@ -120,37 +120,55 @@ export const CustomersProvider = ({ children }) => {
     };
 
     const activarDesactivarCliente = async (customer) => {
-        const { id, activo } = customer;
-        const updateValue = activo === 1 ? 0 : 1;
-
-        const dataSubmit = {
-            activo: updateValue,
-        };
-
+        const { id } = customer;
         try {
             if (!config) {
                 mostrarAlerta({ message: "No tienes permiso", error: true });
                 return;
             }
 
-            const { data } = await ApiBackend.put(
-                `/clientes/${id}`,
-                dataSubmit,
+            const { data } = await ApiBackend.get(
+                `/clientes/${id}/cambiar-estado`,
                 config
             );
+            console.log(data.data, "data de provider cambiar estado");
+            const clienteActualizado = data.data;
 
-            if (updateValue === 0) {
-                setCustomers(customers.filter((c) => c.id !== data.data.id));
-                setCustomersInactivo([...customersInactivo, data.data]);
-                console.log("ejecuto el inactivo");
-            } else {
-                setCustomersInactivo(
-                    customersInactivo.filter((c) => c.id !== data.data.id)
-                );
-                setCustomers([...customers, data.data]);
-                console.log("ejecuto el activo");
-            }
-            setCustomer(data.data);
+            // Actualizar el estado 'customer' con el cliente actualizado
+            setCustomer(clienteActualizado);
+
+            // Actualizar el estado 'customers' con los clientes actualizados
+            const clientesActualizados = customers.map((cliente) => {
+                if (cliente.id === clienteActualizado.id) {
+                    return clienteActualizado;
+                }
+                return cliente;
+            });
+            setCustomers(clientesActualizados);
+
+            // Actualizar el estado 'customersInactivo' con los clientes actualizados
+            const clientesInactivosActualizados = customersInactivo.map(
+                (cliente) => {
+                    if (cliente.id === clienteActualizado.id) {
+                        return clienteActualizado;
+                    }
+                    return cliente;
+                }
+            );
+            setCustomersInactivo(clientesInactivosActualizados);
+
+            // if (updateValue === 0) {
+            //     setCustomers(customers.filter((c) => c.id !== data.data.id));
+            //     setCustomersInactivo([...customersInactivo, data.data]);
+            //     console.log("ejecuto el inactivo");
+            // } else {
+            //     setCustomersInactivo(
+            //         customersInactivo.filter((c) => c.id !== data.data.id)
+            //     );
+            //     setCustomers([...customers, data.data]);
+            //     console.log("ejecuto el activo");
+            // }
+            // setCustomer(data.data);
         } catch (error) {
             console.log(error);
         }
