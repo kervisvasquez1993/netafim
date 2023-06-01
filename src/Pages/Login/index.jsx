@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import styles from "./style.module.css";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { ApiBackend } from "../../apis/ApiBackend";
+
 export const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [alerta, setAlerta] = useState("");
     const { auth, setAuth, loading } = useAuth();
+    const navigate = useNavigate();
     const handleSutmit = async (e) => {
         e.preventDefault();
         if ([email, password].includes("")) {
@@ -17,14 +18,16 @@ export const Login = () => {
             });
             return;
         }
+
         try {
-            const {data}  = await ApiBackend.post("login", {
+            const { data } = await ApiBackend.post("login", {
                 email,
-                 password,
+                password,
             });
             localStorage.setItem("token", data.access_token);
-            setAuth(data);
-            console.log(data);
+            setAuth(data.data);
+            console.log(auth,"auth");
+            navigate("/home");
             setAlerta({});
         } catch (error) {
             console.log(error.response.data.error);
@@ -32,68 +35,69 @@ export const Login = () => {
         }
     };
     const { message } = alerta;
-    console.log(auth, "auth");
-    console.log(loading, "loading");
+
     return (
-        <div
-            className={`${styles["register-container"]} ${styles["container"]}`}
-        >
-            <div className={styles["register-header"]}></div>
-            <div className={styles["register-form"]}>
-                <h2 className={styles["form-title"]}>
+        <div className="flex justify-center items-center h-screen bg-gray-100">
+            <div className="w-full max-w-xs">
+                <h2 className="text-2xl text-center font-bold mb-4">
                     Inicia sesión para registrar clientes
                 </h2>
 
-                <div className={styles["form-container"]}>
-                    <form onSubmit={(e) => handleSutmit(e)}>
-                        <fieldset className={styles["input"]}>
-                            <legend>Correo electrónico</legend>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                value={email}
-                                placeholder="ejemplo@netafim.com"
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
-                        </fieldset>
+                <form onSubmit={(e) => handleSutmit(e)}>
+                    <div className="mb-4">
+                        <label htmlFor="email" className="block mb-1">
+                            Correo electrónico
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={email}
+                            placeholder="ejemplo@netafim.com"
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:border-blue-500"
+                            required
+                        />
+                    </div>
 
-                        <fieldset className={styles["input"]}>
-                            <legend>Contraseña</legend>
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                placeholder="*********"
-                                required
-                            />
-                        </fieldset>
+                    <div className="mb-4">
+                        <label htmlFor="password" className="block mb-1">
+                            Contraseña
+                        </label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="*********"
+                            className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:border-blue-500"
+                            required
+                        />
+                    </div>
 
-                        <Link
-                            className={styles["forgot-password"]}
-                            to={"password-recovery"}
-                        >
-                            Olvidé mi Contraseña
-                        </Link>
-                        <div className={styles["btn"]}>
-                            <input
-                                className={styles["login-input"]}
-                                type="submit"
-                                value="Iniciar sesión"
-                            />
-                        </div>
-                        <div className={styles["btn"]}>
-                            <Link
-                                className={styles["register-link"]}
-                                to={"singup"}
-                            >
-                                Registro
-                            </Link>
-                        </div>
-                    </form>
+                    <div className="flex justify-center">
+                        <input
+                            type="submit"
+                            value="Iniciar sesión"
+                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 cursor-pointer"
+                        />
+                    </div>
+                </form>
+
+                <Link
+                    to="password-recovery"
+                    className="block text-sm text-blue-500 mb-4"
+                >
+                    Olvidé mi Contraseña
+                </Link>
+                <div className="flex justify-center mt-4">
+                    <Link
+                        to="singup"
+                        className="text-sm text-blue-500 hover:text-blue-600"
+                    >
+                        Registro
+                    </Link>
                 </div>
             </div>
         </div>

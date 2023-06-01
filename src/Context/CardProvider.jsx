@@ -69,7 +69,7 @@ export const CardProvider = ({ children }) => {
                 mostrarAlerta({ message: "No tienes permiso", error: true });
                 return;
             }
-            const { respuesta } = await ApiBackend.post(
+            const  respuesta  = await ApiBackend.post(
                 `cliente/${id}/tarjeta`,
                 tarjeta,
                 configFile
@@ -78,9 +78,11 @@ export const CardProvider = ({ children }) => {
 
             // TODO: ACTUALIZAR EL STATE DE CARD
             console.log(respuesta.data.data, "respuesta");
-            setCustomers([...customers, respuesta.data.data]);
-            console.log(customers, "cliente");
-            navigate
+            // agregar a la lista de tarjetas
+            setCardsBusiness([...cardsBusiness, respuesta.data.data]);
+            // setCustomers([...customers, respuesta.data.data]);
+            console.log(cardsBusiness, "tarjeta");
+            navigate(-1)
         } catch (error) {
             console.log(error);
         }
@@ -107,7 +109,8 @@ export const CardProvider = ({ children }) => {
             console.log("cliente Creado");
             console.log(respuesta.data.data, "respuesta");
             setCustomers([...customers, respuesta.data.data]);
-            console.log(customers, "cliente");
+            setCardBuiness(respuesta.data.data);
+            console.log(cardBusiness, "tarjeta creada")
             navigate(-1)
         } catch (error) {
             console.log(error);

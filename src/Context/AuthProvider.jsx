@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
             };
             try {
                 const { data } = await ApiBackend("me", config);
-                console.log(data)
+                console.log(data, "data para el login")
                 setAuth(data);
                 navigate("/home");
             } catch (error) {
