@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { HeadersOne } from "../../Wiews/HeadersOne";
 import { TitleHeaders } from "../../Components/TitleHeaders";
+import useCard from "../../Hooks/useCard" 
+import { useParams } from "react-router-dom";
 const cultivos = [
     "Caña de Azúcar",
     "Banano",
@@ -26,6 +28,8 @@ const opciones = cultivos.map((cultivo) => (
     </option>
 ));
 const CreateCustoWithCard = () => {
+    const {submitNewClienteCard} = useCard()
+    const params = useParams()
     const [customer, setCustomer] = useState({
         nombre: "",
         apellido: "",
@@ -42,7 +46,7 @@ const CreateCustoWithCard = () => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        submitNewCliente(customer);
+        submitNewClienteCard(customer,params.id);
         setCustomer({
             nombre: "",
             apellido: "",
@@ -127,7 +131,7 @@ const CreateCustoWithCard = () => {
                     /> */}
 
                         <select
-                            className="border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
+                            className="block  border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
                             id="cultivo"
                             name="cultivo"
                             onChange={handleInputChange}

@@ -2,6 +2,7 @@ import { useState, useEffect, createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ApiBackend } from "../apis/ApiBackend";
 import { configHeaderToken } from "../Helpers";
+import useCustomers from "../hooks/useCustomers";
 
 export const tokenForFile = (params = {}) => {
     const token = localStorage.getItem("token");
@@ -20,13 +21,20 @@ export const tokenForFile = (params = {}) => {
 };
 const CardContext = createContext();
 export const CardProvider = ({ children }) => {
+    const { setCustomers, customers } = useCustomers();
     const [cardsBusiness, setCardsBusiness] = useState([]);
     const [cardBusiness, setCardBuiness] = useState([]);
     const [loadingCustomers, setLoadingCustomers] = useState(false);
+    const navigate = useNavigate();
     const configFile = tokenForFile();
     const config = configHeaderToken();
     const submitNewTaerjeta = async (card, id) => {
         await newTarjetaWithCustomer(card, id);
+        return;
+    };
+
+    const submitNewClienteCard = async (customer, id) => {
+        await newClienteCard(customer, id);
         return;
     };
     // get all card bussines
@@ -46,7 +54,7 @@ export const CardProvider = ({ children }) => {
                 // setProyectos(data.projects);
                 // setLoadingCustomers(false);
                 setCardsBusiness(data.data, "data de rpovider");
-                console.log(data, "data. decard businness");
+                console.log(data.data, "data. decard businness");
             } catch (error) {
                 console.log(error);
             } finally {
@@ -67,11 +75,39 @@ export const CardProvider = ({ children }) => {
                 configFile
             );
             console.log(respuesta, "cliente Creado");
-            return;
+
             // TODO: ACTUALIZAR EL STATE DE CARD
             console.log(respuesta.data.data, "respuesta");
             setCustomers([...customers, respuesta.data.data]);
             console.log(customers, "cliente");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const newClienteCard = async (cliente, id) => {
+        // const dataSubmit = bodySubmit(cliente);
+
+        console.log(cliente, "dataSubmit desde formulario");
+
+        // console.log(dataSubmit, "dataSubmit desde formulario");
+        try {
+            if (!config) {
+                mostrarAlerta({ message: "No tienes permiso", error: true });
+                return;
+            }
+
+            const respuesta = await ApiBackend.post(
+                `tarjetas/${id}/cliente`,
+                cliente,
+                config
+            );
+            // mostrarAlerta({ message: "cliente Creado", error: false });
+            console.log("cliente Creado");
+            console.log(respuesta.data.data, "respuesta");
+            setCustomers([...customers, respuesta.data.data]);
+            console.log(customers, "cliente");
+            navigate(-1)
         } catch (error) {
             console.log(error);
         }
@@ -104,6 +140,7 @@ export const CardProvider = ({ children }) => {
                 getCard,
                 cardBusiness,
                 loadingCustomers,
+                submitNewClienteCard,
             }}
         >
             {children}

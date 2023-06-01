@@ -143,6 +143,7 @@ export const CustomersProvider = ({ children }) => {
         <CustomersContext.Provider
             value={{
                 customers,
+                setCustomers,
                 customer,
                 loadingCustomers,
                 getCustomer,
