@@ -11,16 +11,17 @@ const ListBusinessCard = () => {
     return (
         <>
             <HeadersOne />
-            <h1 className="text-center text-2xl font-bold py-10">Tarjeta de Clientes</h1>
+            <h1 className="text-center text-2xl font-bold py-10">
+                Tarjeta de Clientes
+            </h1>
             <div className="border rounded-xl bg-white overflow-hidden shadow-sm min-h-3000">
                 <div className="border-t border-b p-4 text-center">
-                    {!cardsBusiness && <div>Sin Clientes</div>}
+                    {!cardsBusiness && <div>Sin Tarjeta</div>}
                     {cardsBusiness &&
                         cardsBusiness.map((ele) => {
                             return (
                                 <Link to={`${ele.id}`} key={ele.id}>
                                     <CardCustomer
-                                        
                                         tarjeta={tarjetaicono}
                                         cardTitle={`Tarjeta ${ele.id}`}
                                         // cardSubtitle={ele.empresa}

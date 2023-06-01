@@ -8,7 +8,7 @@ const CustomersContext = createContext();
 export const CustomersProvider = ({ children }) => {
     const [customers, setCustomers] = useState([]);
     const [customersInactivo, setCustomersInactivo] = useState([]);
-    const [customer, setCustomer] = useState([]);
+    const [customer, setCustomer] = useState({});
     const [loadingCustomers, setLoadingCustomers] = useState(false);
     const navigate = useNavigate();
     const config = configHeaderToken();
@@ -136,7 +136,7 @@ export const CustomersProvider = ({ children }) => {
 
             // Actualizar el estado 'customer' con el cliente actualizado
             setCustomer(clienteActualizado);
-
+            console.log()
             // Actualizar el estado 'customers' con los clientes actualizados
             const clientesActualizados = customers.map((cliente) => {
                 if (cliente.id === clienteActualizado.id) {
