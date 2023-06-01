@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 #root {
     min-height: 100vh;
     display: flex;
@@ -8,6 +9,14 @@
     align-items: center;
     background-color: #f3f4f6;
 }
-form{
+
+form {
     display: block;
+}
+
+input[type="submit"],
+a,
+button {
+    min-width: 200px;
+    text-align: center;
 }

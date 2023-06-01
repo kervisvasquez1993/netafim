@@ -26,7 +26,7 @@ export const Login = () => {
             });
             localStorage.setItem("token", data.access_token);
             setAuth(data.data);
-            console.log(auth,"auth");
+            console.log(auth, "auth");
             navigate("/home");
             setAlerta({});
         } catch (error) {
@@ -43,7 +43,7 @@ export const Login = () => {
                     Inicia sesión para registrar clientes
                 </h2>
 
-                <form onSubmit={(e) => handleSutmit(e)}>
+                {/* <form onSubmit={(e) => handleSutmit(e)}>
                     <div className="mb-4">
                         <label htmlFor="email" className="block mb-1">
                             Correo electrónico
@@ -83,22 +83,69 @@ export const Login = () => {
                             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 cursor-pointer"
                         />
                     </div>
+                </form> */}
+                <form onSubmit={(e) => handleSutmit(e)}>
+                    <div className="mb-4">
+                        <label htmlFor="email" class="block mb-1 text-blue-500">
+                            Correo electrónico
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={email}
+                            placeholder="ejemplo@netafim.com"
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40 hover:opacity-100"
+                            required
+                        />
+                    </div>
+
+                    <div className="mb-4">
+                        <label
+                            htmlFor="password"
+                            className="relative mb-1 text-blue-500"
+                        >
+                            Contraseña
+                        </label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="*********"
+                            className="border-blue-500 border-2 rounded-lg px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40 hover:opacity-100"
+                            required
+                        />
+                    </div>
+                    <div className="flex justify-center pt-10 pb-10">
+                        <Link
+                            to="password-recovery"
+                            className="block text-sm text-blue-500 mb-4"
+                        >
+                            Olvidé mi Contraseña
+                        </Link>
+                    </div>
+
+                    <div className="flex justify-center flex-col items-center">
+                        <input
+                            type="submit"
+                            value="Iniciar sesión"
+                            className="inline-block rounded border mb-7 border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
+                        />
+
+                        <Link
+                            to="/singup"
+                            className="inline-block rounded border border-blue-600 px-12 py-3 text-sm font-medium text-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring active:bg-blue-500"
+                        >
+                            Registro
+                        </Link>
+                    </div>
                 </form>
 
-                <Link
-                    to="password-recovery"
-                    className="block text-sm text-blue-500 mb-4"
-                >
-                    Olvidé mi Contraseña
-                </Link>
-                <div className="flex justify-center mt-4">
-                    <Link
-                        to="singup"
-                        className="text-sm text-blue-500 hover:text-blue-600"
-                    >
-                        Registro
-                    </Link>
-                </div>
+                <div className="flex justify-center mt-4"></div>
             </div>
         </div>
     );
