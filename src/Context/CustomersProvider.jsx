@@ -22,22 +22,24 @@ export const CustomersProvider = ({ children }) => {
         return;
     };
     const descarga = async () => {
-        await descargarArchivo()
-    }
+        await descargarArchivo();
+    };
     const descargarArchivo = async () => {
         const token = localStorage.getItem("token");
         if (!token) {
             console.log("No Tiene Permiso");
             return false;
         }
-    
+
         try {
-            const response = await ApiBackend.get("/generartxt", {responseType: 'blob',
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },});
-            console.log(response)
+            const response = await ApiBackend.get("/generartxt", {
+                responseType: "blob",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            console.log(response);
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const a = document.createElement("a");
             a.href = url;
@@ -47,7 +49,7 @@ export const CustomersProvider = ({ children }) => {
             document.body.removeChild(a);
         } catch (error) {
             // Manejo de errores
-            console.log(error)
+            console.log(error);
         }
     };
     useEffect(() => {
@@ -62,14 +64,31 @@ export const CustomersProvider = ({ children }) => {
                     });
                     return;
                 }
+                const { data } = await ApiBackend.get("/clientes", config);
+                console.log(data.data, "data de provider");
+                // Filtrar los clientes activos
+                const clientesActivos = data.data.filter(
+                    (cliente) => cliente.activo === 1
+                );
 
-                const [activeData, inactiveData] = await Promise.all([
-                    ApiBackend.get("/clientes?activos=1", config),
-                    ApiBackend.get("/clientes?activos=0", config),
-                ]);
+                // Filtrar los clientes inactivos
+                const clientesInactivos = data.data.filter(
+                    (cliente) => cliente.activo === 0
+                );
 
-                setCustomers(activeData.data.data);
-                setCustomersInactivo(inactiveData.data.data);
+                // Establecer los clientes activos en el estado 'customers'
+                setCustomers(clientesActivos);
+
+                // Establecer los clientes inactivos en el estado 'customersInactivo'
+                setCustomersInactivo(clientesInactivos);
+                // const [activeData, inactiveData] = await Promise.all([
+                //     ApiBackend.get("/clientes?activos=1", config),
+                //     ApiBackend.get("/clientes?activos=0", config),
+                // ]);
+                console.log(customers, "customers");
+                console.log(customersInactivo, "customersInactivo");
+                // setCustomers(activeData.data.data);
+                // setCustomersInactivo(inactiveData.data.data);
             } catch (error) {
                 console.log(error);
             } finally {
@@ -178,7 +197,7 @@ export const CustomersProvider = ({ children }) => {
                 submitChangeStatus,
                 customersInactivo,
                 submitNewCliente,
-                descarga
+                descarga,
             }}
         >
             {children}

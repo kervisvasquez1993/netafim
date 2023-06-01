@@ -151,15 +151,13 @@ export const Register = () => {
                     )}
                 </div>
                 <div className="flex justify-center py-10">
-                <button
-                    type="submit"
-                    className="bg-blue-500 text-white rounded-md px-4 py-2 mt-4"
-                >
-                    Registrarse
-                </button>
-
+                    <button
+                        type="submit"
+                        className="bg-blue-500 text-white rounded-md px-4 py-2 mt-4"
+                    >
+                        Registrarse
+                    </button>
                 </div>
-                
             </form>
         </PublicComponents>
     );

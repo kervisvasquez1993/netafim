@@ -2,18 +2,18 @@ import { useState } from "react";
 import CardCustomer from "./Cardcustomer";
 import { Link } from "react-router-dom";
 import Button from "./Button";
-import  persona from "../assets/svg/perfil.svg";
+import persona from "../assets/svg/perfil.svg";
 import useCustomers from "../Hooks/useCustomers";
 const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
-    const {descarga} = useCustomers()
+    const { descarga } = useCustomers();
     const [activeTab, setActiveTab] = useState(1);
     const handleTabClick = (tabIndex) => {
         setActiveTab(tabIndex);
     };
-    const test =() =>{
-    console.log("test");
-    }
-    console.log(data, "data")
+    const test = () => {
+        console.log("test");
+    };
+    console.log(data, "data");
     return (
         <>
             <div className="border rounded-xl overflow-hidden shadow-sm min-h-3000">
@@ -34,7 +34,7 @@ const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
                         }}
                     >
                         <h3 className="text-center text-16 font-semibold">
-                            Clientes Activos    
+                            Clientes Activos
                         </h3>
                     </div>
                     <div
@@ -59,7 +59,11 @@ const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
                 </div>
 
                 <div className="border-t border-b p-4 text-center">
-                    <Button text={"Descargar Datos"} onClick={descarga} variant={"primary"}/>
+                    <Button
+                        text={"Descargar Datos"}
+                        onClick={descarga}
+                        variant={"primary"}
+                    />
                     {!data && <div>Sin Clientes</div>}
                     {data &&
                         data.map((ele) => {
@@ -74,8 +78,8 @@ const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
                                 </Link>
                             );
                         })}
-                         {data.data &&
-                        data.data.map((ele) => {
+                    {data &&
+                        data.map((ele) => {
                             return (
                                 <Link to={`${ele.id}`}>
                                     <CardCustomer
