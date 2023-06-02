@@ -1,12 +1,3 @@
-// import { defineConfig } from 'vite'
-// import { VitePWA } from "vite-plugin-pwa";
-// import react from '@vitejs/plugin-react'
-
-// // https://vitejs.dev/config/
-// export default defineConfig({
-//   plugins: [react()],
-// })
-// vite.config.js
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 import reactRefresh from '@vitejs/plugin-react-refresh';
@@ -19,17 +10,17 @@ export default defineConfig({
     reactRefresh(),
     VitePWA({
       manifest: {
-        name: 'Mi PWA',
-        short_name: 'Mi PWA',
+        name: 'Netafim',
+        short_name: 'Netafim',
         theme_color: '#ffffff',
         icons: [
           {
-            src: '/assets/icons/icon-192x192.png',
+            src: '/assets/icons/logo192x192.png',
             sizes: '192x192',
             type: 'image/png',
           },
           {
-            src: '/assets/icons/icon-512x512.png',
+            src: '/assets/icons/logo512x512.png',
             sizes: '512x512',
             type: 'image/png',
           },
@@ -39,7 +30,7 @@ export default defineConfig({
       workbox: {
         runtimeCaching: [
           {
-            urlPattern: new RegExp('^https://api.example.com'),
+            urlPattern: new RegExp('^https://netafim-app-ksw6o.ondigitalocean.app/api/api/'),
             handler: 'StaleWhileRevalidate',
             options: {
               cacheName: 'api-cache',
