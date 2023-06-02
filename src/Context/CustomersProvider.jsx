@@ -7,8 +7,8 @@ import { data } from "autoprefixer";
 const CustomersContext = createContext();
 export const CustomersProvider = ({ children }) => {
     const [customers, setCustomers] = useState([]);
-    const [customersInactivo, setCustomersInactivo] = useState([]);
     const [customer, setCustomer] = useState({});
+    const [customersInactivo, setCustomersInactivo] = useState([]);
     const [loadingCustomers, setLoadingCustomers] = useState(false);
     const navigate = useNavigate();
     const config = configHeaderToken();
@@ -66,29 +66,32 @@ export const CustomersProvider = ({ children }) => {
                 }
                 const { data } = await ApiBackend.get("/clientes", config);
                 console.log(data.data, "data de provider");
+
+                setCustomers(data.data);
+                console.log(customers, "customers para separar");
                 // Filtrar los clientes activos
-                const clientesActivos = data.data.filter(
-                    (cliente) => cliente.activo === 1
-                );
+                // const clientesActivos = data.data.filter(
+                //     (cliente) => cliente.activo == 1
+                // );
 
-                // Filtrar los clientes inactivos
-                const clientesInactivos = data.data.filter(
-                    (cliente) => cliente.activo === 0
-                );
+                // // Filtrar los clientes inactivos
+                // const clientesInactivos = data.data.filter(
+                //     (cliente) => cliente.activo == 0
+                // );
 
-                // Establecer los clientes activos en el estado 'customers'
-                setCustomers(clientesActivos);
+                // // Establecer los clientes activos en el estado 'customers'
+                // setCustomers(clientesActivos);
 
-                // Establecer los clientes inactivos en el estado 'customersInactivo'
-                setCustomersInactivo(clientesInactivos);
-                // const [activeData, inactiveData] = await Promise.all([
-                //     ApiBackend.get("/clientes?activos=1", config),
-                //     ApiBackend.get("/clientes?activos=0", config),
-                // ]);
-                console.log(customers, "customers");
-                console.log(customersInactivo, "customersInactivo");
-                // setCustomers(activeData.data.data);
-                // setCustomersInactivo(inactiveData.data.data);
+                // // Establecer los clientes inactivos en el estado 'customersInactivo'
+                // setCustomersInactivo(clientesInactivos);
+                // // const [activeData, inactiveData] = await Promise.all([
+                // //     ApiBackend.get("/clientes?activos=1", config),
+                // //     ApiBackend.get("/clientes?activos=0", config),
+                // // ]);
+                // console.log(customers, "customers");
+                // console.log(customersInactivo, "customersInactivo");
+                // // setCustomers(activeData.data.data);
+                // // setCustomersInactivo(inactiveData.data.data);
             } catch (error) {
                 console.log(error);
             } finally {
@@ -136,39 +139,21 @@ export const CustomersProvider = ({ children }) => {
 
             // Actualizar el estado 'customer' con el cliente actualizado
             setCustomer(clienteActualizado);
-            console.log()
-            // Actualizar el estado 'customers' con los clientes actualizados
-            const clientesActualizados = customers.map((cliente) => {
-                if (cliente.id === clienteActualizado.id) {
-                    return clienteActualizado;
-                }
-                return cliente;
-            });
-            setCustomers(clientesActualizados);
 
-            // Actualizar el estado 'customersInactivo' con los clientes actualizados
-            const clientesInactivosActualizados = customersInactivo.map(
-                (cliente) => {
+            // Actualizar el estado 'customers' con el cliente actualizado
+            setCustomers((prevCustomers) => {
+                return prevCustomers.map((cliente) => {
                     if (cliente.id === clienteActualizado.id) {
                         return clienteActualizado;
                     }
                     return cliente;
-                }
-            );
-            setCustomersInactivo(clientesInactivosActualizados);
+                });
+            });
 
-            // if (updateValue === 0) {
-            //     setCustomers(customers.filter((c) => c.id !== data.data.id));
-            //     setCustomersInactivo([...customersInactivo, data.data]);
-            //     console.log("ejecuto el inactivo");
-            // } else {
-            //     setCustomersInactivo(
-            //         customersInactivo.filter((c) => c.id !== data.data.id)
-            //     );
-            //     setCustomers([...customers, data.data]);
-            //     console.log("ejecuto el activo");
-            // }
-            // setCustomer(data.data);
+            console.log(customer, "customer actualizado");
+            console.log(customers, "customers actualizado");
+
+            console.log(customersInactivo, "customersInactivo actualizado");
         } catch (error) {
             console.log(error);
         }
@@ -208,12 +193,13 @@ export const CustomersProvider = ({ children }) => {
             value={{
                 customers,
                 setCustomers,
+                customersInactivo,
+                setCustomersInactivo,
                 customer,
                 loadingCustomers,
                 getCustomer,
                 activarDesactivarCliente,
                 submitChangeStatus,
-                customersInactivo,
                 submitNewCliente,
                 descarga,
             }}

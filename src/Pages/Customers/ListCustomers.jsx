@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ShowCard from "../../Components/ShowCard";
 import useCustomers from "../../Hooks/useCustomers";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,18 +8,13 @@ import { HeadersTwo } from "../../Wiews/HeadersTwo";
 import { TitleHeaders } from "../../Components/TitleHeaders";
 import Button from "../../Components/Button";
 
-
 export const ListCustomers = () => {
-    const { customers, loadingCustomers, customersInactivo } = useCustomers();
-    const [dato, setDatos] = useState(customers);
     const navigate = useNavigate();
+    const { customers, loadingCustomers } = useCustomers();
+    const [dato, setDatos] = useState(customers);
+    
+    
     if (loadingCustomers) return <div>loading...</div>;
-    const handlessCustomers = () => {
-        setDatos(customers);
-    };
-    const handlessCustomersInactivo = () => {
-        setDatos(customersInactivo);
-    };
 
     return (
         <>
@@ -31,12 +26,11 @@ export const ListCustomers = () => {
                 onClick={() => navigate("/home/card-business")}
                 pt={5}
                 pb={10}
-
             />
             <ToggleCard
-                handleLeftClick={handlessCustomers}
-                handleRightClick={handlessCustomersInactivo}
-                data={dato}
+                handleLeftClick={() => console.log("click left")}
+                handleRightClick={() => console.log("click right")}
+                data={customers}
             />
         </>
     );

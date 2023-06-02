@@ -11,17 +11,44 @@ export const ShowCustomers = () => {
     const params = useParams();
     const [txtStatus, setTxtStatus] = useState("");
     const navigate = useNavigate();
-    const { getCustomer, customer, loadingCustomers, submitChangeStatus } =
-        useCustomers();
+    const {
+        getCustomer,
+        customer,
+        customers,
+        customersInactivo,
+        loadingCustomers,
+        submitChangeStatus,
+        setCustomers,
+        setCustomersInactivo,
+    } = useCustomers();
     useEffect(() => {
         getCustomer(params.id);
     }, [params.id]);
     useEffect(() => {
-        if (customer.activo === 1) {
-            setTxtStatus("Archivar Cliente");
+        if (customer.activo == true) {
+            setTxtStatus("Eliminar Cliente");
         } else {
             setTxtStatus("Activar Cliente");
         }
+
+        // Actualizar el estado 'customers' con los clientes actualizados
+        const clientesActualizados = customers.map((cliente) => {
+            if (cliente.id === customer.id) {
+                return customer;
+            }
+            return cliente;
+        });
+        setCustomers(clientesActualizados);
+        // Actualizar el estado 'customersInactivo' con los clientes actualizados
+        const clientesInactivosActualizados = customersInactivo.map(
+            (cliente) => {
+                if (cliente.id === customer.id) {
+                    return customer;
+                }
+                return cliente;
+            }
+        );
+        setCustomersInactivo(clientesInactivosActualizados);
     }, [customer]);
     const onSaludar = () => {
         navigate(`/home/customers-card-business/${params.id}`);

@@ -7,13 +7,18 @@ import useCustomers from "../Hooks/useCustomers";
 const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
     const { descarga } = useCustomers();
     const [activeTab, setActiveTab] = useState(1);
+
     const handleTabClick = (tabIndex) => {
         setActiveTab(tabIndex);
     };
-    const test = () => {
-        console.log("test");
-    };
+
     console.log(data, "data");
+
+    const filteredData =
+        activeTab === 1
+            ? data.filter((cliente) => cliente.activo)
+            : data.filter((cliente) => !cliente.activo);
+
     return (
         <>
             <div className="border rounded-xl overflow-hidden shadow-sm min-h-3000">
@@ -64,33 +69,20 @@ const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
                         onClick={descarga}
                         variant={"primary"}
                     />
-                    {!data && <div>Sin Clientes</div>}
-                    {data &&
-                        data.map((ele) => {
-                            return (
-                                <Link to={`${ele.id}`} key={ele.id}>
-                                    <ShowCard
-                                        cardTitle={ele.nombre}
-                                        tarjeta={persona}
-                                        cardSubtitle={ele.empresa}
-                                    />{" "}
-                                </Link>
-                            );
-                        })}
-                    {data &&
-                        data.map((ele) => {
-                            return (
-                                <Link to={`${ele.id}`} key={ele.id}>
-                                    <ShowCard
-                                        cardTitle={ele.nombre}
-                                        cardSubtitle={ele.empresa}
-                                    />{" "}
-                                </Link>
-                            );
-                        })}
+                    {!filteredData.length && <div>Sin Clientes</div>}
+                    {filteredData.map((ele) => (
+                        <Link to={`${ele.id}`} key={ele.id}>
+                            <ShowCard
+                                cardTitle={ele.nombre}
+                                tarjeta={persona}
+                                cardSubtitle={ele.empresa}
+                            />
+                        </Link>
+                    ))}
                 </div>
             </div>
         </>
     );
 };
+
 export default ToggleCard;
