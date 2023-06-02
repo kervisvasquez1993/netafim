@@ -17,7 +17,7 @@ export const AlertProvider = ({ children }) => {
       setShowAlertState(false);
       setAlertMessage("");
       setAlertType("");
-    }, 5000);
+    }, 2000);
   };
 
   const alertContextValue = {

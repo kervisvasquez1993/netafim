@@ -6,10 +6,10 @@ const Alert = ({ message, type }) => {
   let alertClass =
     "fixed inset-0 flex items-center justify-center z-50 bg-blue-500 bg-opacity-50";
   let alertContentClass =
-    "bg-white border border-black rounded-md p-4 min-h-150px text-black shadow-md";
+    "bg-white border border-black rounded-md p-4 min-h-150px text-black shadow-md text-center";
 
   if (type === "error") {
-    alertContentClass += " border-red-700 text-red-700";
+    alertContentClass += " bg-red border-red-700 text-red-700";
   } else if (type === "success") {
     alertContentClass += " border-green-700 text-green-700";
   } else if (type === "alert") {

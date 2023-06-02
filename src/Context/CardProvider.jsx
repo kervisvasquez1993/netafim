@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ApiBackend } from "../apis/ApiBackend";
 import { configHeaderToken } from "../Helpers";
 import useCustomers from "../Hooks/useCustomers";
+import useAlert from "../Hooks/useAlert";
 
 export const tokenForFile = (params = {}) => {
     const token = localStorage.getItem("token");
@@ -25,11 +26,15 @@ export const CardProvider = ({ children }) => {
     const [cardsBusiness, setCardsBusiness] = useState([]);
     const [cardBusiness, setCardBuiness] = useState([]);
     const [loadingCustomers, setLoadingCustomers] = useState(false);
+    const { showAlert } = useAlert();
     const navigate = useNavigate();
     const configFile = tokenForFile();
     const config = configHeaderToken();
     const submitNewTaerjeta = async (card, id) => {
         await newTarjetaWithCustomer(card, id);
+        // await new Promise((resolve) => setTimeout(resolve, 2000)); // Esperar 3 segundos
+        navigate(-1);
+        await showAlert("Tarjeta Agregada");
         return;
     };
 
@@ -37,6 +42,7 @@ export const CardProvider = ({ children }) => {
         await newClienteCard(customer, id);
         return;
     };
+
     // get all card bussines
 
     useEffect(() => {
@@ -44,7 +50,7 @@ export const CardProvider = ({ children }) => {
             setLoadingCustomers(true);
             try {
                 if (!config) {
-                    mostrarAlerta({
+                    showAlert({
                         message: "No tienes permiso",
                         error: true,
                     });
@@ -66,10 +72,10 @@ export const CardProvider = ({ children }) => {
     const newTarjetaWithCustomer = async (tarjeta, id) => {
         try {
             if (!configFile) {
-                mostrarAlerta({ message: "No tienes permiso", error: true });
+                showAlert({ message: "No tienes permiso", error: true });
                 return;
             }
-            const  respuesta  = await ApiBackend.post(
+            const respuesta = await ApiBackend.post(
                 `cliente/${id}/tarjeta`,
                 tarjeta,
                 configFile
@@ -82,7 +88,7 @@ export const CardProvider = ({ children }) => {
             setCardsBusiness([...cardsBusiness, respuesta.data.data]);
             // setCustomers([...customers, respuesta.data.data]);
             console.log(cardsBusiness, "tarjeta");
-            navigate(-1)
+            
         } catch (error) {
             console.log(error);
         }
@@ -96,7 +102,7 @@ export const CardProvider = ({ children }) => {
         // console.log(dataSubmit, "dataSubmit desde formulario");
         try {
             if (!config) {
-                mostrarAlerta({ message: "No tienes permiso", error: true });
+                showAlert({ message: "No tienes permiso", error: true });
                 return;
             }
 
@@ -105,13 +111,13 @@ export const CardProvider = ({ children }) => {
                 cliente,
                 config
             );
-            // mostrarAlerta({ message: "cliente Creado", error: false });
+            // showAlert({ message: "cliente Creado", error: false });
             console.log("cliente Creado");
             console.log(respuesta.data.data, "respuesta");
             setCustomers([...customers, respuesta.data.data]);
             setCardBuiness(respuesta.data.data);
-            console.log(cardBusiness, "tarjeta creada")
-            navigate(-1)
+            console.log(cardBusiness, "tarjeta creada");
+            await showAlert("Cliente Agregado");
         } catch (error) {
             console.log(error);
         }
@@ -121,7 +127,7 @@ export const CardProvider = ({ children }) => {
         setLoadingCustomers(true);
         try {
             if (!config) {
-                mostrarAlerta({ message: "No tienes permiso", error: true });
+                showAlert({ message: "No tienes permiso", error: true });
                 return;
             }
 

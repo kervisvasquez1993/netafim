@@ -58,7 +58,7 @@ export const ShowCustomers = () => {
     };
     function handleArchiveClientClick() {
         submitChangeStatus(customer);
-        showAlert("Se cambio el Status del cliente de forma correcta", "success");
+        showAlert("Cliente Actualizado de Forma Correcta", "success");
         console.log("Cambio de status ");
     }
 

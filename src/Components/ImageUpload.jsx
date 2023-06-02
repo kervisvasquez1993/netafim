@@ -3,9 +3,12 @@ import imagenUpload from "../assets/sin-img.png";
 import { useParams } from "react-router-dom";
 import useCustomers from "../Hooks/useCustomers";
 import useCard from "../Hooks/useCard";
+import useAlert from "../Hooks/useAlert";
+
 
 function ImageUploader() {
     const [selectedFile, setSelectedFile] = useState(null);
+    const {showAlert} = useAlert();
     const [imageSrc, setImageSrc] = useState(imagenUpload);
     const { submitNewTaerjeta } = useCard();
     const params = useParams();
@@ -13,7 +16,7 @@ function ImageUploader() {
         event.preventDefault();
 
         if (!selectedFile) {
-            console.log("No se ha seleccionado ningún archivo");
+            showAlert("No se ha seleccionado ningún archivo");
             return;
         }
 
@@ -22,7 +25,7 @@ function ImageUploader() {
             formData.append("src_img", selectedFile);
             submitNewTaerjeta(formData, params.id);
         } catch (error) {
-            console.error("Error al enviar la imagen:", error);
+            showAlert("Error al enviar la imagen:", "error");
         }
     };
 

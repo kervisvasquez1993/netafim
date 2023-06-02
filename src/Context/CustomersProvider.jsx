@@ -64,7 +64,7 @@ export const CustomersProvider = ({ children }) => {
             try {
                 if (!config) {
                     console.log("no tienes permiso");
-                    mostrarAlerta({
+                    showAlert({
                         message: "No tienes permiso",
                         error: true,
                     });
@@ -112,7 +112,7 @@ export const CustomersProvider = ({ children }) => {
         setLoadingCustomers(true);
         try {
             if (!config) {
-                mostrarAlerta({ message: "No tienes permiso", error: true });
+                showAlert({ message: "No tienes permiso", error: true });
                 return;
             }
 
@@ -132,7 +132,7 @@ export const CustomersProvider = ({ children }) => {
         const { id } = customer;
         try {
             if (!config) {
-                mostrarAlerta({ message: "No tienes permiso", error: true });
+                showAlert({ message: "No tienes permiso", error: true });
                 return;
             }
 
@@ -173,7 +173,7 @@ export const CustomersProvider = ({ children }) => {
         // console.log(dataSubmit, "dataSubmit desde formulario");
         try {
             if (!config) {
-                mostrarAlerta({ message: "No tienes permiso", error: true });
+                showAlert({ message: "No tienes permiso", error: true });
                 return;
             }
 
@@ -182,7 +182,7 @@ export const CustomersProvider = ({ children }) => {
                 cliente,
                 config
             );
-            // mostrarAlerta({ message: "cliente Creado", error: false });
+            // showAlert({ message: "cliente Creado", error: false });
             console.log("cliente Creado");
 
             console.log(respuesta.data.data, "respuesta");
