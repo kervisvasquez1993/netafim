@@ -6,9 +6,12 @@ import HeaderWithButton from "../../Components/HeaderWithButton";
 import TwoButtons from "../../Components/TwoButtons";
 import Button from "../../Components/Button";
 import { HeadersOne } from "../../Wiews/HeadersOne";
+import Loading from "../../Wiews/Loading";
+import useAlert from "../../Hooks/useAlert";
 
 export const ShowCustomers = () => {
     const params = useParams();
+    const { showAlert } = useAlert();
     const [txtStatus, setTxtStatus] = useState("");
     const navigate = useNavigate();
     const {
@@ -26,7 +29,7 @@ export const ShowCustomers = () => {
     }, [params.id]);
     useEffect(() => {
         if (customer.activo == true) {
-            setTxtStatus("Eliminar Cliente");
+            setTxtStatus("Archivar Cliente");
         } else {
             setTxtStatus("Activar Cliente");
         }
@@ -55,13 +58,14 @@ export const ShowCustomers = () => {
     };
     function handleArchiveClientClick() {
         submitChangeStatus(customer);
+        showAlert("Se cambio el Status del cliente de forma correcta", "success");
         console.log("Cambio de status ");
     }
 
     function handleDeleteClientClick() {
         console.log("Eliminar cliente");
     }
-    if (loadingCustomers) return <div>loading...</div>;
+    if (loadingCustomers) return <Loading />;
     return (
         <>
             <HeadersOne />
