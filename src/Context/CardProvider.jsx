@@ -8,7 +8,7 @@ import useAlert from "../Hooks/useAlert";
 export const tokenForFile = (params = {}) => {
     const token = localStorage.getItem("token");
     if (!token) {
-        console.log("No Tiene Permiso");
+        // console.log("No Tiene Permiso");
         return false;
     }
 
@@ -50,10 +50,10 @@ export const CardProvider = ({ children }) => {
             setLoadingCustomers(true);
             try {
                 if (!config) {
-                    showAlert({
-                        message: "No tienes permiso",
-                        error: true,
-                    });
+                    // showAlert({
+                    //     message: "No tienes permiso",
+                    //     error: true,
+                    // });
                     return;
                 }
                 const { data } = await ApiBackend.get("/tarjetas", config);
@@ -72,7 +72,7 @@ export const CardProvider = ({ children }) => {
     const newTarjetaWithCustomer = async (tarjeta, id) => {
         try {
             if (!configFile) {
-                showAlert({ message: "No tienes permiso", error: true });
+                // showAlert( "No tienes permiso", "error");
                 return;
             }
             const respuesta = await ApiBackend.post(
@@ -101,7 +101,7 @@ export const CardProvider = ({ children }) => {
         // console.log(dataSubmit, "dataSubmit desde formulario");
         try {
             if (!config) {
-                showAlert({ message: "No tienes permiso", error: true });
+                showAlert("No tienes permiso", "error");
                 return;
             }
 
@@ -110,7 +110,7 @@ export const CardProvider = ({ children }) => {
                 cliente,
                 config
             );
-            // showAlert({ message: "cliente Creado", error: false });
+            // showAlert("cliente Creado", "error");
             console.log("cliente Creado");
             console.log(respuesta.data.data, "respuesta");
             setCustomers([...customers, respuesta.data.data]);
@@ -130,7 +130,7 @@ export const CardProvider = ({ children }) => {
         setLoadingCustomers(true);
         try {
             if (!config) {
-                showAlert({ message: "No tienes permiso", error: true });
+                // showAlert({ message: "No tienes permiso", error: true });
                 return;
             }
 

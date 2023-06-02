@@ -1,37 +1,37 @@
 import React, { createContext, useState } from "react";
 import Alert from "../Wiews/Alert";
-// import AlertError from "../Wiews/AlerError";
 
 const AlertContext = createContext();
 
 export const AlertProvider = ({ children }) => {
-  const [showAlertState, setShowAlertState] = useState(false);
-  const [alertMessage, setAlertMessage] = useState([]);
-  const [alertType, setAlertType] = useState([]);
+    const [showAlertState, setShowAlertState] = useState(false);
+    const [alertMessage, setAlertMessage] = useState("");
+    const [alertType, setAlertType] = useState("");
 
-  const showAlert = (message, type) => {
-    setShowAlertState(true);
-    setAlertMessage(message);
-    setAlertType(type);
+    const showAlert = (message, type) => {
+        setShowAlertState(true);
+        setAlertMessage(message);
+        setAlertType(type);
 
-    setTimeout(() => {
-      setShowAlertState(false);
-      
-      setAlertMessage("");
-      setAlertType("");
-    }, 2000);
-  };
+        setTimeout(() => {
+            setShowAlertState(false);
+            setAlertMessage("");
+            setAlertType("");
+        }, 2000);
+    };
 
-  const alertContextValue = {
-    showAlert: showAlert,
-  };
+    const alertContextValue = {
+        showAlert: showAlert,
+    };
 
-  return (
-    <AlertContext.Provider value={alertContextValue}>
-      {children}
-      {showAlertState && <Alert message={alertMessage} type={alertType} />}
-    </AlertContext.Provider>
-  );
+    return (
+        <AlertContext.Provider value={alertContextValue}>
+            {children}
+            {showAlertState && (
+                <Alert msj={alertMessage} type={alertType} />
+            )}
+        </AlertContext.Provider>
+    );
 };
 
 export default AlertContext;

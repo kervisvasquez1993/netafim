@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
-const Alert = ({ message, type }) => {
+const Alert = ({ msj = "", type }) => {
   const [showAlert, setShowAlert] = useState(true);
 
   let alertClass =
     "fixed inset-0 flex items-center justify-center z-50 bg-blue-500 bg-opacity-50";
   let alertContentClass =
-    "bg-white border border-black rounded-md p-4 min-h-150px text-black shadow-md text-center";
+    "bg-white border border-black rounded-md p-4 min-h-150px text-black shadow-md text-ce";
 
   if (type === "error") {
     alertContentClass += " bg-red border-red-700 text-red-700";
@@ -27,7 +27,7 @@ const Alert = ({ message, type }) => {
   return (
     <div className={alertClass}>
       <div className={alertContentClass}>
-        <p>{message}</p>
+        <span>{msj}</span>
         <button
           className="text-black hover:text-gray-500 absolute top-2 right-2"
           onClick={closeAlert}

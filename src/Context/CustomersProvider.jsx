@@ -63,11 +63,11 @@ export const CustomersProvider = ({ children }) => {
             setLoadingCustomers(true);
             try {
                 if (!config) {
-                    console.log("no tienes permiso");
-                    showAlert({
-                        message: "No tienes permiso",
-                        error: true,
-                    });
+                    // console.log("no tienes permiso");
+                    // showAlert(
+                    //     "No tienes permiso",
+                    //     "error"
+                    // );
                     return;
                 }
                 const { data } = await ApiBackend.get("/clientes", config);
@@ -112,7 +112,7 @@ export const CustomersProvider = ({ children }) => {
         setLoadingCustomers(true);
         try {
             if (!config) {
-                showAlert({ message: "No tienes permiso", error: true });
+                // showAlert("No tienes permiso", "error");
                 return;
             }
 
@@ -132,7 +132,7 @@ export const CustomersProvider = ({ children }) => {
         const { id } = customer;
         try {
             if (!config) {
-                showAlert({ message: "No tienes permiso", error: true });
+                // showAlert("No tienes permiso", "error");
                 return;
             }
 
@@ -173,7 +173,7 @@ export const CustomersProvider = ({ children }) => {
         // console.log(dataSubmit, "dataSubmit desde formulario");
         try {
             if (!config) {
-                showAlert({ message: "No tienes permiso", error: true });
+                // showAlert("No tienes permiso", "error");
                 return;
             }
 
@@ -182,7 +182,7 @@ export const CustomersProvider = ({ children }) => {
                 cliente,
                 config
             );
-            // showAlert({ message: "cliente Creado", error: false });
+            // showAlert("cliente Creado", "error");
             console.log("cliente Creado");
 
             console.log(respuesta.data.data, "respuesta");

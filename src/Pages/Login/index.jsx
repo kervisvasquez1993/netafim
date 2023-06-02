@@ -42,7 +42,7 @@ export const Login = () => {
         <PublicComponents title={"Inicia sesión para registrar clientes"}>
             <form onSubmit={(e) => handleSutmit(e)}>
                 <div className="mb-4">
-                    <label htmlFor="email" class="block mb-1 text-blue-500">
+                    <label htmlFor="email" className="block mb-1 text-blue-500">
                         Correo electrónico
                     </label>
 
@@ -76,14 +76,14 @@ export const Login = () => {
                         required
                     />
                 </div>
-                <div className="flex justify-center pt-10 pb-10">
+                {/* <div className="flex justify-center pt-10 pb-10">
                     <Link
                         to="password-recovery"
                         className="block text-sm text-blue-500 mb-4"
                     >
                         Olvidé mi Contraseña
                     </Link>
-                </div>
+                </div> */}
 
                 <div className="flex justify-center flex-col items-center">
                     <input

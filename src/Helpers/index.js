@@ -1,7 +1,7 @@
 export const configHeaderToken = (params = {}) => {
     const token = localStorage.getItem("token");
     if (!token) {
-        console.log("No Tiene Permiso");
+        // console.log("No Tiene Permiso");
         return false;
     }
 
