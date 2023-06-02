@@ -4,7 +4,12 @@ import { HeadersOne } from "../../Wiews/HeadersOne";
 import useCard from "../../Hooks/useCard";
 import { baseUrlaws } from "../../Helpers";
 import Button from "../../Components/Button";
+// import { TitleHeaders } from "../Components/TitleHeaders";
+// TitleHeaders
+import Loading from "../../Wiews/Loading";
 import { TitleHeaders } from "../../Components/TitleHeaders";
+// import Loading from "../../Components/Loading";
+
 export const ShowBusinessCard = () => {
     const { getCard, cardBusiness, loadingCustomers } = useCard();
     const params = useParams();
@@ -18,7 +23,7 @@ export const ShowBusinessCard = () => {
     return (
         <>
             <HeadersOne />
-            <TitleHeaders title={`Titulo ${cardBusiness.id}`} isBack={true} />
+            <TitleHeaders title={`Titulo ${cardBusiness.id}`} isBack={false} />
             <div className="bg-white rounded-lg shadow-md p-4">
                 <img
                     src={`${baseUrlaws}/${cardBusiness.src_img}`}

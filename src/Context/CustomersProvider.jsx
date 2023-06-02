@@ -26,8 +26,8 @@ export const CustomersProvider = ({ children }) => {
     const descarga = async () => {
         await descargarArchivo();
         // showAlert("Este es un mensaje de alerta", "success");
-        console.log(useAlert)  
-        return 
+        console.log(useAlert);
+        return;
     };
     const descargarArchivo = async () => {
         const token = localStorage.getItem("token");
@@ -52,7 +52,7 @@ export const CustomersProvider = ({ children }) => {
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            showAlert("Este es un mensaje de alerta", "success");
+            // showAlert("Este es un mensaje de alerta", "success");
         } catch (error) {
             // Manejo de errores
             console.log(error);
@@ -188,8 +188,10 @@ export const CustomersProvider = ({ children }) => {
             console.log(respuesta.data.data, "respuesta");
             setCustomers([...customers, respuesta.data.data]);
             console.log(customers, "cliente");
+            showAlert("Cliente Agregado de forma Correcta", "success");
             navigate(-1);
         } catch (error) {
+            showAlert("Error en el Formulario, Todos los Campos son Obligatorios y el correo debe ser único", "error");
             console.log(error);
         }
     };

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import useCustomers from "../Hooks/useCustomers";
+import useAlert from "../Hooks/useAlert";
+
 const cultivos = [
     "Caña de Azúcar",
     "Banano",
@@ -25,6 +27,7 @@ const opciones = cultivos.map((cultivo) => (
     </option>
 ));
 const FormSubmit = () => {
+    const {showAlert} = useAlert();
     const { submitNewCliente } = useCustomers();
     const [customer, setCustomer] = useState({
         nombre: "",
@@ -54,6 +57,7 @@ const FormSubmit = () => {
             ubicacion_zona: "",
             empresa: "",
         });
+        
     };
     return (
         <form onSubmit={handleSubmit}>
@@ -130,6 +134,7 @@ const FormSubmit = () => {
                         onChange={handleInputChange}
                         value={customer.cultivo}
                     >
+                        <option>Seleccione una opción</option>
                         {opciones}
                     </select>
                 </div>
@@ -187,6 +192,7 @@ const FormSubmit = () => {
                         onChange={handleInputChange}
                         value={customer.tamano_de_cultivo}
                     >
+                        <option>Seleccione una opción</option>
                         {opcionesCultivo}
                     </select>
                 </div>
@@ -224,7 +230,7 @@ const FormSubmit = () => {
                 </div>
                 <div className="flex flex-col items-center justify-center py-10 ">
                     <input
-                        style={{minWidth: "250px"}}
+                        style={{ minWidth: "250px" }}
                         type="submit"
                         className="bg-blue-500 text-white font-semibold py-2 px-4 rounded border-2 border-blue-500 mb-4"
                         value="enviar"

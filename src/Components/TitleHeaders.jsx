@@ -1,6 +1,6 @@
 import React from "react";
 import Back from "../Wiews/Back";
-export const TitleHeaders = ({ title, sizeTilte = 4, isBack = true }) => {
+export const TitleHeaders = ({ title, sizeTilte = 4, isBack = false }) => {
     return (
         <div
             style={{

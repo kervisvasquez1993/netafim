@@ -1,12 +1,13 @@
 import React, { createContext, useState } from "react";
 import Alert from "../Wiews/Alert";
+// import AlertError from "../Wiews/AlerError";
 
 const AlertContext = createContext();
 
 export const AlertProvider = ({ children }) => {
   const [showAlertState, setShowAlertState] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
-  const [alertType, setAlertType] = useState("");
+  const [alertMessage, setAlertMessage] = useState([]);
+  const [alertType, setAlertType] = useState([]);
 
   const showAlert = (message, type) => {
     setShowAlertState(true);
@@ -15,6 +16,7 @@ export const AlertProvider = ({ children }) => {
 
     setTimeout(() => {
       setShowAlertState(false);
+      
       setAlertMessage("");
       setAlertType("");
     }, 2000);
