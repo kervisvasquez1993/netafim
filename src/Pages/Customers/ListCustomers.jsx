@@ -7,14 +7,14 @@ import ToggleCard from "../../Components/ToggleCard";
 import { HeadersTwo } from "../../Wiews/HeadersTwo";
 import { TitleHeaders } from "../../Components/TitleHeaders";
 import Button from "../../Components/Button";
+import Loading from "../../Wiews/Loading";
 
 export const ListCustomers = () => {
     const navigate = useNavigate();
     const { customers, loadingCustomers } = useCustomers();
     const [dato, setDatos] = useState(customers);
-    
-    
-    if (loadingCustomers) return <div>loading...</div>;
+
+    if (loadingCustomers) return <Loading />;
 
     return (
         <>

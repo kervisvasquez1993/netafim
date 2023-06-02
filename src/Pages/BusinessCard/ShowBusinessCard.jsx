@@ -13,7 +13,7 @@ export const ShowBusinessCard = () => {
         getCard(params.id);
     }, [params.id]);
     console.log(cardBusiness, "cardBusiness");
-    if (loadingCustomers) return <div>loading...</div>;
+    if (loadingCustomers) return <Loading/>;
     // console.log(baseUrlaws, "baseUrlaws");
     return (
         <>

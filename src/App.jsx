@@ -15,6 +15,7 @@ import ListBusinessCard from "./Pages/BusinessCard/ListBusinessCard";
 import { ShowBusinessCard } from "./Pages/BusinessCard/ShowBusinessCard";
 import CreateCustoWithCard from "./Pages/BusinessCard/CreateCustoWithCard";
 import { AlertProvider } from "./Context/AlertProvider";
+import Me from "./Pages/Me";
 
 const App = () => {
     return (
@@ -42,6 +43,8 @@ const App = () => {
                                         path="customers"
                                         element={<ListCustomers />}
                                     />
+
+                                    <Route path="me" element={<Me/>}/>
                                     <Route
                                         path="add-customers"
                                         element={<CreateCustomers />}
