@@ -4,8 +4,12 @@ import { Link } from "react-router-dom";
 import Button from "./Button";
 import persona from "../assets/svg/perfil.svg";
 import useCustomers from "../Hooks/useCustomers";
+import useAlert from "../Hooks/useAlert";
+
 const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
     const { descarga } = useCustomers();
+    
+
     const [activeTab, setActiveTab] = useState(1);
 
     const handleTabClick = (tabIndex) => {

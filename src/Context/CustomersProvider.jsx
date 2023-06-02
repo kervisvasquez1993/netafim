@@ -3,9 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { configHeaderToken } from "../Helpers";
 import { ApiBackend } from "../apis/ApiBackend";
 import { data } from "autoprefixer";
+import useAlert from "../Hooks/useAlert";
 
 const CustomersContext = createContext();
 export const CustomersProvider = ({ children }) => {
+    const { showAlert } = useAlert();
     const [customers, setCustomers] = useState([]);
     const [customer, setCustomer] = useState({});
     const [customersInactivo, setCustomersInactivo] = useState([]);
@@ -23,6 +25,9 @@ export const CustomersProvider = ({ children }) => {
     };
     const descarga = async () => {
         await descargarArchivo();
+        // showAlert("Este es un mensaje de alerta", "success");
+        console.log(useAlert)  
+        return 
     };
     const descargarArchivo = async () => {
         const token = localStorage.getItem("token");
@@ -47,6 +52,7 @@ export const CustomersProvider = ({ children }) => {
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
+            showAlert("Este es un mensaje de alerta", "success");
         } catch (error) {
             // Manejo de errores
             console.log(error);
