@@ -88,7 +88,6 @@ export const CardProvider = ({ children }) => {
             setCardsBusiness([...cardsBusiness, respuesta.data.data]);
             // setCustomers([...customers, respuesta.data.data]);
             console.log(cardsBusiness, "tarjeta");
-            
         } catch (error) {
             console.log(error);
         }
@@ -118,7 +117,11 @@ export const CardProvider = ({ children }) => {
             setCardBuiness(respuesta.data.data);
             console.log(cardBusiness, "tarjeta creada");
             await showAlert("Cliente Agregado");
+            navigate(-1)
         } catch (error) {
+            await showAlert(
+                "Todos los campos son Obligatorios y el correo debe ser valido y no debe estar registrado"
+            );
             console.log(error);
         }
     };

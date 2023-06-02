@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { HeadersOne } from "../../Wiews/HeadersOne";
 import { TitleHeaders } from "../../Components/TitleHeaders";
-import useCard from "../../Hooks/useCard" 
+import useCard from "../../Hooks/useCard";
 import { useParams } from "react-router-dom";
 const cultivos = [
     "Caña de Azúcar",
@@ -28,8 +28,8 @@ const opciones = cultivos.map((cultivo) => (
     </option>
 ));
 const CreateCustoWithCard = () => {
-    const {submitNewClienteCard} = useCard()
-    const params = useParams()
+    const { submitNewClienteCard } = useCard();
+    const params = useParams();
     const [customer, setCustomer] = useState({
         nombre: "",
         apellido: "",
@@ -46,7 +46,7 @@ const CreateCustoWithCard = () => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        submitNewClienteCard(customer,params.id);
+        submitNewClienteCard(customer, params.id);
         setCustomer({
             nombre: "",
             apellido: "",
@@ -62,7 +62,7 @@ const CreateCustoWithCard = () => {
     return (
         <>
             <HeadersOne />
-            <TitleHeaders title={"Añadir Cliente"}/>
+            <TitleHeaders title={"Añadir Cliente"} />
             <form onSubmit={handleSubmit}>
                 <div className="max-w-md mx-auto">
                     <div className="mb-4">
@@ -131,12 +131,13 @@ const CreateCustoWithCard = () => {
                     /> */}
 
                         <select
-                            className="block  border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
+                            className="border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
                             id="cultivo"
                             name="cultivo"
                             onChange={handleInputChange}
                             value={customer.cultivo}
                         >
+                            <option>Seleccione una opción</option>
                             {opciones}
                         </select>
                     </div>
@@ -194,6 +195,7 @@ const CreateCustoWithCard = () => {
                             onChange={handleInputChange}
                             value={customer.tamano_de_cultivo}
                         >
+                            <option>Seleccione una opción</option>
                             {opcionesCultivo}
                         </select>
                     </div>
@@ -229,11 +231,14 @@ const CreateCustoWithCard = () => {
                             value={customer.empresa}
                         />
                     </div>
-                    <input
-                        type="submit"
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        value="enviar"
-                    />
+                    <div className="flex flex-col items-center justify-center py-10 ">
+                        <input
+                            style={{ minWidth: "250px" }}
+                            type="submit"
+                            className="bg-blue-500 text-white font-semibold py-2 px-4 rounded border-2 border-blue-500 mb-4"
+                            value="enviar"
+                        />
+                    </div>
                 </div>
             </form>
         </>
