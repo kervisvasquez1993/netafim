@@ -24,6 +24,7 @@ export const ShowCustomers = () => {
         submitChangeStatus,
         setCustomers,
         setCustomersInactivo,
+        onDeleteCustomer
     } = useCustomers();
     useEffect(() => {
         getCustomer(params.id);
@@ -70,6 +71,8 @@ export const ShowCustomers = () => {
 
     function handleDeleteClientClick() {
         console.log("Eliminar cliente");
+        onDeleteCustomer(customer);
+
     }
     if (loadingCustomers) return <Loading />;
     return (

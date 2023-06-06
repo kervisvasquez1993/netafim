@@ -25,6 +25,32 @@ export const CustomersProvider = ({ children }) => {
         await newCliente(customer);
         return;
     };
+    const onDeleteCustomer = async (customer) => {
+        await deleteClustomer(customer);
+        return;
+    };
+
+    const deleteClustomer = async (customer) => {
+        setLoadingCustomers(true);
+        const { id } = customer;
+        try {
+            if (!config) {
+                // showAlert("No tienes permiso", "error");
+                return;
+            }
+
+            const { data } = await ApiBackend.delete(`/clientes/${id}`, config);
+            console.log(data);
+            setCustomers(customers.filter((customer) => customer.id !== id));
+            Swal.fire(data.message, "", "success");
+            navigate(-1);
+            return;
+        } catch (error) {
+            S(error);
+        } finally {
+            setLoadingCustomers(false);
+        }
+    };
     const descarga = async () => {
         await descargarArchivo();
         // showAlert("Este es un mensaje de alerta", "success");
@@ -203,7 +229,7 @@ export const CustomersProvider = ({ children }) => {
                 submitChangeStatus,
                 submitNewCliente,
                 descarga,
-                errors,
+                onDeleteCustomer,
             }}
         >
             {children}
