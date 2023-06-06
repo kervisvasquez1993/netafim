@@ -4,10 +4,12 @@ import { configHeaderToken } from "../Helpers";
 import { ApiBackend } from "../apis/ApiBackend";
 import { data } from "autoprefixer";
 import useAlert from "../Hooks/useAlert";
+import Swal from "sweetalert2";
 
 const CustomersContext = createContext();
 export const CustomersProvider = ({ children }) => {
     const { showAlert } = useAlert();
+    const [errors, setErrors] = useState(null);
     const [customers, setCustomers] = useState([]);
     const [customer, setCustomer] = useState({});
     const [customersInactivo, setCustomersInactivo] = useState([]);
@@ -21,7 +23,7 @@ export const CustomersProvider = ({ children }) => {
     };
     const submitNewCliente = async (customer) => {
         await newCliente(customer);
-        navigate(-1);
+        // navigate(-1);
         return;
     };
     const descarga = async () => {
@@ -118,7 +120,6 @@ export const CustomersProvider = ({ children }) => {
             }
 
             const { data } = await ApiBackend.get(`/clientes/${id}`, config);
-
             setCustomer(data.data);
 
             return;
@@ -188,13 +189,35 @@ export const CustomersProvider = ({ children }) => {
             setCustomer(respuesta.data.data);
             setCustomers([...customers, respuesta.data.data]);
             console.log(customers, "clientes UPDATE");
-            showAlert("Cliente Agregado de forma Correcta", "success");
+            Swal.fire(
+                'Cliente Agregado de forma Correcta',
+                '',
+                'success'
+              )
+
+            navigate(-1);
         } catch (error) {
-            showAlert(
-                "Error en el Formulario, Todos los Campos son Obligatorios y el correo debe ser único",
-                "error"
-            );
             console.log(error);
+            // setErrors(error.response.data.error);
+            if (error.response.data.error) {
+                const errorList = Object.values(
+                    error.response.data.error
+                ).flatMap((errorArray) =>
+                    errorArray.map(
+                        (errorMessage) =>
+                            `<li className="text-red-500 py-5">${errorMessage}</li>`
+                    )
+                );
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    html: `<ol>${errorList.join("")}</ol>`,
+                });
+
+                console.log(error, "error");
+            }
+
+            
         }
     };
 
@@ -212,6 +235,7 @@ export const CustomersProvider = ({ children }) => {
                 submitChangeStatus,
                 submitNewCliente,
                 descarga,
+                errors,
             }}
         >
             {children}

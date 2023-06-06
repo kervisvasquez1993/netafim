@@ -49,7 +49,7 @@ export const Home = () => {
                 </div>
             </div>
             <Button
-                text="Cerrar Sesion"
+                text="Cerrar Sesión"
                 variant="secondary"
                 onClick={handleLogout}
             />

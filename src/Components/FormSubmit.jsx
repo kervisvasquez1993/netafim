@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useCustomers from "../Hooks/useCustomers";
 import useAlert from "../Hooks/useAlert";
 
+
 const cultivos = [
     "Caña de Azúcar",
     "Banano",
@@ -28,7 +29,7 @@ const opciones = cultivos.map((cultivo) => (
 ));
 const FormSubmit = () => {
     const {showAlert} = useAlert();
-    const { submitNewCliente } = useCustomers();
+    const { submitNewCliente, errors } = useCustomers();
     const [customer, setCustomer] = useState({
         nombre: "",
         apellido: "",
@@ -45,19 +46,7 @@ const FormSubmit = () => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        submitNewCliente(customer);
-        setCustomer({
-            nombre: "",
-            apellido: "",
-            correo: "",
-            cultivo: "",
-            numero_telefono: "",
-            pais: "",
-            tamano_de_cultivo: "",
-            ubicacion_zona: "",
-            empresa: "",
-        });
-        
+        submitNewCliente(customer);        
     };
     return (
         <form onSubmit={handleSubmit}>
