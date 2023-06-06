@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { ApiBackend } from "../../apis/ApiBackend";
 import { HeadersTwo } from "../../Wiews/HeadersTwo";
 import { PublicComponents } from "../../Layouts/PublicComponents";
+import Swal from "sweetalert2";
 
 export const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [alerta, setAlerta] = useState("");
+    const [errors, setErrors] = useState({});
     const { auth, setAuth, loading } = useAuth();
     const navigate = useNavigate();
+
     const handleSutmit = async (e) => {
         e.preventDefault();
         if ([email, password].includes("")) {
@@ -32,12 +35,25 @@ export const Login = () => {
             navigate("/home");
             setAlerta({});
         } catch (error) {
-            console.log(error.response.data.error);
-            setAlerta({ message: error.response.data.error, error: true });
+            setErrors(error.response.data.error);
+            // setAlerta({ message: error.response.data.error, error: true });
         }
     };
     const { message } = alerta;
+    // useEffect(() => {
+    //     console.log(errors);
 
+    // }, [errors]);
+    if (errors.length > 0) {
+        Swal.fire({
+            title: "Error!",
+            text: errors,
+            icon: "error",
+            confirmButtonText: "Aceptar",
+        });
+
+        setErrors({});
+    }
     return (
         <PublicComponents title={"Inicia sesión para registrar clientes"}>
             <form onSubmit={(e) => handleSutmit(e)}>

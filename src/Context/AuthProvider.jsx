@@ -8,6 +8,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState({});
     const [loading, setLoading] = useState(true);
+    const [errors, setErrors] = useState({});
     const config = configHeaderToken();
     const navigate = useNavigate();
     const salir = async () => {
