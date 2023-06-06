@@ -13,7 +13,7 @@ export const ListCustomers = () => {
     const navigate = useNavigate();
     const { customers, loadingCustomers } = useCustomers();
     const [dato, setDatos] = useState(customers);
-
+    useEffect(() => {}, [customers]);
     if (loadingCustomers) return <Loading />;
 
     return (
@@ -30,7 +30,7 @@ export const ListCustomers = () => {
             <ToggleCard
                 handleLeftClick={() => console.log("click left")}
                 handleRightClick={() => console.log("click right")}
-                data={customers}
+                data={dato}
             />
         </>
     );

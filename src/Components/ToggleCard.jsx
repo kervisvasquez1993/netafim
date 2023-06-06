@@ -19,7 +19,7 @@ const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
     console.log(data, "data");
 
     const filteredData =
-        activeTab === 1
+        activeTab == 1
             ? data.filter((cliente) => cliente.activo)
             : data.filter((cliente) => !cliente.activo);
 
@@ -29,7 +29,7 @@ const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
                 <div className="flex">
                     <div
                         className={`w-1/2 p-1 flex justify-center items-center cursor-pointer flex items-center ${
-                            activeTab === 1
+                            activeTab == 1
                                 ? "bg-blue-500 text-white"
                                 : "bg-blue-500 opacity-50 text-white"
                         }`}

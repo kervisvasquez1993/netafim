@@ -23,7 +23,6 @@ export const CustomersProvider = ({ children }) => {
     };
     const submitNewCliente = async (customer) => {
         await newCliente(customer);
-        // navigate(-1);
         return;
     };
     const descarga = async () => {
@@ -75,32 +74,7 @@ export const CustomersProvider = ({ children }) => {
                 }
                 const { data } = await ApiBackend.get("/clientes", config);
                 console.log(data.data, "data de provider");
-
                 setCustomers(data.data);
-                console.log(customers, "customers para separar");
-                // Filtrar los clientes activos
-                // const clientesActivos = data.data.filter(
-                //     (cliente) => cliente.activo == 1
-                // );
-
-                // // Filtrar los clientes inactivos
-                // const clientesInactivos = data.data.filter(
-                //     (cliente) => cliente.activo == 0
-                // );
-
-                // // Establecer los clientes activos en el estado 'customers'
-                // setCustomers(clientesActivos);
-
-                // // Establecer los clientes inactivos en el estado 'customersInactivo'
-                // setCustomersInactivo(clientesInactivos);
-                // // const [activeData, inactiveData] = await Promise.all([
-                // //     ApiBackend.get("/clientes?activos=1", config),
-                // //     ApiBackend.get("/clientes?activos=0", config),
-                // // ]);
-                // console.log(customers, "customers");
-                // console.log(customersInactivo, "customersInactivo");
-                // // setCustomers(activeData.data.data);
-                // // setCustomersInactivo(inactiveData.data.data);
             } catch (error) {
                 console.log(error);
             } finally {
@@ -109,7 +83,7 @@ export const CustomersProvider = ({ children }) => {
         };
 
         fetchData();
-    }, []);
+    }, [customer]);
 
     const getCustomer = async (id) => {
         setLoadingCustomers(true);
@@ -189,11 +163,7 @@ export const CustomersProvider = ({ children }) => {
             setCustomer(respuesta.data.data);
             setCustomers([...customers, respuesta.data.data]);
             console.log(customers, "clientes UPDATE");
-            Swal.fire(
-                'Cliente Agregado de forma Correcta',
-                '',
-                'success'
-              )
+            Swal.fire("Cliente Agregado de forma Correcta", "", "success");
 
             navigate(-1);
         } catch (error) {
@@ -216,8 +186,6 @@ export const CustomersProvider = ({ children }) => {
 
                 console.log(error, "error");
             }
-
-            
         }
     };
 
