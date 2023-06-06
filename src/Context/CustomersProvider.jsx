@@ -21,6 +21,7 @@ export const CustomersProvider = ({ children }) => {
     };
     const submitNewCliente = async (customer) => {
         await newCliente(customer);
+        navigate(-1);
         return;
     };
     const descarga = async () => {
@@ -182,16 +183,17 @@ export const CustomersProvider = ({ children }) => {
                 cliente,
                 config
             );
-            // showAlert("cliente Creado", "error");
-            console.log("cliente Creado");
 
             console.log(respuesta.data.data, "respuesta");
+            setCustomer(respuesta.data.data);
             setCustomers([...customers, respuesta.data.data]);
-            console.log(customers, "cliente");
+            console.log(customers, "clientes UPDATE");
             showAlert("Cliente Agregado de forma Correcta", "success");
-            navigate(-1);
         } catch (error) {
-            showAlert("Error en el Formulario, Todos los Campos son Obligatorios y el correo debe ser único", "error");
+            showAlert(
+                "Error en el Formulario, Todos los Campos son Obligatorios y el correo debe ser único",
+                "error"
+            );
             console.log(error);
         }
     };
