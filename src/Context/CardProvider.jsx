@@ -4,6 +4,7 @@ import { ApiBackend } from "../apis/ApiBackend";
 import { configHeaderToken } from "../Helpers";
 import useCustomers from "../Hooks/useCustomers";
 import useAlert from "../Hooks/useAlert";
+import Swal from "sweetalert2";
 
 export const tokenForFile = (params = {}) => {
     const token = localStorage.getItem("token");
@@ -33,8 +34,8 @@ export const CardProvider = ({ children }) => {
     const submitNewTaerjeta = async (card, id) => {
         await newTarjetaWithCustomer(card, id);
         // await new Promise((resolve) => setTimeout(resolve, 2000)); // Esperar 3 segundos
-        navigate(-1);
-        await showAlert("Tarjeta Agregada");
+       
+      
         return;
     };
 
@@ -68,7 +69,7 @@ export const CardProvider = ({ children }) => {
             }
         };
         getCardBusiness();
-    }, []);
+    }, [cardBusiness]);
     const newTarjetaWithCustomer = async (tarjeta, id) => {
         try {
             if (!configFile) {
@@ -87,9 +88,20 @@ export const CardProvider = ({ children }) => {
             // agregar a la lista de tarjetas
             setCardsBusiness([...cardsBusiness, respuesta.data.data]);
             // setCustomers([...customers, respuesta.data.data]);
-            console.log(cardsBusiness, "tarjeta");
+            navigate(-1);
+            Swal.fire({
+                title: "Tarjeta Cargada",
+                text: "Se Cargo la Tarjeta de forma correcta",
+                icon: "success",
+                confirmButtonText: "Aceptar",
+              });
         } catch (error) {
-            console.log(error);
+            Swal.fire({
+                title: "Error!",
+                text: "Error Al subir el archivo",
+                icon: "error",
+                confirmButtonText: "Aceptar",
+              });
         }
     };
 
@@ -117,7 +129,7 @@ export const CardProvider = ({ children }) => {
             setCardBuiness(respuesta.data.data);
             console.log(cardBusiness, "tarjeta creada");
             await showAlert("Cliente Agregado");
-            navigate(-1)
+            navigate(-1);
         } catch (error) {
             await showAlert(
                 "Todos los campos son Obligatorios y el correo debe ser valido y no debe estar registrado"

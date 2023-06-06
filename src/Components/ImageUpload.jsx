@@ -1,83 +1,100 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import imagenUpload from "../assets/sin-img.png";
 import { useParams } from "react-router-dom";
 import useCustomers from "../Hooks/useCustomers";
 import useCard from "../Hooks/useCard";
 import useAlert from "../Hooks/useAlert";
-
+import Swal from "sweetalert2";
 
 function ImageUploader() {
-    const [selectedFile, setSelectedFile] = useState(null);
-    const {showAlert} = useAlert();
-    const [imageSrc, setImageSrc] = useState(imagenUpload);
-    const { submitNewTaerjeta } = useCard();
-    const params = useParams();
-    const handleSubmit = (event) => {
-        event.preventDefault();
+  const fileInputRef = useRef(null);
+  const { showAlert } = useAlert();
+  const [imageSrc, setImageSrc] = useState(imagenUpload);
+  const [isLoading, setIsLoading] = useState(false);
+  const { submitNewTaerjeta } = useCard();
+  const params = useParams();
 
-        if (!selectedFile) {
-            showAlert("No se ha seleccionado ningún archivo");
-            return;
-        }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const selectedFile = fileInputRef.current.files[0];
 
-        try {
-            const formData = new FormData();
-            formData.append("src_img", selectedFile);
-            submitNewTaerjeta(formData, params.id);
-        } catch (error) {
-            showAlert("Error al enviar la imagen:", "error");
-        }
-    };
+    if (!selectedFile) {
+      Swal.fire({
+        title: "Error!",
+        text: "No se ha seleccionado ningún archivo",
+        icon: "error",
+        confirmButtonText: "Aceptar",
+      });
+      return;
+    }
 
-    const handleDrop = (event) => {
-        event.preventDefault();
-        setSelectedFile(event.dataTransfer.files[0]);
-    };
+    setIsLoading(true);
 
-    const handleImageClick = () => {
-        document.getElementById("file-input").click();
-    };
+    try {
+      const formData = new FormData();
+      formData.append("src_img", selectedFile);
+      await submitNewTaerjeta(formData, params.id);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      Swal.fire({
+        title: "Error!",
+        text: "Error al enviar la imagen",
+        icon: "error",
+        confirmButtonText: "Aceptar",
+      });
+    }
+  };
 
-    const handleFileChange = (event) => {
-        setSelectedFile(event.target.files[0]);
-        setImageSrc(URL.createObjectURL(event.target.files[0]));
-    };
+  const handleImageClick = () => {
+    fileInputRef.current.click();
+  };
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <div className="bg-white rounded-lg border border-gray-400 p-6">
-                <label htmlFor="file-input" className="block mb-4">
-                    <div className="border-dashed border-2 border-gray-400 rounded-lg p-4">
-                        <img
-                            src={imageSrc}
-                            alt="Selecciona una imagen"
-                            className="block mx-auto cursor-pointer object-contain w-full h-full"
-                            onClick={handleImageClick}
-                        />
-                    </div>
-                </label>
-                <input
-                    id="file-input"
-                    type="file"
-                    className="hidden"
-                    name="src_img"
-                    onChange={handleFileChange}
-                />
-            </div>
+  const handleFileChange = () => {
+    const selectedFile = fileInputRef.current.files[0];
+    setImageSrc(URL.createObjectURL(selectedFile));
+  };
 
-            <div className={`flex justify-center pt-10 pb-5`}>
-                <button
-                    className={
-                        "px-4 py-2 rounded-md font-medium border bg-blue-500 text-white hover:bg-blue-600"
-                    }
-                    style={{ minWidth: "200px", height: "50px" }}
-                    type="submit"
-                >
-                   Subir Archivo
-                </button>
-            </div>
-        </form>
-    );
+  return (
+    <form onSubmit={handleSubmit}>
+      <div className="bg-white rounded-lg border border-gray-400 p-6">
+        <label htmlFor="file-input" className="block mb-4">
+          <div className="border-dashed border-2 border-gray-400 rounded-lg p-4">
+            {isLoading ? (
+              <p>Cargando archivo...</p>
+            ) : (
+              <img
+                src={imageSrc}
+                alt="Selecciona una imagen"
+                className="block mx-auto cursor-pointer object-contain w-full h-full"
+                onClick={handleImageClick}
+              />
+            )}
+          </div>
+        </label>
+        <input
+          ref={fileInputRef}
+          id="file-input"
+          type="file"
+          className="hidden"
+          name="src_img"
+          onInput={handleFileChange}
+        />
+      </div>
+
+      <div className={`flex justify-center pt-10 pb-5`}>
+        <button
+          className={
+            "px-4 py-2 rounded-md font-medium border bg-blue-500 text-white hover:bg-blue-600"
+          }
+          style={{ minWidth: "200px", height: "50px" }}
+          type="submit"
+        >
+          Subir Archivo
+        </button>
+      </div>
+    </form>
+  );
 }
 
 export default ImageUploader;
