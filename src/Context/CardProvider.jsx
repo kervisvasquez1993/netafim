@@ -31,6 +31,10 @@ export const CardProvider = ({ children }) => {
     const navigate = useNavigate();
     const configFile = tokenForFile();
     const config = configHeaderToken();
+    const onDeleteCard = async (card) => {
+        await deleteCard(card);
+        return;
+    }
     const submitNewTaerjeta = async (card, id) => {
         await newTarjetaWithCustomer(card, id);
         // await new Promise((resolve) => setTimeout(resolve, 2000)); // Esperar 3 segundos
@@ -70,6 +74,31 @@ export const CardProvider = ({ children }) => {
         };
         getCardBusiness();
     }, [cardBusiness]);
+
+    const deleteCard = async (card) => {
+        setLoadingCustomers(true);
+        const { id } = card;
+        try {
+            if (!config) {
+                // showAlert("No tienes permiso", "error");
+                return;
+            }
+
+            const { data } = await ApiBackend.delete(
+                `/tarjetas/${id}`,
+                config
+            );
+            console.log(data);
+            setCardsBusiness(cardsBusiness.filter((card) => card.id !== id));
+            Swal.fire(data.message, "", "success");
+            navigate(-1);
+            return;
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoadingCustomers(false);
+        }
+    }
     const newTarjetaWithCustomer = async (tarjeta, id) => {
         try {
             if (!configFile) {

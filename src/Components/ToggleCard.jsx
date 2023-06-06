@@ -20,8 +20,8 @@ const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
 
     const filteredData =
         activeTab == 1
-            ? data.filter((cliente) => cliente.activo)
-            : data.filter((cliente) => !cliente.activo);
+            ? data?.filter((cliente) => cliente.activo)
+            : data?.filter((cliente) => !cliente.activo);
 
     return (
         <>
@@ -73,8 +73,8 @@ const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
                         onClick={descarga}
                         variant={"primary"}
                     />
-                    {!filteredData.length && <div>Sin Clientes</div>}
-                    {filteredData.map((ele) => (
+                    {!filteredData?.length && <div>Sin Clientes</div>}
+                    {filteredData?.map((ele) => (
                         <Link to={`${ele.id}`} key={ele.id}>
                             <ShowCard
                                 cardTitle={ele.nombre}
