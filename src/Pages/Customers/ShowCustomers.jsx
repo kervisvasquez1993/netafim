@@ -8,6 +8,7 @@ import Button from "../../Components/Button";
 import { HeadersOne } from "../../Wiews/HeadersOne";
 import Loading from "../../Wiews/Loading";
 import useAlert from "../../Hooks/useAlert";
+import Swal from "sweetalert2";
 
 export const ShowCustomers = () => {
     const params = useParams();
@@ -58,7 +59,12 @@ export const ShowCustomers = () => {
     };
     function handleArchiveClientClick() {
         submitChangeStatus(customer);
-        showAlert("Cliente Actualizado de Forma Correcta", "success");
+        Swal.fire({
+            title: "Cliente Actualizado!",
+            text: "Cliente Actualizado de Forma Correcta",
+            icon: "success",
+            confirmButtonText: "Aceptar",
+        });
         console.log("Cambio de status ");
     }
 
