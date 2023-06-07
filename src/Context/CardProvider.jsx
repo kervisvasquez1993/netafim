@@ -195,6 +195,7 @@ export const CardProvider = ({ children }) => {
                 cardBusiness,
                 loadingCustomers,
                 submitNewClienteCard,
+                onDeleteCard
             }}
         >
             {children}

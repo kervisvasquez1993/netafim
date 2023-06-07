@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PublicComponents } from "../../Layouts/PublicComponents";
+import Swal from "sweetalert2";
+import { ApiBackend } from "../../apis/ApiBackend";
 
 export const Register = () => {
     const navigate = useNavigate();
@@ -38,29 +40,30 @@ export const Register = () => {
         }
 
         // Enviar datos al backend
-        const url = `${import.meta.env.VITE_BACKEND}register`;
         try {
-            const response = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
-            });
-            const data = await response.json();
+            const { data } = await ApiBackend.post("register", formData);
             console.log(data);
+            Swal.fire(data.message, "", "success");
+            navigate("/login");
         } catch (error) {
-            console.error(error);
+            if (error.response.data.error) {
+                const errorList = Object.values(
+                    error.response.data.error
+                ).flatMap((errorArray) =>
+                    errorArray.map(
+                        (errorMessage) =>
+                            `<li className="text-red-500 py-5">${errorMessage}</li>`
+                    )
+                );
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    html: `<ol>${errorList.join("")}</ol>`,
+                });
 
-            // Manejar errores de la respuesta del backend
-            if (error.response) {
-                setErrors(error.response.data.errors);
-            } else {
-                setErrors({ general: "Hubo un error al registrar el usuario" });
+                console.log(error, "error");
             }
         }
-
-        navigate("/login");
     };
 
     const handleChange = (event) => {

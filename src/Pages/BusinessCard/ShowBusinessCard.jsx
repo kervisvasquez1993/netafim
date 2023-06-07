@@ -11,14 +11,14 @@ import { TitleHeaders } from "../../Components/TitleHeaders";
 // import Loading from "../../Components/Loading";
 
 export const ShowBusinessCard = () => {
-    const { getCard, cardBusiness, loadingCustomers } = useCard();
+    const { getCard, cardBusiness, loadingCustomers, onDeleteCard } = useCard();
     const params = useParams();
     const navigate = useNavigate();
     useEffect(() => {
         getCard(params.id);
     }, [params.id]);
     console.log(cardBusiness, "cardBusiness");
-    if (loadingCustomers) return <Loading/>;
+    if (loadingCustomers) return <Loading />;
     // console.log(baseUrlaws, "baseUrlaws");
     return (
         <>
@@ -44,9 +44,7 @@ export const ShowBusinessCard = () => {
             <Button
                 text={"Eliminar"}
                 variant={"secondary"}
-                onClick={() =>
-                   console.log("eliminado")
-                }
+                onClick={() => onDeleteCard(cardBusiness)}
                 pt={5}
                 pb={5}
             />
