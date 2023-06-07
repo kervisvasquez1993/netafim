@@ -13,6 +13,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 backgroundPosition: 'center',
                 minHeight: '100vh',
             }}
+
+            className="custom-div pt-10"
         >
             <App />
         </div>

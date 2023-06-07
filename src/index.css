@@ -20,3 +20,10 @@ button {
     min-width: 200px;
     text-align: center;
 }
+
+@media (min-width: 1600px) {
+    .custom-div {
+        background-size: 20vw;
+        width: 45vw;
+    }
+}
