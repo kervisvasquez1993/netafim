@@ -65,6 +65,16 @@ export const CustomersProvider = ({ children }) => {
         }
 
         try {
+            Swal.fire({
+                title: "Generando archivo",
+                text: "Por favor, espere...",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                onBeforeOpen: () => {
+                    Swal.showLoading();
+                },
+            });
+
             const response = await ApiBackend.get("/generartxt", {
                 responseType: "blob",
                 headers: {
@@ -72,15 +82,21 @@ export const CustomersProvider = ({ children }) => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            console.log(response);
+
             const url = window.URL.createObjectURL(new Blob([response.data]));
+
             const a = document.createElement("a");
             a.href = url;
-            a.download = "informacion.txt";
+            a.download = "informacion.xlsx";
+
             document.body.appendChild(a);
+
             a.click();
+
             document.body.removeChild(a);
-            // showAlert("Este es un mensaje de alerta", "success");
+
+            // Cerrar el modal después de la descarga
+            Swal.close();
         } catch (error) {
             // Manejo de errores
             console.log(error);
