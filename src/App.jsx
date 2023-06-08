@@ -50,6 +50,10 @@ const App = () => {
                                         element={<CreateCustomers />}
                                     />
                                     <Route
+                                        path="add-card-business"
+                                        element={<CreateBusinessCard />}
+                                    />
+                                    <Route
                                         path="customers/:id"
                                         element={<ShowCustomers />}
                                     />

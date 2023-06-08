@@ -34,12 +34,18 @@ export const CardProvider = ({ children }) => {
     const onDeleteCard = async (card) => {
         await deleteCard(card);
         return;
-    }
-    const submitNewTaerjeta = async (card, id) => {
-        await newTarjetaWithCustomer(card, id);
+    };
+    const submitNewTaerjeta = async (card, id = {}) => {
+        if (id) {
+            console.log("sin id");
+            await newTarjeta(card);
+        } else {
+            console.log("con id");
+            await newTarjetaWithCustomer(card, id);
+        }
+
         // await new Promise((resolve) => setTimeout(resolve, 2000)); // Esperar 3 segundos
-       
-      
+
         return;
     };
 
@@ -84,10 +90,7 @@ export const CardProvider = ({ children }) => {
                 return;
             }
 
-            const { data } = await ApiBackend.delete(
-                `/tarjetas/${id}`,
-                config
-            );
+            const { data } = await ApiBackend.delete(`/tarjetas/${id}`, config);
             console.log(data);
             setCardsBusiness(cardsBusiness.filter((card) => card.id !== id));
             Swal.fire(data.message, "", "success");
@@ -98,7 +101,42 @@ export const CardProvider = ({ children }) => {
         } finally {
             setLoadingCustomers(false);
         }
-    }
+    };
+
+    const newTarjeta = async (tarjeta) => {
+        try {
+            if (!configFile) {
+                // showAlert( "No tienes permiso", "error");
+                return;
+            }
+            const respuesta = await ApiBackend.post(
+                `/tarjetas`,
+                tarjeta,
+                configFile
+            );
+            console.log(respuesta, "cliente Creado");
+
+            // TODO: ACTUALIZAR EL STATE DE CARD
+            console.log(respuesta.data.data, "respuesta");
+            // agregar a la lista de tarjetas
+            setCardsBusiness([...cardsBusiness, respuesta.data.data]);
+            // setCustomers([...customers, respuesta.data.data]);
+            navigate(-1);
+            Swal.fire({
+                title: "Tarjeta Cargada",
+                text: "Se Cargo la Tarjeta de forma correcta",
+                icon: "success",
+                confirmButtonText: "Aceptar",
+            });
+        } catch (error) {
+            Swal.fire({
+                title: "Error!",
+                text: "Error Al subir el archivo",
+                icon: "error",
+                confirmButtonText: "Aceptar",
+            });
+        }
+    };
     const newTarjetaWithCustomer = async (tarjeta, id) => {
         try {
             if (!configFile) {
@@ -123,14 +161,14 @@ export const CardProvider = ({ children }) => {
                 text: "Se Cargo la Tarjeta de forma correcta",
                 icon: "success",
                 confirmButtonText: "Aceptar",
-              });
+            });
         } catch (error) {
             Swal.fire({
                 title: "Error!",
                 text: "Error Al subir el archivo",
                 icon: "error",
                 confirmButtonText: "Aceptar",
-              });
+            });
         }
     };
 
@@ -195,7 +233,7 @@ export const CardProvider = ({ children }) => {
                 cardBusiness,
                 loadingCustomers,
                 submitNewClienteCard,
-                onDeleteCard
+                onDeleteCard,
             }}
         >
             {children}
