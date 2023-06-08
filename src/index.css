@@ -32,17 +32,18 @@ button {
     background-color: #0a7dd6;
 }
 
-.bg-toggle{
+.bg-toggle {
     background-color: #0a7dd6;
     color: white;
     opacity: 1;
 }
 
-.bg-toggle2{
+.bg-toggle2 {
     /* background-color: #b9d6ed; */
     color: white;
     opacity: 0.5;
 }
+
 .bg-secundary {
     background-color: #b9d6ed;
 }
@@ -68,7 +69,8 @@ button {
 }
 
 /* Estilo cuando el input está activo */
-.input-style:focus, .input-style:valid {
+.input-style:focus,
+.input-style:valid {
     opacity: 1;
     background-color: #f3f4f6;
     border: 1px solid #0a7dd6;
@@ -151,17 +153,22 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+
 select option {
     /* Estilos de los elementos option */
-    background-color: transparent; /* Color de fondo */
-    color: #0a7dd6; /* Color del texto */
-  }
-  
-  select option:hover {
+    background-color: transparent;
+    /* Color de fondo */
+    color: #0a7dd6;
+    /* Color del texto */
+}
+
+select option:hover {
     /* Estilos cuando se pasa el cursor sobre un option */
-    background-color: transparent; /* Nuevo color de fondo */
-    color: #0a7dd6; /* Nuevo color del texto */
-  }
+    background-color: transparent;
+    /* Nuevo color de fondo */
+    color: #0a7dd6;
+    /* Nuevo color del texto */
+}
 
 .button-style-white:hover {
     background-color: #f5f5f5;
@@ -174,16 +181,38 @@ select option {
 /* input editar */
 .input-container {
     position: relative;
-  }
+}
 
-  .input-field {
+.input-field {
     /* padding-left: 40px; */
-  }
+}
 
-  .icon {
+.icon {
     position: absolute;
     left: 300px;
     top: 50%;
     transform: translateY(-50%);
     color: #0a7dd6;
-  }
+}
+
+.conBack {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 50px;
+}
+
+.elIzquierdo {
+    align-self: center;
+}
+
+.elCentro {
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: 30px;
+    font-weight: 400;
+    /* background-color: red; */
+}

@@ -3,25 +3,27 @@ import { TitleHeaders } from "../Components/TitleHeaders";
 import useAuth from "../Hooks/useAuth";
 import { HeadersOne } from "../Wiews/HeadersOne";
 import Swal from "sweetalert2";
+import HeaderBack from "../Components/HeaderBack";
 
 const Me = () => {
     const { auth, onUpdatePassword } = useAuth();
     const [password, setPassword] = useState("");
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(password.length < 6){
+        if (password.length < 6) {
             Swal.fire({
                 title: "¿Estás seguro?",
                 text: "La contraseña debe tener al menos 6 caracteres",
-            })
-            return
+            });
+            return;
         }
         onUpdatePassword(password);
     };
     return (
         <>
             <HeadersOne />
-            <TitleHeaders title={"perfil"} sizeTilte={5} isBack={false} />
+
+            <HeaderBack titulo={"Perfil"} />
 
             <form onSubmit={handleSubmit}>
                 <div className="mb-4 form-container">
@@ -95,7 +97,6 @@ const Me = () => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        
                     >
                         <path
                             strokeLinecap="round"

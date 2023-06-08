@@ -8,6 +8,7 @@ import { HeadersTwo } from "../../Wiews/HeadersTwo";
 import { TitleHeaders } from "../../Components/TitleHeaders";
 import Button from "../../Components/Button";
 import Loading from "../../Wiews/Loading";
+import HeaderBack from "../../Components/HeaderBack";
 
 
 const boton = () => {
@@ -34,12 +35,12 @@ export const ListCustomers = () => {
     return (
         <>
             <HeadersTwo />
-            <TitleHeaders title={"Lista de Clientes"} />
+            <HeaderBack titulo={"Lista de clietes"}/>
             <Button
                 text={"Ver tarjetas de clientes"}
                 variant={"primary"}
                 onClick={() => navigate("/home/card-business")}
-                pt={5}
+                pt={10}
                 pb={10}
             />
             <ToggleCard

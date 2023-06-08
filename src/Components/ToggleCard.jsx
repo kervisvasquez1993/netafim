@@ -8,7 +8,6 @@ import useAlert from "../Hooks/useAlert";
 
 const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
     const { descarga } = useCustomers();
-    
 
     const [activeTab, setActiveTab] = useState(1);
 
@@ -22,13 +21,28 @@ const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
         activeTab == 1
             ? data?.filter((cliente) => cliente.activo)
             : data?.filter((cliente) => !cliente.activo);
-    const titulo = (<span className="flex justify-between items-center">Descargar Datos <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-  </svg>
-  </span>)
+    const titulo = (
+        <span className="flex justify-between items-center">
+            Descargar Datos{" "}
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+            >
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+                />
+            </svg>
+        </span>
+    );
     return (
         <>
-            <div className="border rounded-xl overflow-hidden shadow-sm min-h-3000">
+            <div className="border rounded-xl overflow-hidden shadow-sm min-h-3000 mt-10">
                 <div className="flex">
                     <div
                         className={`w-1/2 p-1 flex justify-center items-center cursor-pointer flex items-center ${
@@ -52,8 +66,8 @@ const ToggleCard = ({ handleLeftClick, handleRightClick, data }) => {
                     <div
                         className={` flex justify-center items-center w-1/2 p-1 cursor-pointer ${
                             activeTab === 2
-                            ? "bg-main  text-white"
-                            : " bg-main  opacity-50 text-white"
+                                ? "bg-main  text-white"
+                                : " bg-main  opacity-50 text-white"
                         }`}
                         onClick={() => {
                             handleRightClick();
