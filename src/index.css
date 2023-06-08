@@ -57,10 +57,11 @@ button {
 }
 
 /* Estilo cuando el input está activo */
-.input-style:focus {
+.input-style:focus, .input-style:valid {
     opacity: 1;
     background-color: #f3f4f6;
     border: 1px solid #0a7dd6;
+    outline: none;
 
 }
 

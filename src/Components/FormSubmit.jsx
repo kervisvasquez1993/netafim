@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useCustomers from "../Hooks/useCustomers";
 import useAlert from "../Hooks/useAlert";
+import { Link } from "react-router-dom";
 
 
 const cultivos = [
@@ -51,15 +52,15 @@ const FormSubmit = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div className="max-w-md mx-auto">
-                <div className="mb-4">
+                <div className="mb-4 form-container">
                     <label
                         htmlFor="nombre"
-                        className="block font-normal mb-2 text-blue-500 "
+                        className="label-position label-style"
                     >
-                        Nombre:
+                        Nombre
                     </label>
                     <input
-                        className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
+                        className=" input-style"
                         type="text"
                         id="nombre"
                         name="nombre"
@@ -67,15 +68,15 @@ const FormSubmit = () => {
                         value={customer.nombre}
                     />
                 </div>
-                <div className="mb-4">
+                <div className="mb-4 form-container">
                     <label
                         htmlFor="apellido"
-                        className="block font-normal mb-2 text-blue-500  "
+                        className="label-position label-style "
                     >
-                        Apellido:
+                        Apellido
                     </label>
                     <input
-                        className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
+                        className=" input-style"
                         type="text"
                         id="apellido"
                         name="apellido"
@@ -83,15 +84,15 @@ const FormSubmit = () => {
                         value={customer.apellido}
                     />
                 </div>
-                <div className="mb-4">
+                <div className="mb-4 form-container">
                     <label
                         htmlFor="empresa"
-                        className="block font-normal mb-2 text-blue-500 "
+                        className="label-position label-style"
                     >
-                        Empresa:
+                        Empresa
                     </label>
                     <input
-                        className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
+                        className=" input-style"
                         type="text"
                         id="empresa"
                         name="empresa"
@@ -100,15 +101,15 @@ const FormSubmit = () => {
                     />
                 </div>
 
-                <div className="mb-4">
+                <div className="mb-4 form-container">
                     <label
                         htmlFor="numero_telefono"
-                        className="block font-normal mb-2 text-blue-500 "
+                        className="label-position label-style"
                     >
-                        Número de teléfono:
+                        Número de teléfono
                     </label>
                     <input
-                        className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
+                        className=" input-style"
                         type="text"
                         id="numero_telefono"
                         name="numero_telefono"
@@ -116,16 +117,16 @@ const FormSubmit = () => {
                         value={customer.numero_telefono}
                     />
                 </div>
-                <div className="mb-4">
+                <div className="mb-4 form-container">
                     <label
                         htmlFor="correo"
                         onChange={handleInputChange}
-                        className="block font-normal mb-2 text-blue-500 "
+                        className="label-position label-style"
                     >
-                        Correo:
+                        Correo electrónico
                     </label>
                     <input
-                        className="  border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40 text-blue-500 opacity-40"
+                        className="  input-style text-blue-500 opacity-40"
                         type="text"
                         id="correo"
                         name="correo"
@@ -133,15 +134,15 @@ const FormSubmit = () => {
                         value={customer.correo}
                     />
                 </div>
-                <div className="mb-4">
+                <div className="mb-4 form-container">
                     <label
                         htmlFor="cultivo"
-                        className="block font-normal mb-2 text-blue-500 "
+                        className="label-position label-style"
                     >
-                        Cultivo:
+                        Cultivo
                     </label>
                     {/* <input
-                        className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
+                        className=" input-style"
                         type="text"
                         id="cultivo"
                         name="cultivo"
@@ -150,7 +151,7 @@ const FormSubmit = () => {
                     /> */}
 
                     <select
-                        className="border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
+                        className="input-style"
                         id="cultivo"
                         name="cultivo"
                         onChange={handleInputChange}
@@ -160,15 +161,15 @@ const FormSubmit = () => {
                         {opciones}
                     </select>
                 </div>
-                <div className="mb-4">
+                <div className="mb-4 form-container">
                     <label
                         htmlFor="ubicacion_zona"
-                        className="block font-normal mb-2 text-blue-500 "
+                        className="label-position label-style"
                     >
                         Ubicación / Zona:
                     </label>
                     <input
-                        className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
+                        className=" input-style"
                         type="text"
                         id="ubicacion_zona"
                         name="ubicacion_zona"
@@ -177,15 +178,15 @@ const FormSubmit = () => {
                     />
                 </div>
                
-                <div className="mb-4">
+                <div className="mb-4 form-container">
                     <label
                         htmlFor="pais"
-                        className="block font-normal mb-2 text-blue-500 "
+                        className="label-position label-style"
                     >
-                        País:
+                        País
                     </label>
                     <input
-                        className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
+                        className=" input-style"
                         type="text"
                         onChange={handleInputChange}
                         value={customer.pais}
@@ -193,15 +194,15 @@ const FormSubmit = () => {
                         name="pais"
                     />
                 </div>
-                <div className="mb-4">
+                <div className="mb-4 form-container">
                     <label
                         htmlFor="tamano_de_cultivo"
-                        className="block font-normal mb-2 text-blue-500 "
+                        className="label-position label-style"
                     >
-                        Tamaño de cultivo:
+                        Tamaño de cultivo
                     </label>
                     {/* <input
-                        className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
+                        className=" input-style"
                         type="text"
                         id="tamano_de_cultivo"
                         name="tamano_de_cultivo"
@@ -209,7 +210,7 @@ const FormSubmit = () => {
                         value={customer.tamano_de_cultivo}
                     /> */}
                     <select
-                        className="border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
+                        className="input-style"
                         id="tamano_de_cultivo"
                         name="tamano_de_cultivo"
                         onChange={handleInputChange}
@@ -223,11 +224,14 @@ const FormSubmit = () => {
                 
                 <div className="flex flex-col items-center justify-center py-10 ">
                     <input
-                        style={{ minWidth: "250px" }}
+                        // style={{ minWidth: "250px" }}
                         type="submit"
-                        className="bg-blue-500 text-white font-semibold py-2 px-4 rounded border-2 border-blue-500 mb-4"
-                        value="enviar"
+                        className="button-style mb-5"
+                        value="Guardar cliente"
                     />
+                    <Link to="/home" className="button-style-white">
+                        Cancelar
+                    </Link>
                 </div>
             </div>
         </form>

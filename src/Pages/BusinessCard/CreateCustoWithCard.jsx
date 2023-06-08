@@ -236,7 +236,7 @@ const CreateCustoWithCard = () => {
                             style={{ minWidth: "250px" }}
                             type="submit"
                             className="bg-blue-500 text-white font-semibold py-2 px-4 rounded border-2 border-blue-500 mb-4"
-                            value="enviar"
+                            value="Guardar cliente"
                         />
                     </div>
                 </div>

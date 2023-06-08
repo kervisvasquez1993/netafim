@@ -11,9 +11,12 @@ import Loading from "../../Wiews/Loading";
 
 export const ListCustomers = () => {
     const navigate = useNavigate();
-    const { customers, loadingCustomers } = useCustomers();
+    const { customers, loadingCustomers,onGetDataCustomers } = useCustomers();
     const [dato, setDatos] = useState(customers);
     useEffect(() => {}, [customers]);
+    useEffect(() => {
+        onGetDataCustomers();
+    }, []);
     if (loadingCustomers) return <Loading />;
 
     return (

@@ -29,6 +29,10 @@ export const CustomersProvider = ({ children }) => {
         await deleteClustomer(customer);
         return;
     };
+    const onGetDataCustomers = async () => {
+        await getData();
+        return
+    }
 
     const deleteClustomer = async (customer) => {
         setLoadingCustomers(true);
@@ -107,11 +111,6 @@ export const CustomersProvider = ({ children }) => {
             setLoadingCustomers(true);
             try {
                 if (!config) {
-                    // console.log("no tienes permiso");
-                    // showAlert(
-                    //     "No tienes permiso",
-                    //     "error"
-                    // );
                     return;
                 }
                 const { data } = await ApiBackend.get("/clientes", config);
@@ -126,6 +125,24 @@ export const CustomersProvider = ({ children }) => {
 
         fetchData();
     }, [customer]);
+
+
+    const getData = async () => {
+        setLoadingCustomers(true);
+        try {
+            if (!config) {
+                return;
+            }
+            const { data } = await ApiBackend.get("/clientes", config);
+            console.log(data.data, "data de provider");
+            setCustomers(data.data);
+            console.log(customers, "data de provider llamda");
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoadingCustomers(false);
+        }
+    };
 
     const getCustomer = async (id) => {
         setLoadingCustomers(true);
@@ -246,6 +263,7 @@ export const CustomersProvider = ({ children }) => {
                 submitNewCliente,
                 descarga,
                 onDeleteCustomer,
+                onGetDataCustomers
             }}
         >
             {children}

@@ -5,6 +5,8 @@ import { ApiBackend } from "../../apis/ApiBackend";
 import { HeadersTwo } from "../../Wiews/HeadersTwo";
 import { PublicComponents } from "../../Layouts/PublicComponents";
 import Swal from "sweetalert2";
+import useCustomers from "../../Hooks/useCustomers";
+// useCustomers
 
 export const Login = () => {
     const [email, setEmail] = useState("");
@@ -13,7 +15,7 @@ export const Login = () => {
     const [errors, setErrors] = useState({});
     const { auth, setAuth, loading } = useAuth();
     const navigate = useNavigate();
-
+    const { onGetDataCustomers } = useCustomers();
     const handleSutmit = async (e) => {
         e.preventDefault();
         if ([email, password].includes("")) {
@@ -34,6 +36,7 @@ export const Login = () => {
             console.log(auth, "auth");
             navigate("/home");
             setAlerta({});
+            
         } catch (error) {
             setErrors(error.response.data.error);
             // setAlerta({ message: error.response.data.error, error: true });
@@ -58,7 +61,10 @@ export const Login = () => {
         <PublicComponents title={"Inicia sesión para registrar clientes"}>
             <form onSubmit={(e) => handleSutmit(e)}>
                 <div className="mb-4 form-container">
-                    <label htmlFor="email" className="label-position label-style">
+                    <label
+                        htmlFor="email"
+                        className="label-position label-style"
+                    >
                         Correo electrónico
                     </label>
 
@@ -108,10 +114,7 @@ export const Login = () => {
                         className="button-style mb-5"
                     />
 
-                    <Link
-                        to="/singup"
-                        className="button-style-white"
-                    >
+                    <Link to="/singup" className="button-style-white">
                         Registro
                     </Link>
                 </div>

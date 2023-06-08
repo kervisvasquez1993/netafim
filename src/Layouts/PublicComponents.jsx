@@ -15,7 +15,7 @@ export const PublicComponents = ({ children, title }) => {
                 }}
             >
                 <div className="w-full max-w-xs">
-                    <h2 className="text-2xl text-center font-bold mb-4">
+                    <h2 className="text-2xl text-center font-bold mb-4" style={{fontWeight : 200}}>
                         {title}
                     </h2>
 

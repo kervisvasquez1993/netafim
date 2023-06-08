@@ -12,6 +12,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 backgroundSize: "250%",
                 backgroundPosition: 'center',
                 minHeight: '100vh',
+                width: "90vw"
             }}
 
             className="custom-div pt-10"
