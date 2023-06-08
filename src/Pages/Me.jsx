@@ -81,6 +81,7 @@ const Me = () => {
                     </label>
                     <input
                         className="input-style"
+                        placeholder="*********"
                         type="password"
                         id="password"
                         name="password"
