@@ -170,3 +170,20 @@ select option {
 .button-style-white:active {
     transform: translateY(2px);
 }
+
+/* input editar */
+.input-container {
+    position: relative;
+  }
+
+  .input-field {
+    /* padding-left: 40px; */
+  }
+
+  .icon {
+    position: absolute;
+    left: 300px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #0a7dd6;
+  }
