@@ -9,6 +9,18 @@ import { TitleHeaders } from "../../Components/TitleHeaders";
 import Button from "../../Components/Button";
 import Loading from "../../Wiews/Loading";
 
+
+const boton = () => {
+   return  <div className={`flex justify-center pt-10 pb-10`}>
+    <button
+        className={className}
+        style={{ minWidth: "200px", height: "50px" }}
+        onClick={()=>{console.log("hola")}}
+    >
+        
+    </button>
+</div>
+}
 export const ListCustomers = () => {
     const navigate = useNavigate();
     const { customers, loadingCustomers,onGetDataCustomers } = useCustomers();

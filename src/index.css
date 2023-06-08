@@ -32,6 +32,17 @@ button {
     background-color: #0a7dd6;
 }
 
+.bg-toggle{
+    background-color: #0a7dd6;
+    color: white;
+    opacity: 1;
+}
+
+.bg-toggle2{
+    /* background-color: #b9d6ed; */
+    color: white;
+    opacity: 0.5;
+}
 .bg-secundary {
     background-color: #b9d6ed;
 }
