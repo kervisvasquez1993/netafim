@@ -58,7 +58,7 @@ export const Register = () => {
                 Swal.fire({
                     icon: "error",
                     title: "Error",
-                    html: `<ol>${errorList.join("")}</ol>`,
+                    html: `<ol>${errorList.join("")}</ol> <br/>`,
                 });
 
                 console.log(error, "error");
@@ -74,14 +74,19 @@ export const Register = () => {
     return (
         <PublicComponents title={"Registro"}>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="name">Nombre</label>
+                <div className="mb-4 form-container">
+                    <label
+                        htmlFor="name"
+                        className="label-position label-style"
+                    >
+                        Nombre
+                    </label>
                     <input
                         type="text"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        className={`border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40 ${
+                        className={`input-style ${
                             errors.name ? "border-red-500" : ""
                         }`}
                     />
@@ -89,14 +94,19 @@ export const Register = () => {
                         <span className="text-red-500">{errors.name}</span>
                     )}
                 </div>
-                <div>
-                    <label htmlFor="last_name">Apellido</label>
+                <div className="mb-4 form-container">
+                    <label
+                        htmlFor="last_name"
+                        className="label-position label-style"
+                    >
+                        Apellidos
+                    </label>
                     <input
                         type="text"
                         name="last_name"
                         value={formData.last_name}
                         onChange={handleChange}
-                        className={`border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40 ${
+                        className={`input-style ${
                             errors.last_name ? "border-red-500" : ""
                         }`}
                     />
@@ -104,14 +114,19 @@ export const Register = () => {
                         <span className="text-red-500">{errors.last_name}</span>
                     )}
                 </div>
-                <div>
-                    <label htmlFor="email">Email</label>
+                <div className="mb-4 form-container">
+                    <label
+                        htmlFor="email"
+                        className="label-position label-style"
+                    >
+                        Email
+                    </label>
                     <input
                         type="text"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className={`border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40 ${
+                        className={` input-style ${
                             errors.email ? "border-red-500" : ""
                         }`}
                     />
@@ -119,14 +134,19 @@ export const Register = () => {
                         <span className="text-red-500">{errors.email}</span>
                     )}
                 </div>
-                <div>
-                    <label htmlFor="password">Contraseña</label>
+                <div className="mb-4 form-container">
+                    <label
+                        htmlFor="password"
+                        className="label-position label-style"
+                    >
+                        Contraseña
+                    </label>
                     <input
                         type="password"
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
-                        className={`border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40 ${
+                        className={`input-style ${
                             errors.password ? "border-red-500" : ""
                         }`}
                     />
@@ -134,8 +154,11 @@ export const Register = () => {
                         <span className="text-red-500">{errors.password}</span>
                     )}
                 </div>
-                <div>
-                    <label htmlFor="password_confirmation">
+                <div className="mb-4 form-container">
+                    <label
+                        htmlFor="password_confirmation"
+                        className="label-position label-style"
+                    >
                         Confirmar Contraseña
                     </label>
                     <input
@@ -143,7 +166,7 @@ export const Register = () => {
                         name="password_confirmation"
                         value={formData.password_confirmation}
                         onChange={handleChange}
-                        className={`border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40 ${
+                        className={`input-style ${
                             errors.password_confirmation ? "border-red-500" : ""
                         }`}
                     />
@@ -156,7 +179,7 @@ export const Register = () => {
                 <div className="flex justify-center py-10">
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white rounded-md px-4 py-2 mt-4"
+                        className="button-style"
                     >
                         Registrarse
                     </button>

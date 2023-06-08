@@ -105,12 +105,12 @@ export const Login = () => {
                     <input
                         type="submit"
                         value="Iniciar sesión"
-                        className="inline-block rounded border mb-7 border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
+                        className="button-style mb-5"
                     />
 
                     <Link
                         to="/singup"
-                        className="inline-block rounded border border-blue-600 px-12 py-3 text-sm font-medium text-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring active:bg-blue-500"
+                        className="button-style-white"
                     >
                         Registro
                     </Link>

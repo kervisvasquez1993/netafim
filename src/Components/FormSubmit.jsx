@@ -85,6 +85,39 @@ const FormSubmit = () => {
                 </div>
                 <div className="mb-4">
                     <label
+                        htmlFor="empresa"
+                        className="block font-normal mb-2 text-blue-500 "
+                    >
+                        Empresa:
+                    </label>
+                    <input
+                        className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
+                        type="text"
+                        id="empresa"
+                        name="empresa"
+                        onChange={handleInputChange}
+                        value={customer.empresa}
+                    />
+                </div>
+
+                <div className="mb-4">
+                    <label
+                        htmlFor="numero_telefono"
+                        className="block font-normal mb-2 text-blue-500 "
+                    >
+                        Número de teléfono:
+                    </label>
+                    <input
+                        className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
+                        type="text"
+                        id="numero_telefono"
+                        name="numero_telefono"
+                        onChange={handleInputChange}
+                        value={customer.numero_telefono}
+                    />
+                </div>
+                <div className="mb-4">
+                    <label
                         htmlFor="correo"
                         onChange={handleInputChange}
                         className="block font-normal mb-2 text-blue-500 "
@@ -129,20 +162,21 @@ const FormSubmit = () => {
                 </div>
                 <div className="mb-4">
                     <label
-                        htmlFor="numero_telefono"
+                        htmlFor="ubicacion_zona"
                         className="block font-normal mb-2 text-blue-500 "
                     >
-                        Número de teléfono:
+                        Ubicación / Zona:
                     </label>
                     <input
                         className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
                         type="text"
-                        id="numero_telefono"
-                        name="numero_telefono"
+                        id="ubicacion_zona"
+                        name="ubicacion_zona"
                         onChange={handleInputChange}
-                        value={customer.numero_telefono}
+                        value={customer.ubicacion_zona}
                     />
                 </div>
+               
                 <div className="mb-4">
                     <label
                         htmlFor="pais"
@@ -185,38 +219,8 @@ const FormSubmit = () => {
                         {opcionesCultivo}
                     </select>
                 </div>
-                <div className="mb-4">
-                    <label
-                        htmlFor="ubicacion_zona"
-                        className="block font-normal mb-2 text-blue-500 "
-                    >
-                        Ubicación / Zona:
-                    </label>
-                    <input
-                        className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
-                        type="text"
-                        id="ubicacion_zona"
-                        name="ubicacion_zona"
-                        onChange={handleInputChange}
-                        value={customer.ubicacion_zona}
-                    />
-                </div>
-                <div className="mb-4">
-                    <label
-                        htmlFor="empresa"
-                        className="block font-normal mb-2 text-blue-500 "
-                    >
-                        Empresa:
-                    </label>
-                    <input
-                        className=" border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40"
-                        type="text"
-                        id="empresa"
-                        name="empresa"
-                        onChange={handleInputChange}
-                        value={customer.empresa}
-                    />
-                </div>
+                
+                
                 <div className="flex flex-col items-center justify-center py-10 ">
                     <input
                         style={{ minWidth: "250px" }}
