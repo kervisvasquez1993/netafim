@@ -7,7 +7,7 @@ export const HeadersOne = () => {
         <header
             className="flex justify-center items-center"
             style={{
-                height: "15vh",
+                height: "10vh",
                 display: "flex",
                 justifyContent: "center",
             }}
