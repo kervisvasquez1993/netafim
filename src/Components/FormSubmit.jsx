@@ -17,17 +17,21 @@ const cultivos = [
     "Sandia",
     "Otro",
 ];
+
+const opciones = cultivos.map((cultivo) => (
+    <option key={cultivo} value={cultivo}>
+        {cultivo}
+    </option>
+));
+
+
 const sizes = ["ha", "mz", "m²"];
 const opcionesCultivo = sizes.map((size) => (
     <option key={size} value={size}>
         {size}
     </option>
 ));
-const opciones = cultivos.map((cultivo) => (
-    <option key={cultivo} value={cultivo}>
-        {cultivo}
-    </option>
-));
+
 const FormSubmit = () => {
     const {showAlert} = useAlert();
     const { submitNewCliente, errors } = useCustomers();
@@ -141,15 +145,6 @@ const FormSubmit = () => {
                     >
                         Cultivo
                     </label>
-                    {/* <input
-                        className=" input-style"
-                        type="text"
-                        id="cultivo"
-                        name="cultivo"
-                        onChange={handleInputChange}
-                        value={customer.cultivo}
-                    /> */}
-
                     <select
                         className="input-style"
                         id="cultivo"
