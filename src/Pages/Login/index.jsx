@@ -57,8 +57,8 @@ export const Login = () => {
     return (
         <PublicComponents title={"Inicia sesión para registrar clientes"}>
             <form onSubmit={(e) => handleSutmit(e)}>
-                <div className="mb-4">
-                    <label htmlFor="email" className="block mb-1 text-blue-500">
+                <div className="mb-4 form-container">
+                    <label htmlFor="email" className="label-position label-style">
                         Correo electrónico
                     </label>
 
@@ -69,15 +69,15 @@ export const Login = () => {
                         value={email}
                         placeholder="ejemplo@netafim.com"
                         onChange={(e) => setEmail(e.target.value)}
-                        className="border-blue-500 border-2 rounded-md px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40 hover:opacity-100"
+                        className="input-style"
                         required
                     />
                 </div>
 
-                <div className="mb-4">
+                <div className="mb-4 form-container">
                     <label
                         htmlFor="password"
-                        className="relative mb-1 text-blue-500"
+                        className="label-position label-style"
                     >
                         Contraseña
                     </label>
@@ -88,7 +88,7 @@ export const Login = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="*********"
-                        className="border-blue-500 border-2 rounded-lg px-4 py-2 focus:outline-none w-full text-blue-500 opacity-40 hover:opacity-100"
+                        className="input-style"
                         required
                     />
                 </div>
