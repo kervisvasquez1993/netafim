@@ -9,6 +9,7 @@ import { HeadersOne } from "../../Wiews/HeadersOne";
 import Loading from "../../Wiews/Loading";
 import useAlert from "../../Hooks/useAlert";
 import Swal from "sweetalert2";
+import HeaderBack from "../../Components/HeaderBack";
 
 export const ShowCustomers = () => {
     const params = useParams();
@@ -78,11 +79,8 @@ export const ShowCustomers = () => {
     return (
         <>
             <HeadersOne />
-            <HeaderWithButton
-                title={"Datos del cliente"}
-                buttonText={"Añadir tarjeta de cliente"}
-                onButtonClick={onSaludar}
-            />
+            <HeaderBack titulo={`Datos del cliente`} />
+            <Button text={"Añadir tarjeta de cliente"} onClick={onSaludar} variant={"primary"} pt={10} pb={10} />
             <Form data={customer} />
             <TwoButtons
                 firstButtonName={txtStatus}

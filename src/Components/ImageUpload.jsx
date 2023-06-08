@@ -61,7 +61,7 @@ function ImageUploader() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div className="bg-white rounded-lg border border-gray-400 p-6">
+            <div className="bg-white rounded-lg border border-gray-400 p-6 mt-10 mb-10">
                 <label htmlFor="file-input" className="block mb-4">
                     <div className="border-dashed border-2 border-gray-400 rounded-lg p-4">
                         {isLoading ? (

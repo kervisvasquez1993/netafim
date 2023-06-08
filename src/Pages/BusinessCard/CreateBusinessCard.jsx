@@ -3,6 +3,7 @@ import { HeadersOne } from "../../Wiews/HeadersOne";
 import { TitleHeaders } from "../../Components/TitleHeaders";
 import Button from "../../Components/Button";
 import ImageUploader from "../../Components/ImageUpload";
+import HeaderBack from "../../Components/HeaderBack";
 
 const CreateBusinessCard = () => {
     const saludar = () => {
@@ -11,11 +12,7 @@ const CreateBusinessCard = () => {
     return (
         <>
             <HeadersOne />
-            <TitleHeaders
-                title={
-                    "Subir Tarjeta "
-                }
-            />
+            <HeaderBack titulo={"Subir Tarjeta"} />
             {/* <TitleHeaders
                 title={
                     "Puede tomar foto de una Tarjeta de Presentación y luego transcribir los datos "

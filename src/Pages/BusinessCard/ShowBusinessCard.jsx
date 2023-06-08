@@ -8,6 +8,7 @@ import Button from "../../Components/Button";
 // TitleHeaders
 import Loading from "../../Wiews/Loading";
 import { TitleHeaders } from "../../Components/TitleHeaders";
+import HeaderBack from "../../Components/HeaderBack";
 // import Loading from "../../Components/Loading";
 
 export const ShowBusinessCard = () => {
@@ -23,8 +24,8 @@ export const ShowBusinessCard = () => {
     return (
         <>
             <HeadersOne />
-            <TitleHeaders title={`Titulo ${cardBusiness.id}`} isBack={false} />
-            <div className="bg-white rounded-lg shadow-md p-4">
+            <HeaderBack titulo={`Titulo ${cardBusiness.id}`} />
+            <div className="bg-white rounded-lg shadow-md pr-10 pl-10 mt-10 mb-10">
                 <img
                     src={`${baseUrlaws}/${cardBusiness.src_img}`}
                     alt="Imagen de la cardBusiness"
@@ -37,8 +38,8 @@ export const ShowBusinessCard = () => {
                 onClick={() =>
                     navigate(`/home/card-business-customers/${params.id}`)
                 }
-                pt={5}
-                pb={2}
+                pt={10}
+                pb={10}
             />
 
             <Button
