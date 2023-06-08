@@ -15,7 +15,7 @@ const Card = ({ icon, buttonText, ruta }) => {
             <div className="p-4 flex items-center justify-center"><img src={icon} /></div>
 
             <Link
-                className="bg-blue-500 text-white text-center text-xl py-2 px-4 rounded-lg"
+                className="bg-main text-white text-center text-xl py-2 px-4 rounded-lg"
                 to={ruta}
             >
                 {buttonText}

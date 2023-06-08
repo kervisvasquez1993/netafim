@@ -12,11 +12,11 @@ import useAuth from "../../Hooks/useAuth.jsx";
 export const Home = () => {
     const { salir } = useAuth();
     const handleLogout = () => {
-        console.log("hola")
+        console.log("hola");
         salir();
-        console.log("logout")
+        console.log("logout");
         return;
-    }
+    };
     return (
         <>
             <HeadersOne />
@@ -33,14 +33,14 @@ export const Home = () => {
                 <div className="w-full md:w-1/3 lg:w-1/3 p-4">
                     <Card
                         icon={addCliente}
-                        buttonText={"Agregar cliente"}
+                        buttonText={"Agregar Cliente"}
                         ruta={"add-customers"}
                     />
                 </div>
                 <div className="w-full md:w-1/3 lg:w-1/3 p-4">
                     <Card
                         icon={listCliente}
-                        buttonText={"Ver cliente"}
+                        buttonText={"Ver Clientes"}
                         ruta={"customers"}
                     />
                 </div>

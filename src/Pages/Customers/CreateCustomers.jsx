@@ -6,7 +6,7 @@ export const CreateCustomers = () => {
     return (
         <>
             <HeadersOne/>
-            <TitleHeaders title={"Datos del Cliente"} sizeTilte={2}/>
+            <TitleHeaders title={"Añadir cliente"} sizeTilte={2}/>
             <FormSubmit />
         </>
     );

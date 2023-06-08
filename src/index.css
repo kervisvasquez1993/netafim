@@ -27,3 +27,10 @@ button {
         width: 45vw;
     }
 }
+
+.bg-main{
+    background-color: #0a7dd6;
+}
+.bg-secundary{
+    background-color: #b9d6ed;
+}

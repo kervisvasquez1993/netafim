@@ -80,7 +80,7 @@ export const ShowCustomers = () => {
             <HeadersOne />
             <HeaderWithButton
                 title={"Datos del cliente"}
-                buttonText={"Añadir tarjeta"}
+                buttonText={"Tarjeta de cliente"}
                 onButtonClick={onSaludar}
             />
             <Form data={customer} />

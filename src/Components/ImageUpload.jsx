@@ -1,14 +1,11 @@
 import React, { useState, useRef } from "react";
 import imagenUpload from "../assets/sin-img.png";
 import { useParams } from "react-router-dom";
-import useCustomers from "../Hooks/useCustomers";
 import useCard from "../Hooks/useCard";
-import useAlert from "../Hooks/useAlert";
 import Swal from "sweetalert2";
 
 function ImageUploader() {
   const fileInputRef = useRef(null);
-  const { showAlert } = useAlert();
   const [imageSrc, setImageSrc] = useState(imagenUpload);
   const [isLoading, setIsLoading] = useState(false);
   const { submitNewTaerjeta } = useCard();
@@ -78,7 +75,7 @@ function ImageUploader() {
           type="file"
           className="hidden"
           name="src_img"
-          onInput={handleFileChange}
+          onChange={handleFileChange}
         />
       </div>
 
