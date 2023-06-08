@@ -2,6 +2,7 @@ import { useState, useEffect, createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ApiBackend } from "../apis/ApiBackend";
 import { configHeaderToken } from "../Helpers/index";
+import Swal from "sweetalert2";
 // configHeaderToken
 
 const AuthContext = createContext();
@@ -14,6 +15,29 @@ export const AuthProvider = ({ children }) => {
     const salir = async () => {
         await logout();
         return;
+    };
+    const onUpdatePassword = async (data) => {
+        await updatePassword(data);
+    };
+
+    const updatePassword = async (password) => {
+        try {
+            if (!config) {
+                return;
+            }
+            const { data } = await ApiBackend.put(
+                `user/update-password`,
+                password,
+                config
+            );
+            console.log(data, "data");
+            Swal.fire({
+                icon: "success",
+                title: data.message,
+            });
+        } catch (error) {
+            console.log(error);
+        }
     };
     useEffect(() => {
         (async () => {
@@ -44,7 +68,7 @@ export const AuthProvider = ({ children }) => {
                 // showAlert( "No tienes permiso", "error");
                 return;
             }
-            const respuesta = await ApiBackend.post(`logout`,{}, config);
+            const respuesta = await ApiBackend.post(`logout`, {}, config);
             localStorage.removeItem("token");
             navigate("/login");
 
@@ -55,7 +79,9 @@ export const AuthProvider = ({ children }) => {
         }
     };
     return (
-        <AuthContext.Provider value={{ auth, setAuth, loading, salir }}>
+        <AuthContext.Provider
+            value={{ auth, setAuth, loading, salir, onUpdatePassword }}
+        >
             {children}
         </AuthContext.Provider>
     );

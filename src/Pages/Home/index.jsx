@@ -45,7 +45,7 @@ export const Home = () => {
                     />
                 </div>
                 <div className="w-full md:w-1/3 lg:w-1/3 p-4">
-                    <Card icon={perfil} buttonText={"Ver Perfil"} ruta={"me"} />
+                    <Card icon={perfil} buttonText={"Perfil"} ruta={"me"} />
                 </div>
             </div>
             <Button

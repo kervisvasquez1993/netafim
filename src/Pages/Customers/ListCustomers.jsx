@@ -36,7 +36,7 @@ export const ListCustomers = () => {
             <HeadersTwo />
             <TitleHeaders title={"Lista de Clientes"} />
             <Button
-                text={"Ver las Tarjetas de clientes"}
+                text={"Ver tarjetas de clientes"}
                 variant={"primary"}
                 onClick={() => navigate("/home/card-business")}
                 pt={5}
