@@ -3,7 +3,6 @@ import useCustomers from "../Hooks/useCustomers";
 import useAlert from "../Hooks/useAlert";
 import { Link } from "react-router-dom";
 
-
 const cultivos = [
     "Caña de Azúcar",
     "Banano",
@@ -13,17 +12,32 @@ const cultivos = [
     "Ornamentales",
     "Hortalizas",
     "Palma de Aceite",
-    "Melon",
-    "Sandia",
-    "Otro",
+    "Melón",
+    "Sandía",
+    "Otros",
 ];
+
+const paises = [
+    "Costa Rica",
+    "Guatemala",
+    "Honduras",
+    "Panamá",
+    "El Salvador",
+    "Nicaragua",
+    "República Dominicana",
+    "Caribe",
+];
+const optPaises = paises.map((pais) => (
+    <option key={pais} value={pais}>
+        {pais}
+    </option>
+));
 
 const opciones = cultivos.map((cultivo) => (
     <option key={cultivo} value={cultivo}>
         {cultivo}
     </option>
 ));
-
 
 const sizes = ["ha", "mz", "m²"];
 const opcionesCultivo = sizes.map((size) => (
@@ -33,7 +47,7 @@ const opcionesCultivo = sizes.map((size) => (
 ));
 
 const FormSubmit = () => {
-    const {showAlert} = useAlert();
+    const { showAlert } = useAlert();
     const { submitNewCliente, errors } = useCustomers();
     const [customer, setCustomer] = useState({
         nombre: "",
@@ -43,6 +57,7 @@ const FormSubmit = () => {
         numero_telefono: "",
         pais: "",
         tamano_de_cultivo: "",
+        unidad_medida: "",
         ubicacion_zona: "",
         empresa: "",
     });
@@ -51,7 +66,7 @@ const FormSubmit = () => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        submitNewCliente(customer);        
+        submitNewCliente(customer);
     };
     return (
         <form onSubmit={handleSubmit}>
@@ -156,6 +171,78 @@ const FormSubmit = () => {
                         {opciones}
                     </select>
                 </div>
+                {customer.cultivo === "Otros" && (
+                    <div className="mb-4 form-container">
+                        <label
+                            htmlFor="otro_cultivo"
+                            className="label-position label-style"
+                        >
+                            Otros Cultivos
+                        </label>
+                        <input
+                            className="input-style"
+                            type="text"
+                            id="otro_cultivo"
+                            name="otro_cultivo"
+                            onChange={handleInputChange}
+                            value={customer.otro_cultivo}
+                        />
+                    </div>
+                )}
+                <div className="mb-4 form-container">
+                    <label
+                        htmlFor="tamano_de_cultivo"
+                        className="label-position label-style"
+                    >
+                        Tamaño de cultivo
+                    </label>
+                    <select
+                        className="input-style"
+                        id="tamano_de_cultivo"
+                        name="tamano_de_cultivo"
+                        onChange={handleInputChange}
+                        value={customer.tamano_de_cultivo}
+                    >
+                        <option>Seleccione una opción</option>
+                        {opcionesCultivo}
+                    </select>
+                </div>
+                <div className="mb-4 form-container">
+                    <label
+                        htmlFor="unidad_medida"
+                        className="label-position label-style"
+                    >
+                        Unidad de medida
+                    </label>
+                    <input
+                        className=" input-style"
+                        type="text"
+                        id="unidad_medida"
+                        name="unidad_medida"
+                        onChange={handleInputChange}
+                        value={customer.unidad_medida}
+                    />
+                </div>
+
+                <div className="mb-4 form-container">
+                    <label
+                        htmlFor="pais"
+                        className="label-position label-style"
+                    >
+                        País
+                    </label>
+                    <select
+                        className="input-style"
+                        id="pais"
+                        name="pais"
+                        onChange={handleInputChange}
+                        value={customer.pais}
+                    >
+                        <option>Seleccione una opción</option>
+                        {optPaises}
+                    </select>
+                </div>
+
                 <div className="mb-4 form-container">
                     <label
                         htmlFor="ubicacion_zona"
@@ -172,51 +259,7 @@ const FormSubmit = () => {
                         value={customer.ubicacion_zona}
                     />
                 </div>
-               
-                <div className="mb-4 form-container">
-                    <label
-                        htmlFor="pais"
-                        className="label-position label-style"
-                    >
-                        País
-                    </label>
-                    <input
-                        className=" input-style"
-                        type="text"
-                        onChange={handleInputChange}
-                        value={customer.pais}
-                        id="pais"
-                        name="pais"
-                    />
-                </div>
-                <div className="mb-4 form-container">
-                    <label
-                        htmlFor="tamano_de_cultivo"
-                        className="label-position label-style"
-                    >
-                        Tamaño de cultivo
-                    </label>
-                    {/* <input
-                        className=" input-style"
-                        type="text"
-                        id="tamano_de_cultivo"
-                        name="tamano_de_cultivo"
-                        onChange={handleInputChange}
-                        value={customer.tamano_de_cultivo}
-                    /> */}
-                    <select
-                        className="input-style"
-                        id="tamano_de_cultivo"
-                        name="tamano_de_cultivo"
-                        onChange={handleInputChange}
-                        value={customer.tamano_de_cultivo}
-                    >
-                        <option>Seleccione una opción</option>
-                        {opcionesCultivo}
-                    </select>
-                </div>
-                
-                
+
                 <div className="flex flex-col items-center justify-center py-10 ">
                     <input
                         // style={{ minWidth: "250px" }}
@@ -232,5 +275,4 @@ const FormSubmit = () => {
         </form>
     );
 };
-
 export default FormSubmit;
