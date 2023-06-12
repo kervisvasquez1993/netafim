@@ -54,6 +54,7 @@ const FormSubmit = () => {
         apellido: "",
         correo: "",
         cultivo: "",
+        otro_cultivo : "",
         numero_telefono: "",
         pais: "",
         tamano_de_cultivo: "",
