@@ -136,11 +136,43 @@ button {
     transition: background-color 0.3s ease;
 }
 
+
 .button-style:hover {
     background-color: #0a7dd6;
 }
 
 .button-style:active {
+    transform: translateY(2px);
+}
+
+
+.button-style-2 {
+    background-color: #0a7dd6;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 200px;
+    transition: background-color 0.3s ease;
+}
+.button-style-red {
+    background-color: #ef4544;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 200px;
+    transition: background-color 0.3s ease;
+}
+
+
+.button-style-2:hover {
+    background-color: #0a7dd6;
+}
+
+.button-style-2:active {
     transform: translateY(2px);
 }
 
@@ -215,4 +247,7 @@ select option:hover {
     font-size: 30px;
     font-weight: 400;
     /* background-color: red; */
+}
+.min-height-200px {
+    min-height: 200px;
 }
