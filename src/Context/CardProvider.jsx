@@ -129,6 +129,7 @@ export const CardProvider = ({ children }) => {
                 confirmButtonText: "Aceptar",
             });
         } catch (error) {
+            console.log(error);
             Swal.fire({
                 title: "Error!",
                 text: "Error Al subir el archivo",
