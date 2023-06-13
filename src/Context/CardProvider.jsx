@@ -117,22 +117,22 @@ export const CardProvider = ({ children }) => {
             console.log(respuesta, "cliente Creado");
 
             // TODO: ACTUALIZAR EL STATE DE CARD
-            console.log(respuesta.data.data, "respuesta");
+            console.log(respuesta.data.message, "respuesta");
             // agregar a la lista de tarjetas
             setCardsBusiness([...cardsBusiness, respuesta.data.data]);
             // setCustomers([...customers, respuesta.data.data]);
             navigate(-1);
             Swal.fire({
                 title: "Tarjeta Cargada",
-                text: "Se Cargo la Tarjeta de forma correcta",
+                text: respuesta.data.message,
                 icon: "success",
                 confirmButtonText: "Aceptar",
             });
         } catch (error) {
-            console.log(error);
+            console.log(error.response.data);
             Swal.fire({
                 title: "Error!",
-                text: `${error}`,
+                text: `${error.response.data.message}`,
                 icon: "error",
                 confirmButtonText: "Aceptar",
             });
