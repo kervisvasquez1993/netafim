@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import imagenUpload from "../assets/sin-img.png";
 import { useParams } from "react-router-dom";
 import useCard from "../Hooks/useCard";
@@ -9,6 +9,7 @@ function ImageUploader() {
   const [isLoading, setIsLoading] = useState(false);
   const { submitNewTaerjeta } = useCard();
   const params = useParams();
+  const cameraInputRef = useRef(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -27,7 +28,7 @@ function ImageUploader() {
 
     try {
       const formData = new FormData();
-      formData.append("src_img", selectedFile, "src_img"); // Asignar el nombre "src_img" al archivo seleccionado
+      formData.append("src_img", selectedFile);
       if (params.id) {
         console.log("params.id", params.id);
         await submitNewTaerjeta(formData, params.id);
@@ -57,6 +58,21 @@ function ImageUploader() {
     document.getElementById("file-input").value = "";
   };
 
+  const handleImageUploadClick = () => {
+    document.getElementById("file-input").click();
+  };
+
+  const handleCameraButtonClick = () => {
+    cameraInputRef.current.click();
+  };
+
+  const handleCapture = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="bg-white rounded-lg shadow-md pr-10 pl-10 mt-10 mb-10 min-height-200px">
@@ -65,21 +81,34 @@ function ImageUploader() {
             src={URL.createObjectURL(selectedFile)}
             alt="Imagen seleccionada"
             className="block mx-auto cursor-pointer object-contain w-full h-full min-height-200px"
+            onClick={handleImageUploadClick}
           />
         ) : (
           <img
             src={imagenUpload}
             alt="Imagen seleccionada"
             className="block mx-auto cursor-pointer object-contain w-full h-full min-height-200px"
+            onClick={handleImageUploadClick}
           />
         )}
         <input
           id="file-input"
           type="file"
-          accept="image/*;capture=camera"
+          accept="image/*"
+          capture="environment"
           className="hidden"
           name="src_img"
           onChange={handleFileChange}
+        />
+        <input
+          id="camera-input"
+          type="file"
+          accept="image/*"
+          capture="user"
+          className="hidden"
+          name="src_img"
+          ref={cameraInputRef}
+          onChange={handleCapture}
         />
       </div>
       <div className="">
@@ -90,10 +119,17 @@ function ImageUploader() {
             <div className="flex flex-col items-center justify-center">
               <label
                 htmlFor="file-input"
-                className="button-style-2 text-center  m-5"
+                className="button-style-2 text-center m-5"
               >
                 {selectedFile ? "Cambiar imagen" : "Seleccionar imagen"}
               </label>
+              <button
+                type="button"
+                className="button-style-2 text-center m-5"
+                onClick={handleCameraButtonClick}
+              >
+                Tomar foto
+              </button>
               {selectedFile && (
                 <button
                   type="button"
