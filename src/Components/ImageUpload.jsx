@@ -64,9 +64,10 @@ function ImageUploader() {
   };
 
   const handleCameraButtonClick = () => {
+    const facingMode = { exact: "environment" };
     const constraints = {
       audio: false,
-      video: { facingMode: { exact: "environment" } }
+      video: { facingMode },
     };
 
     navigator.mediaDevices.getUserMedia(constraints)
@@ -114,7 +115,7 @@ function ImageUploader() {
             ref={webcamRef}
             screenshotFormat="image/jpeg"
             className="block mx-auto cursor-pointer object-contain w-full h-full min-height-200px"
-            onClick={handleCapture}
+            onClick={handleImageUploadClick}
           />
         )}
         <input
