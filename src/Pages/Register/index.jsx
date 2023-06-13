@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { PublicComponents } from "../../Layouts/PublicComponents";
 import Swal from "sweetalert2";
 import { ApiBackend } from "../../apis/ApiBackend";
+import HeaderBack from "../../Components/HeaderBack";
 
 export const Register = () => {
     const navigate = useNavigate();
@@ -72,7 +73,8 @@ export const Register = () => {
     };
 
     return (
-        <PublicComponents title={"Registro"}>
+        <PublicComponents>
+            <HeaderBack titulo={"Registro"} titulo2={true}/>
             <form onSubmit={handleSubmit}>
                 <div className="mb-4 form-container">
                     <label
