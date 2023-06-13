@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import imagenUpload from "../assets/sin-img.png";
 import { useParams } from "react-router-dom";
 import useCard from "../Hooks/useCard";
@@ -11,46 +11,6 @@ function ImageUploader() {
   const { submitNewTaerjeta } = useCard();
   const params = useParams();
   const webcamRef = useRef(null);
-
-  useEffect(() => {
-    checkCameraPermissions();
-  }, []);
-
-  const checkCameraPermissions = async () => {
-    try {
-      const devices = await navigator.mediaDevices.enumerateDevices();
-      const cameras = devices.filter(
-        (device) => device.kind === "videoinput"
-      );
-
-      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-      if (isMobile) {
-        const rearCameras = cameras.filter((camera) =>
-          camera.label.toLowerCase().includes("back")
-        );
-        if (rearCameras.length > 0) {
-          webcamRef.current.videoConstraints = {
-            deviceId: rearCameras[0].deviceId,
-          };
-        } else {
-          Swal.fire({
-            title: "Error!",
-            text: "No se ha encontrado una cámara trasera disponible.",
-            icon: "error",
-            confirmButtonText: "Aceptar",
-          });
-        }
-      }
-    } catch (error) {
-      Swal.fire({
-        title: "Error!",
-        text: "Error al acceder a los dispositivos de cámara.",
-        icon: "error",
-        confirmButtonText: "Aceptar",
-      });
-    }
-  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -164,15 +124,13 @@ function ImageUploader() {
               >
                 {selectedFile ? "Cambiar imagen" : "Seleccionar imagen"}
               </label>
-              {!selectedFile && (
-                <button
-                  type="button"
-                  className="button-style-2 text-center m-5"
-                  onClick={handleCameraButtonClick}
-                >
-                  Tomar foto
-                </button>
-              )}
+              <button
+                type="button"
+                className="button-style-2 text-center m-5"
+                onClick={handleCameraButtonClick}
+              >
+                Tomar foto
+              </button>
               {selectedFile && (
                 <button
                   type="button"
