@@ -3,13 +3,14 @@ import imagenUpload from "../assets/sin-img.png";
 import { useParams } from "react-router-dom";
 import useCard from "../Hooks/useCard";
 import Swal from "sweetalert2";
+import Webcam from "react-webcam";
 
 function ImageUploader() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const { submitNewTaerjeta } = useCard();
   const params = useParams();
-  const cameraInputRef = useRef(null);
+  const webcamRef = useRef(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -63,14 +64,23 @@ function ImageUploader() {
   };
 
   const handleCameraButtonClick = () => {
-    cameraInputRef.current.click();
+    const imageSrc = webcamRef.current.getScreenshot();
+    if (imageSrc) {
+      const capturedImage = dataURLtoFile(imageSrc, "capturedImage.jpeg");
+      setSelectedFile(capturedImage);
+    }
   };
 
-  const handleCapture = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      setSelectedFile(file);
+  const dataURLtoFile = (dataURL, filename) => {
+    const arr = dataURL.split(",");
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
     }
+    return new File([u8arr], filename, { type: mime });
   };
 
   return (
@@ -84,9 +94,10 @@ function ImageUploader() {
             onClick={handleImageUploadClick}
           />
         ) : (
-          <img
-            src={imagenUpload}
-            alt="Imagen seleccionada"
+          <Webcam
+            audio={false}
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
             className="block mx-auto cursor-pointer object-contain w-full h-full min-height-200px"
             onClick={handleImageUploadClick}
           />
@@ -99,16 +110,6 @@ function ImageUploader() {
           className="hidden"
           name="src_img"
           onChange={handleFileChange}
-        />
-        <input
-          id="camera-input"
-          type="file"
-          accept="image/*"
-          capture="user"
-          className="hidden"
-          name="src_img"
-          ref={cameraInputRef}
-          onChange={handleCapture}
         />
       </div>
       <div className="">
