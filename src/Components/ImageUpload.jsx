@@ -64,6 +64,21 @@ function ImageUploader() {
   };
 
   const handleCameraButtonClick = () => {
+    const constraints = {
+      audio: false,
+      video: { facingMode: { exact: "environment" } }
+    };
+
+    navigator.mediaDevices.getUserMedia(constraints)
+      .then((stream) => {
+        webcamRef.current.srcObject = stream;
+      })
+      .catch((error) => {
+        console.error("Error accessing camera:", error);
+      });
+  };
+
+  const handleCapture = () => {
     const imageSrc = webcamRef.current.getScreenshot();
     if (imageSrc) {
       const capturedImage = dataURLtoFile(imageSrc, "capturedImage.jpeg");
@@ -99,7 +114,7 @@ function ImageUploader() {
             ref={webcamRef}
             screenshotFormat="image/jpeg"
             className="block mx-auto cursor-pointer object-contain w-full h-full min-height-200px"
-            onClick={handleImageUploadClick}
+            onClick={handleCapture}
           />
         )}
         <input
@@ -129,7 +144,7 @@ function ImageUploader() {
                 className="button-style-2 text-center m-5"
                 onClick={handleCameraButtonClick}
               >
-                Tomar foto
+                Usar cámara trasera
               </button>
               {selectedFile && (
                 <button
