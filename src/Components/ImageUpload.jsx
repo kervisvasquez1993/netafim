@@ -74,6 +74,7 @@ function ImageUploader() {
         <input
           id="file-input"
           type="file"
+          accept="image/*;capture=camera"
           className="hidden"
           name="src_img"
           onChange={handleFileChange}
