@@ -27,7 +27,7 @@ function ImageUploader() {
 
     try {
       const formData = new FormData();
-      formData.append("src_img", selectedFile);
+      formData.append("src_img", selectedFile, "src_img"); // Asignar el nombre "src_img" al archivo seleccionado
       if (params.id) {
         console.log("params.id", params.id);
         await submitNewTaerjeta(formData, params.id);
@@ -60,17 +60,19 @@ function ImageUploader() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="bg-white rounded-lg shadow-md pr-10 pl-10 mt-10 mb-10 min-height-200px">
-      {selectedFile? (
-                <img
-                  src={URL.createObjectURL(selectedFile)}
-                  alt="Imagen seleccionada"
-                  className="block mx-auto cursor-pointer object-contain w-full h-full min-height-200px"
-                />
-              ) : ( <img
-                src={imagenUpload}
-                alt="Imagen seleccionada"
-                className="block mx-auto cursor-pointer object-contain w-full h-full min-height-200px"
-              />)}       
+        {selectedFile ? (
+          <img
+            src={URL.createObjectURL(selectedFile)}
+            alt="Imagen seleccionada"
+            className="block mx-auto cursor-pointer object-contain w-full h-full min-height-200px"
+          />
+        ) : (
+          <img
+            src={imagenUpload}
+            alt="Imagen seleccionada"
+            className="block mx-auto cursor-pointer object-contain w-full h-full min-height-200px"
+          />
+        )}
         <input
           id="file-input"
           type="file"
@@ -81,30 +83,30 @@ function ImageUploader() {
         />
       </div>
       <div className="">
-  {isLoading ? (
-    <p>Cargando archivo...</p>
-  ) : (
-    <>
-      <div className="flex flex-col items-center justify-center">
-        <label
-          htmlFor="file-input"
-          className="button-style-2 text-center  m-5"
-        >
-          {selectedFile ? "Cambiar imagen" : "Seleccionar imagen"}
-        </label>
-        {selectedFile && (
-          <button
-            type="button"
-            className="button-style-red text-center "
-            onClick={handleCancelImage}
-          >
-            Cancelar
-          </button>
+        {isLoading ? (
+          <p>Cargando archivo...</p>
+        ) : (
+          <>
+            <div className="flex flex-col items-center justify-center">
+              <label
+                htmlFor="file-input"
+                className="button-style-2 text-center  m-5"
+              >
+                {selectedFile ? "Cambiar imagen" : "Seleccionar imagen"}
+              </label>
+              {selectedFile && (
+                <button
+                  type="button"
+                  className="button-style-red text-center "
+                  onClick={handleCancelImage}
+                >
+                  Cancelar
+                </button>
+              )}
+            </div>
+          </>
         )}
       </div>
-    </>
-  )}
-</div>
       <div className="flex justify-center pt-10 pb-5">
         <button
           className="button-style"
