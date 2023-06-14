@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useCustomers from "../Hooks/useCustomers";
 import useAlert from "../Hooks/useAlert";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useCard from "../Hooks/useCard";
 
@@ -65,6 +65,7 @@ const unidadesMedida = unidadesDeMedida.map((size) => (
 
 const FormSubmit = () => {
     const params = useParams();
+    const navigate = useNavigate();
     const { showAlert } = useAlert();
     const { submitNewCliente, errors } = useCustomers();
     const { submitNewClienteCard } = useCard();
@@ -293,9 +294,9 @@ const FormSubmit = () => {
                         className="button-style mb-5"
                         value="Guardar cliente"
                     />
-                    <Link to="/home" className="button-style-white">
+                    <Link onClick={() => navigate(-1)} className="button-style-white">
                         Cancelar
-                    </Link>
+                    </Link >
                 </div>
             </div>
         </form>

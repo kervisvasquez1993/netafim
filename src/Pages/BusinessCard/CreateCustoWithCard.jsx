@@ -4,6 +4,7 @@ import { TitleHeaders } from "../../Components/TitleHeaders";
 import useCard from "../../Hooks/useCard";
 import { useParams } from "react-router-dom";
 import FormSubmit from "../../Components/FormSubmit";
+import HeaderBack from "../../Components/HeaderBack";
 const cultivos = [
     "Caña de Azúcar",
     "Banano",
@@ -63,7 +64,7 @@ const CreateCustoWithCard = () => {
     return (
         <>
             <HeadersOne />
-            <TitleHeaders title={"Añadir Cliente"} />
+            <HeaderBack titulo={"Añadir Cliente"} />
             <FormSubmit />
 
         </>
