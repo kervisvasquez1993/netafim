@@ -35,7 +35,7 @@ export const ListCustomers = () => {
     return (
         <>
             <HeadersTwo />
-            <HeaderBack titulo={"Lista de clietes"}/>
+            <HeaderBack titulo={"Clientes registrados"}/>
             <Button
                 text={"Ver tarjetas de clientes"}
                 variant={"primary"}
