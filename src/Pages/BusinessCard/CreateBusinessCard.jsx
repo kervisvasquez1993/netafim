@@ -12,12 +12,12 @@ const CreateBusinessCard = () => {
     return (
         <>
             <HeadersOne />
-            <HeaderBack titulo={"Subir Tarjeta"} />
-            {/* <TitleHeaders
+            <HeaderBack titulo={""} />
+            <TitleHeaders
                 title={
                     "Puede tomar foto de una Tarjeta de Presentación y luego transcribir los datos "
                 }
-            /> */}
+            />
 
             <ImageUploader />
         </>

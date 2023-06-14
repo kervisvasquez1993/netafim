@@ -111,11 +111,11 @@ function ImageUploader() {
                                 className="button-style-2 text-center mb-5"
                                 onClick={handleCameraButtonClick}
                             >
-                                Tomar foto
+                                Tomar una foto
                             </button>
                             <button
                                 type="button"
-                                className="button-style-white text-center"
+                                className="button-style-white text-center mb-5"
                                 onClick={handleGalleryButtonClick}
                             >
                                 Cargar una foto

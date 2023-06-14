@@ -103,7 +103,7 @@ function ImageUploader() {
                   className="button-style-2 text-center"
                   onClick={handleCameraButtonClick}
                 >
-                  Tomar foto
+                  Tomar una foto
                 </button>
               )}
             </div>

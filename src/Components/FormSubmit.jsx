@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import useCustomers from "../Hooks/useCustomers";
 import useAlert from "../Hooks/useAlert";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import useCard from "../Hooks/useCard";
 
 const cultivos = [
     "Caña de Azúcar",
@@ -47,8 +49,10 @@ const opcionesCultivo = sizes.map((size) => (
 ));
 
 const FormSubmit = () => {
+    const params = useParams();
     const { showAlert } = useAlert();
     const { submitNewCliente, errors } = useCustomers();
+    const {submitNewClienteCard} = useCard();
     const [customer, setCustomer] = useState({
         nombre: "",
         apellido: "",
@@ -65,9 +69,16 @@ const FormSubmit = () => {
     const handleInputChange = (e) => {
         setCustomer({ ...customer, [e.target.name]: e.target.value });
     };
+    
     const handleSubmit = (e) => {
         e.preventDefault();
-        submitNewCliente(customer);
+        console.log(params.id, "params")
+        if(params.id){
+            submitNewClienteCard(customer, params.id);
+        }else{
+            submitNewCliente(customer);
+        }
+        
     };
     return (
         <form onSubmit={handleSubmit}>
