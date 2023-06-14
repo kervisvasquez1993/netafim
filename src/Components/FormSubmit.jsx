@@ -14,7 +14,7 @@ const cultivos = [
     "Palma de Aceite",
     "Melón",
     "Sandía",
-    "Otros",
+    "Otro",
 ];
 
 const paises = [
@@ -172,7 +172,7 @@ const FormSubmit = () => {
                         {opciones}
                     </select>
                 </div>
-                {customer.cultivo === "Otros" && (
+                {customer.cultivo === "Otro" && (
                     <div className="mb-4 form-container">
                         <label
                             htmlFor="otro_cultivo"
