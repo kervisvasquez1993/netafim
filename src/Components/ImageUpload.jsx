@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import imagenUpload from "../assets/sin-img.png";
 import { useParams } from "react-router-dom";
 import useCard from "../Hooks/useCard";
 import Swal from "sweetalert2";
@@ -11,6 +10,7 @@ function ImageUploader() {
   const { submitNewTaerjeta } = useCard();
   const params = useParams();
   const webcamRef = useRef(null);
+  const [cameraFacingMode, setCameraFacingMode] = useState("user");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -64,6 +64,16 @@ function ImageUploader() {
   };
 
   const handleCameraButtonClick = () => {
+    const newCameraFacingMode =
+      cameraFacingMode === "user" ? "environment" : "user";
+    setCameraFacingMode(newCameraFacingMode);
+  };
+
+  const handleCameraError = (error) => {
+    console.error("Error al acceder a la cámara:", error);
+  };
+
+  const handleTakePhoto = () => {
     const imageSrc = webcamRef.current.getScreenshot();
     if (imageSrc) {
       const capturedImage = dataURLtoFile(imageSrc, "capturedImage.jpeg");
@@ -98,8 +108,12 @@ function ImageUploader() {
             audio={false}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
+            videoConstraints={{
+              facingMode: cameraFacingMode,
+            }}
             className="block mx-auto cursor-pointer object-contain w-full h-full min-height-200px"
             onClick={handleImageUploadClick}
+            onUserMediaError={handleCameraError}
           />
         )}
         <input
@@ -127,9 +141,16 @@ function ImageUploader() {
               <button
                 type="button"
                 className="button-style-2 text-center m-5"
-                onClick={handleCameraButtonClick}
+                onClick={handleTakePhoto}
               >
                 Tomar foto
+              </button>
+              <button
+                type="button"
+                className="button-style-2 text-center m-5"
+                onClick={handleCameraButtonClick}
+              >
+                Cambiar cámara
               </button>
               {selectedFile && (
                 <button
