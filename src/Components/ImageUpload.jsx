@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useCard from "../Hooks/useCard";
 import Swal from "sweetalert2";
@@ -10,7 +10,19 @@ function ImageUploader() {
   const { submitNewTaerjeta } = useCard();
   const params = useParams();
   const webcamRef = useRef(null);
-  const [cameraFacingMode, setCameraFacingMode] = useState("user");
+  const [cameraFacingMode, setCameraFacingMode] = useState("environment");
+
+  useEffect(() => {
+    // Verificar si la cámara trasera está disponible y establecerla como predeterminada
+    navigator.mediaDevices.enumerateDevices().then((devices) => {
+      const rearCamera = devices.find(
+        (device) => device.kind === "videoinput" && device.label.includes("rear")
+      );
+      if (rearCamera) {
+        setCameraFacingMode(rearCamera.deviceId);
+      }
+    });
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

@@ -8,15 +8,21 @@ import perfil from "../../assets/svg/perfil.svg";
 import { TitleHeaders } from "../../Components/TitleHeaders.jsx";
 import Button from "../../Components/Button.jsx";
 import useAuth from "../../Hooks/useAuth.jsx";
+import { useEffect } from "react";
 
 export const Home = () => {
     const { salir } = useAuth();
+    const { getCustomerData } = useCustomers();
     const handleLogout = () => {
         console.log("hola");
         salir();
         console.log("logout");
         return;
     };
+    useEffect(() => {
+        console.log("useEffect");
+        getCustomerData();
+    }, []);
     return (
         <>
             <HeadersOne />

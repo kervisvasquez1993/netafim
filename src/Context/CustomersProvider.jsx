@@ -126,7 +126,21 @@ export const CustomersProvider = ({ children }) => {
         fetchData();
     }, [customer]);
 
-
+   const  getCustomerData = async () =>  {
+        setLoadingCustomers(true);
+        try {
+            if (!config) {
+                return;
+            }
+            const { data } = await ApiBackend.get("/clientes", config);
+            console.log(data.data, "data de provider");
+            setCustomers(data.data);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoadingCustomers(false);
+        }
+    };
     const getData = async () => {
         setLoadingCustomers(true);
         try {
@@ -263,7 +277,8 @@ export const CustomersProvider = ({ children }) => {
                 submitNewCliente,
                 descarga,
                 onDeleteCustomer,
-                onGetDataCustomers
+                onGetDataCustomers,
+                getCustomerData
             }}
         >
             {children}
