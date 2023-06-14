@@ -197,7 +197,8 @@ export const CardProvider = ({ children }) => {
             setCustomers([...customers, respuesta.data.data]);
             setCardBuiness(respuesta.data.data);
             console.log(cardBusiness, "tarjeta creada");
-            await showAlert("Cliente Agregado");
+            Swal.fire("Cliente Agregado de forma Correcta", "", "success");
+            // await showAlert("Cliente Agregado");
             navigate(-1);
         } catch (error) {
             await showAlert(
