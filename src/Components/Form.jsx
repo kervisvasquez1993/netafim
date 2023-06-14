@@ -12,6 +12,7 @@ function Form({ data }) {
         tamano_de_cultivo,
         ubicacion_zona,
         empresa,
+        unidad_medida
     } = data;
     console.log(ubicacion_zona);
     return (
@@ -93,7 +94,37 @@ function Form({ data }) {
                     value={cultivo}
                     readOnly
                 />
-            </div>
+            </div>   <div className="mb-4 form-container">
+       <label
+           htmlFor="tamano_de_cultivo"
+           className="label-position label-style"
+       >
+           Tamaño de cultivo
+       </label>
+       <input
+           className=" input-style"
+           type="text"
+           id="tamano_de_cultivo"
+           readOnly
+           defaultValue={tamano_de_cultivo}
+       />
+   </div>
+
+   <div className="mb-4 form-container">
+       <label
+           htmlFor="unidad_medida"
+           className="label-position label-style"
+       >
+           Unidad de medida
+       </label>
+       <input
+           className=" input-style"
+           type="text"
+           id="unidad_medida"
+           readOnly
+           defaultValue={unidad_medida}
+       />
+   </div>
             <div className="mb-4 form-container">
                 <label
                     htmlFor="ubicacion_zona"
@@ -122,21 +153,21 @@ function Form({ data }) {
                     readOnly
                 />
             </div>
-            <div className="mb-4 form-container">
-                <label
-                    htmlFor="tamano_de_cultivo"
-                    className="label-position label-style"
-                >
-                    Tamaño de cultivo
-                </label>
-                <input
-                    className=" input-style"
-                    type="text"
-                    id="tamano_de_cultivo"
-                    readOnly
-                    defaultValue={tamano_de_cultivo}
-                />
-            </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
             
         </div>
     );

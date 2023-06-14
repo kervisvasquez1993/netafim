@@ -70,10 +70,14 @@ export const CustomersProvider = ({ children }) => {
 
         try {
             Swal.fire({
+                customClass:{
+                    confirmButton : "bg-main"
+                },
                 title: "Generando archivo",
                 text: "Por favor, espere...",
                 allowOutsideClick: false,
                 allowEscapeKey: false,
+                confirmButtonColor : "#0a7dd6",
                 onBeforeOpen: () => {
                     Swal.showLoading();
                 },
@@ -255,6 +259,7 @@ export const CustomersProvider = ({ children }) => {
                     icon: "error",
                     title: "Error",
                     html: `<ol>${errorList.join("")}</ol>`,
+                    confirmButtonColor : "#0a7dd6",
                 });
 
                 console.log(error, "error");

@@ -22,6 +22,7 @@ function ImageUploader() {
                 text: "No se ha seleccionado ninguna imagen",
                 icon: "error",
                 confirmButtonText: "Aceptar",
+                confirmButtonColor : "#0a7dd6",
             });
             return;
         }
@@ -47,6 +48,7 @@ function ImageUploader() {
                 text: "Error al enviar la imagen",
                 icon: "error",
                 confirmButtonText: "Aceptar",
+                confirmButtonColor : "#0a7dd6",
             });
         }
     };

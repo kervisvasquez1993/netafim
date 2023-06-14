@@ -32,8 +32,12 @@ export const AuthProvider = ({ children }) => {
             );
             console.log(data, "data");
             Swal.fire({
+                customClass:{
+                    confirmButton : "bg-main"
+                },
                 icon: "success",
                 title: data.message,
+                confirmButtonColor : "#0a7dd6",
             });
         } catch (error) {
             console.log(error);

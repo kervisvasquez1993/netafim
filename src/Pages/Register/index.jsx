@@ -57,6 +57,7 @@ export const Register = () => {
                     )
                 );
                 Swal.fire({
+                    
                     icon: "error",
                     title: "Error",
                     html: `<ol>${errorList.join("")}</ol> <br/>`,

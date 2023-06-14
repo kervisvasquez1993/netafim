@@ -53,6 +53,7 @@ export const Login = () => {
             text: errors,
             icon: "error",
             confirmButtonText: "Aceptar",
+            confirmButtonColor : "#0a7dd6",
         });
 
         setErrors({});

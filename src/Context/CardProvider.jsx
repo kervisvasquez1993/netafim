@@ -93,7 +93,7 @@ export const CardProvider = ({ children }) => {
             const { data } = await ApiBackend.delete(`/tarjetas/${id}`, config);
             console.log(data);
             setCardsBusiness(cardsBusiness.filter((card) => card.id !== id));
-            Swal.fire(data.message, "", "success");
+            Swal.fire(data.message, "", "success", );
             navigate(-1);
             return;
         } catch (error) {
@@ -123,10 +123,14 @@ export const CardProvider = ({ children }) => {
             // setCustomers([...customers, respuesta.data.data]);
             navigate(-1);
             Swal.fire({
+                customClass:{
+                    confirmButton : "bg-main"
+                },
                 title: "Tarjeta Cargada",
                 text: respuesta.data.message,
                 icon: "success",
                 confirmButtonText: "Aceptar",
+                confirmButtonColor : "#0a7dd6",
             });
         } catch (error) {
             console.log(error.response.data);
@@ -135,6 +139,7 @@ export const CardProvider = ({ children }) => {
                 text: `${error.response.data.message}`,
                 icon: "error",
                 confirmButtonText: "Aceptar",
+                confirmButtonColor : "#0a7dd6",
             });
         }
     };
@@ -162,6 +167,7 @@ export const CardProvider = ({ children }) => {
                 text: "Se Cargo la Tarjeta de forma correcta",
                 icon: "success",
                 confirmButtonText: "Aceptar",
+                confirmButtonColor : "#0a7dd6",
             });
         } catch (error) {
             console.log(error);
@@ -170,6 +176,7 @@ export const CardProvider = ({ children }) => {
                 text: `${error}`,
                 icon: "error",
                 confirmButtonText: "Aceptar",
+                confirmButtonColor : "#0a7dd6",
             });
         }
     };

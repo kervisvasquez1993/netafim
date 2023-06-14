@@ -62,9 +62,12 @@ export const ShowCustomers = () => {
     function handleArchiveClientClick() {
         submitChangeStatus(customer);
         Swal.fire({
+           
+           
             title: "Cliente Actualizado!",
             text: "Cliente Actualizado de Forma Correcta",
             icon: "success",
+            confirmButtonColor : "#0a7dd6",
             confirmButtonText: "Aceptar",
         });
         console.log("Cambio de status ");

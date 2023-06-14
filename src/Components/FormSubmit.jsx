@@ -14,8 +14,8 @@ const cultivos = [
     "Ornamentales",
     "Hortalizas",
     "Palma de Aceite",
-    "Melón",
-    "Sandía",
+    "Melon",
+    "Sandia",
     "Otro",
 ];
 
@@ -35,14 +35,29 @@ const optPaises = paises.map((pais) => (
     </option>
 ));
 
-const opciones = cultivos.map((cultivo) => (
-    <option key={cultivo} value={cultivo}>
-        {cultivo}
-    </option>
-));
+const opciones = cultivos.map((cultivo) => {
+    if (cultivo == "Melon") {
+        return (
+            <option key={cultivo} value={cultivo}>
+                Melón
+            </option>
+        );
+    } else if (cultivo == "Sandia") {
+        return (
+            <option key={cultivo} value={cultivo}>
+                Sandía
+            </option>
+        );
+    }
+    return (
+        <option key={cultivo} value={cultivo}>
+            {cultivo}
+        </option>
+    );
+});
 
-const sizes = ["ha", "mz", "m²"];
-const opcionesCultivo = sizes.map((size) => (
+const unidadesDeMedida = ["ha", "mz", "m²"];
+const unidadesMedida = unidadesDeMedida.map((size) => (
     <option key={size} value={size}>
         {size}
     </option>
@@ -52,13 +67,13 @@ const FormSubmit = () => {
     const params = useParams();
     const { showAlert } = useAlert();
     const { submitNewCliente, errors } = useCustomers();
-    const {submitNewClienteCard} = useCard();
+    const { submitNewClienteCard } = useCard();
     const [customer, setCustomer] = useState({
         nombre: "",
         apellido: "",
         correo: "",
         cultivo: "",
-        otro_cultivo : "",
+        otro_cultivo: "",
         numero_telefono: "",
         pais: "",
         tamano_de_cultivo: "",
@@ -69,16 +84,15 @@ const FormSubmit = () => {
     const handleInputChange = (e) => {
         setCustomer({ ...customer, [e.target.name]: e.target.value });
     };
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(params.id, "params")
-        if(params.id){
+        console.log(params.id, "params");
+        if (params.id) {
             submitNewClienteCard(customer, params.id);
-        }else{
+        } else {
             submitNewCliente(customer);
         }
-        
     };
     return (
         <form onSubmit={handleSubmit}>
@@ -208,16 +222,14 @@ const FormSubmit = () => {
                     >
                         Tamaño de cultivo
                     </label>
-                    <select
-                        className="input-style"
+                    <input
+                        className=" input-style"
+                        type="text"
                         id="tamano_de_cultivo"
                         name="tamano_de_cultivo"
                         onChange={handleInputChange}
                         value={customer.tamano_de_cultivo}
-                    >
-                        <option>Seleccione una opción</option>
-                        {opcionesCultivo}
-                    </select>
+                    />
                 </div>
                 <div className="mb-4 form-container">
                     <label
@@ -226,14 +238,16 @@ const FormSubmit = () => {
                     >
                         Unidad de medida
                     </label>
-                    <input
-                        className=" input-style"
-                        type="text"
+                    <select
+                        className="input-style"
                         id="unidad_medida"
                         name="unidad_medida"
                         onChange={handleInputChange}
                         value={customer.unidad_medida}
-                    />
+                    >
+                        <option>Seleccione una opción</option>
+                        {unidadesMedida}
+                    </select>
                 </div>
 
                 <div className="mb-4 form-container">
