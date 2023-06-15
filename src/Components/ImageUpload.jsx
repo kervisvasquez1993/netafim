@@ -98,18 +98,12 @@ function ImageUploader() {
 
   return (
     <form onSubmit={handleSubmit}>
-              <div className="">
+      <div className="">
         {isLoading ? (
           <Loading />
         ) : (
           <>
             <div className="flex flex-col items-center justify-center">
-              {/* <label
-                htmlFor="file-input"
-                className="button-style-2 text-center m-5"
-              >
-                {selectedFile ? "Cambiar imagen" : "Seleccionar imagen"}
-              </label> */}
               <button
                 type="button"
                 className="button-style-2 text-center m-5"
@@ -117,13 +111,12 @@ function ImageUploader() {
               >
                 Tomar una foto
               </button>
-              <button
-                type="button"
+              <label
+                htmlFor="gallery-input"
                 className="button-style-2 text-center m-5"
-                onClick={handleGalleryButtonClick}
               >
                 Cargar una foto
-              </button>
+              </label>
               {selectedFile && (
                 <button
                   type="button"
@@ -184,7 +177,6 @@ function ImageUploader() {
           {isLoading ? "Cargando..." : "Subir Archivo"}
         </button>
       </div>
-
     </form>
   );
 }
