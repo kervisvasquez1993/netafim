@@ -4,8 +4,6 @@ import useCard from "../Hooks/useCard";
 import Swal from "sweetalert2";
 import Webcam from "react-webcam";
 import Loading from "../Wiews/Loading";
-import { useDropzone } from "react-dropzone";
-import axios from "axios";
 
 function ImageUploader() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -14,12 +12,6 @@ function ImageUploader() {
   const params = useParams();
   const webcamRef = useRef(null);
   const [facingMode, setFacingMode] = useState("environment");
-
-  const onDrop = (acceptedFiles) => {
-    setSelectedFile(acceptedFiles[0]);
-  };
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -68,6 +60,10 @@ function ImageUploader() {
     document.getElementById("file-input").value = "";
   };
 
+  const handleImageUploadClick = () => {
+    document.getElementById("file-input").click();
+  };
+
   const handleCameraButtonClick = () => {
     const imageSrc = webcamRef.current.getScreenshot();
     if (imageSrc) {
@@ -76,8 +72,12 @@ function ImageUploader() {
     }
   };
 
-  const handleGalleryFileChange = (acceptedFiles) => {
-    setSelectedFile(acceptedFiles[0]);
+  const handleGalleryButtonClick = () => {
+    document.getElementById("gallery-input").click();
+  };
+
+  const handleGalleryFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
   };
 
   const handleSwitchCamera = () => {
@@ -111,10 +111,12 @@ function ImageUploader() {
               >
                 Tomar una foto
               </button>
-              <div {...getRootProps()} className={`button-style-2 text-center m-5 dropzone ${isDragActive ? "active" : ""}`}>
-                <input {...getInputProps()} />
-                Subir una foto
-              </div>
+              <label
+                htmlFor="gallery-input"
+                className="button-style-2 text-center m-5"
+              >
+                Cargar una foto
+              </label>
               {selectedFile && (
                 <button
                   type="button"
@@ -134,7 +136,7 @@ function ImageUploader() {
             src={URL.createObjectURL(selectedFile)}
             alt="Imagen seleccionada"
             className="block mx-auto cursor-pointer object-contain w-full h-full min-height-200px"
-            onClick={handleCameraButtonClick}
+            onClick={handleImageUploadClick}
           />
         ) : (
           <Webcam
@@ -143,7 +145,7 @@ function ImageUploader() {
             screenshotFormat="image/jpeg"
             videoConstraints={{ facingMode }}
             className="block mx-auto cursor-pointer object-contain w-full h-full min-height-200px"
-            onClick={handleCameraButtonClick}
+            onClick={handleImageUploadClick}
           />
         )}
         <input
@@ -154,6 +156,14 @@ function ImageUploader() {
           className="hidden"
           name="src_img"
           onChange={handleFileChange}
+        />
+        <input
+          id="gallery-input"
+          type="file"
+          accept="image/*"
+          className="hidden"
+          name="src_img"
+          onChange={handleGalleryFileChange}
         />
       </div>
 
