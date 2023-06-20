@@ -16,6 +16,7 @@ import { ShowBusinessCard } from "./Pages/BusinessCard/ShowBusinessCard";
 import CreateCustoWithCard from "./Pages/BusinessCard/CreateCustoWithCard";
 import { AlertProvider } from "./Context/AlertProvider";
 import Me from "./Pages/Me";
+import VerificationPage from "./Pages/Verification/VerificationPage";
 
 const App = () => {
     return (
@@ -31,6 +32,10 @@ const App = () => {
                                     <Route
                                         path="singup"
                                         element={<Register />}
+                                    />
+                                    <Route
+                                        path="verificacion/:token"
+                                        element={<VerificationPage />}
                                     />
                                     {/* <Route
                                     path="password-recovery"

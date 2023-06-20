@@ -9,13 +9,40 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState({});
     const [loading, setLoading] = useState(true);
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState(null);
+    const [mensaje, setMensaje] = useState(null);
     const config = configHeaderToken();
     const navigate = useNavigate();
     const salir = async () => {
         await logout();
         return;
     };
+    const validarToken = async (token) => {
+        try {
+            const respuesta = await verify(token);
+            Swal.fire({
+                customClass: {
+                    confirmButton: "bg-main",
+                },
+                icon: "success",
+                title: respuesta,
+                confirmButtonColor: "#0a7dd6",
+            });
+            return;
+        } catch (error) {
+            //   console.log(error.message);
+            Swal.fire({
+                customClass: {
+                    confirmButton: "bg-main",
+                },
+                icon: "error",
+                title: error,
+                confirmButtonColor: "#0a7dd6",
+            });
+            setErrors(error); // Establecer el mensaje de error en el estado
+        }
+    };
+
     const onUpdatePassword = async (data) => {
         await updatePassword(data);
     };
@@ -32,12 +59,12 @@ export const AuthProvider = ({ children }) => {
             );
             console.log(data, "data");
             Swal.fire({
-                customClass:{
-                    confirmButton : "bg-main"
+                customClass: {
+                    confirmButton: "bg-main",
                 },
                 icon: "success",
                 title: data.message,
-                confirmButtonColor : "#0a7dd6",
+                confirmButtonColor: "#0a7dd6",
             });
         } catch (error) {
             console.log(error);
@@ -65,6 +92,17 @@ export const AuthProvider = ({ children }) => {
             setLoading(false);
         })();
     }, []);
+    const verify = async (token) => {
+        try {
+            const { data } = await ApiBackend.get(`register/verify/${token}`);
+            console.log(data.message, "data");
+            return data.message;
+        } catch (error) {
+            console.log(error.response.data.error, "error");
+            throw new Error(error.response.data.error);
+        }
+    };
+
     const logout = async () => {
         try {
             console.log(config, "config");
@@ -84,7 +122,16 @@ export const AuthProvider = ({ children }) => {
     };
     return (
         <AuthContext.Provider
-            value={{ auth, setAuth, loading, salir, onUpdatePassword }}
+            value={{
+                auth,
+                setAuth,
+                loading,
+                salir,
+                onUpdatePassword,
+                validarToken,
+                errors,
+                mensaje,
+            }}
         >
             {children}
         </AuthContext.Provider>
