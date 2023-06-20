@@ -99,14 +99,14 @@ export const Login = () => {
                         required
                     />
                 </div>
-                {/* <div className="flex justify-center pt-10 pb-10">
+                <div className="flex justify-center pt-10 pb-10">
                     <Link
-                        to="password-recovery"
+                        to="/password-recovery"
                         className="block text-sm text-blue-500 mb-4"
                     >
                         Olvidé mi Contraseña
                     </Link>
-                </div> */}
+                </div>
 
                 <div className="flex justify-center flex-col items-center">
                     <input

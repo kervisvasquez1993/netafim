@@ -1,45 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./style.module.css";
+import { PublicComponents } from "../../Layouts/PublicComponents";
+import HeaderBack from "../../Components/HeaderBack";
+import { HeadersTwo } from "../../Wiews/HeadersTwo";
+import { ApiBackend } from "../../apis/ApiBackend";
 
 export const PasswordRecovery = () => {
+    const [email, setEmail] = useState("");
+    const handleSutmit = async (e) => {
+        e.preventDefault();
+        console.log(email);
+        try {
+            const { data } = await ApiBackend.post("password/reset", {
+                email,
+            });
+            console.log(data);
+            // return;
+        } catch (error) {
+            console.log(error);
+            // setAlerta({ message: error.response.data.error, error: true });
+        }
+    };
     return (
-        <div
-            className={`${styles["register-container"]} ${styles["container"]}`}
-        >
-            <div className={styles["register-header"]}></div>
+        <>
+            <HeadersTwo />
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '50vh' }}>
+                <HeaderBack titulo={"Recuperar contraseña"} titulo2={true} />
+                <form onSubmit={(e) => handleSutmit(e)}>
+                    <div className="mb-4 form-container">
+                        <label
+                            htmlFor="email"
+                            className="label-position label-style"
+                        >
+                            Correo electrónico
+                        </label>
 
-            <div className={styles["register-form"]}>
-                <div className={styles["title"]}>
-                    <div className={styles["arrow"]}></div>
-                    <h2 className={styles["form-title"]}>
-                        Recuperar contraseña
-                    </h2>
-                </div>
-
-                <div className={styles["form-container"]}>
-                    <form>
-                        <fieldset className={styles["input"]}>
-                            <legend>Correo electrónico</legend>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                placeholder="ejemplo@netafim.com"
-                                required
-                            />
-                        </fieldset>
-
-                        <div className={styles["btn"]}>
-                            <a
-                                className={styles["reset-password-request"]}
-                                href="#"
-                            >
-                                Enviar solicitud
-                            </a>
-                        </div>
-                    </form>
-                </div>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={email}
+                            placeholder="ejemplo@netafim.com"
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="input-style"
+                            required
+                        />
+                    </div>
+                    <div className="flex justify-center flex-col items-center pt-10">
+                        <input
+                            type="submit"
+                            value="Enviar solicitud"
+                            className="button-style pt-10 mb-10"
+                        />
+                    </div>
+                </form>
             </div>
-        </div>
+        </>
     );
 };

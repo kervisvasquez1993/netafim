@@ -17,6 +17,7 @@ import CreateCustoWithCard from "./Pages/BusinessCard/CreateCustoWithCard";
 import { AlertProvider } from "./Context/AlertProvider";
 import Me from "./Pages/Me";
 import VerificationPage from "./Pages/Verification/VerificationPage";
+import NewPassword from "./Pages/NewPassword";
 
 const App = () => {
     return (
@@ -37,10 +38,14 @@ const App = () => {
                                         path="verificacion/:token"
                                         element={<VerificationPage />}
                                     />
-                                    {/* <Route
-                                    path="password-recovery"
-                                    element={<PasswordRecovery />}
-                                /> */}
+                                    <Route
+                                        path="password-recovery"
+                                        element={<PasswordRecovery />}
+                                    />
+                                    <Route
+                                        path="reset-password/:token"
+                                        element={<NewPassword />}
+                                    />
                                 </Route>
                                 <Route path="/home" element={<RutaProtegida />}>
                                     <Route index element={<Home />} />
@@ -49,7 +54,7 @@ const App = () => {
                                         element={<ListCustomers />}
                                     />
 
-                                    <Route path="me" element={<Me/>}/>
+                                    <Route path="me" element={<Me />} />
                                     <Route
                                         path="add-customers"
                                         element={<CreateCustomers />}
