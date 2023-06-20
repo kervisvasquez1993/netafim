@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { PublicComponents } from "../../Layouts/PublicComponents";
 import { ApiBackend } from "../../apis/ApiBackend";
+import Swal from "sweetalert2";
 
 const NewPassword = () => {
     const { token } = useParams();
@@ -35,12 +36,39 @@ const NewPassword = () => {
 
         // Enviar datos al backend
         try {
-            const { data } = await ApiBackend.post(`password/reset/${token}`, formData);
+            // Mostrar mensaje de carga
+            Swal.fire({
+                title: "Cargando",
+                text: "Espere por favor...",
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                onBeforeOpen: () => {
+                    Swal.showLoading();
+                },
+            });
+
+            const { data } = await ApiBackend.post(
+                `password/reset/${token}`,
+                formData
+            );
             console.log(data);
-            Swal.fire(data.message, "", "success");
+            Swal.fire({
+                icon: "success",
+                title: data.message,
+                showConfirmButton: true,
+            });
+            setFormData({
+                token: token,
+                password: "",
+                password_confirmation: "",
+            });
             // navigate("/login");
         } catch (error) {
-            console.log(error)
+            Swal.fire({
+                icon: "error",
+                title: error.response.data.error,
+                showConfirmButton: true,
+            });
             if (error.response) {
                 const errorList = Object.values(
                     error.response.data.error
@@ -62,7 +90,7 @@ const NewPassword = () => {
     };
 
     return (
-        <PublicComponents title={"Inicia sesión para registrar clientes"}>
+        <PublicComponents title={"Actualizar contraseña"}>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <div className="mb-4 form-container">
                     <label
