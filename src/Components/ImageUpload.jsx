@@ -18,11 +18,10 @@ function ImageUploader() {
     useEffect(() => {
         setIsWebcamReady(true);
     }, []);
-    console.log(selectedFiles);
-
+    // console.log(selectedFiles);
     const handleSubmit = async (event, uuid) => {
         event.preventDefault();
-        console.log("uuid", uuid);
+
         if (selectedFiles.length === 0) {
             Swal.fire({
                 title: "Error!",
@@ -36,21 +35,19 @@ function ImageUploader() {
         setIsLoading(true);
 
         try {
-            const formData = new FormData();
-            selectedFiles.forEach((file, index) => {
-                formData.append(`src_img${index}`, file);
-            });
-            
-            if (params.id) {
-                console.log("params.id", params.id);
-                console.log(uuid, "uuidtest")
-                
-                await submitNewTaerjeta({card : formData, id : params.id, uuid: uuid});
-            } else {
-                console.log("params.id sin esto");
-                console.log(uuid, "uuidtest")
-                console.log(formData, "formData antes del provider")
-                await submitNewTaerjeta({card : formData, uuid : uuid});
+            for (let i = 0; i < selectedFiles.length; i++) {
+                const formData = new FormData();
+                formData.append("src_img", selectedFiles[i]);
+                console.log(formData, "formdata");
+                if (params.id) {
+                    await submitNewTaerjeta({
+                        card: formData,
+                        id: params.id,
+                        uuid,
+                    });
+                } else {
+                    await submitNewTaerjeta({ card: formData, uuid });
+                }
             }
 
             setIsLoading(false);
