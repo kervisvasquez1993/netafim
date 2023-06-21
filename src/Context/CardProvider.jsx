@@ -36,13 +36,15 @@ export const CardProvider = ({ children }) => {
         return;
     };
     const submitNewTaerjeta = async ({ card, id = {}, uuid = "" }) => {
+        const src_card = card.get("src_img");
         if (id) {
             console.log("sin id");
-            console.log("card sin id", card);
-            await newTarjeta(card, uuid);
+            console.log("card sin id", card.get("src_img"));
+
+            await newTarjeta(src_card, uuid);
         } else {
             console.log("con id");
-            await newTarjetaWithCustomer(card, id, uuid);
+            await newTarjetaWithCustomer(src_card, id, uuid);
         }
 
         // await new Promise((resolve) => setTimeout(resolve, 2000)); // Esperar 3 segundos
@@ -105,6 +107,8 @@ export const CardProvider = ({ children }) => {
     };
 
     const newTarjeta = async (tarjeta, uuid) => {
+        console.log(tarjeta, "tarjeta");
+        console.log(uuid, "uuid");
         try {
             if (!configFile) {
                 // showAlert( "No tienes permiso", "error");
@@ -112,7 +116,7 @@ export const CardProvider = ({ children }) => {
             }
             const respuesta = await ApiBackend.post(
                 `/tarjetas`,
-                { tarjeta, uuid },
+                { src_img: tarjeta, uuid },
                 configFile
             );
             console.log(respuesta, "cliente Creado");
@@ -152,7 +156,7 @@ export const CardProvider = ({ children }) => {
             }
             const respuesta = await ApiBackend.post(
                 `cliente/${id}/tarjeta`,
-                { tarjeta, uuid },
+                { src_img: tarjeta, uuid },
                 configFile
             );
             console.log(respuesta, "cliente Creado");

@@ -39,6 +39,7 @@ function ImageUploader() {
                 const formData = new FormData();
                 formData.append("src_img", selectedFiles[i]);
                 console.log(formData, "formdata");
+                console.log("Form Data:", getFormDataValues(formData));
                 if (params.id) {
                     await submitNewTaerjeta({
                         card: formData,
@@ -62,6 +63,15 @@ function ImageUploader() {
         }
     };
 
+    function getFormDataValues(formData) {
+      const values = {};
+    
+      for (const [key, value] of formData) {
+        values[key] = value;
+      }
+    
+      return values;
+    }
     const handleFileChange = (event) => {
         const files = event.target.files;
         const updatedSelectedFiles = [...selectedFiles];
