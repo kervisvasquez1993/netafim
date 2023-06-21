@@ -35,13 +35,14 @@ export const CardProvider = ({ children }) => {
         await deleteCard(card);
         return;
     };
-    const submitNewTaerjeta = async (card, id = {}) => {
+    const submitNewTaerjeta = async ({ card, id = {}, uuid = "" }) => {
         if (id) {
             console.log("sin id");
-            await newTarjeta(card);
+            console.log("card", card);
+            await newTarjeta(card, uuid);
         } else {
             console.log("con id");
-            await newTarjetaWithCustomer(card, id);
+            await newTarjetaWithCustomer(card, id, uuid);
         }
 
         // await new Promise((resolve) => setTimeout(resolve, 2000)); // Esperar 3 segundos
@@ -93,7 +94,7 @@ export const CardProvider = ({ children }) => {
             const { data } = await ApiBackend.delete(`/tarjetas/${id}`, config);
             console.log(data);
             setCardsBusiness(cardsBusiness.filter((card) => card.id !== id));
-            Swal.fire(data.message, "", "success", );
+            Swal.fire(data.message, "", "success");
             navigate(-1);
             return;
         } catch (error) {
@@ -103,7 +104,7 @@ export const CardProvider = ({ children }) => {
         }
     };
 
-    const newTarjeta = async (tarjeta) => {
+    const newTarjeta = async (tarjeta, uuid) => {
         try {
             if (!configFile) {
                 // showAlert( "No tienes permiso", "error");
@@ -111,7 +112,7 @@ export const CardProvider = ({ children }) => {
             }
             const respuesta = await ApiBackend.post(
                 `/tarjetas`,
-                tarjeta,
+                { tarjeta, uuid },
                 configFile
             );
             console.log(respuesta, "cliente Creado");
@@ -123,14 +124,14 @@ export const CardProvider = ({ children }) => {
             // setCustomers([...customers, respuesta.data.data]);
             navigate(-1);
             Swal.fire({
-                customClass:{
-                    confirmButton : "bg-main"
+                customClass: {
+                    confirmButton: "bg-main",
                 },
                 title: "Tarjeta Cargada",
                 text: respuesta.data.message,
                 icon: "success",
                 confirmButtonText: "Aceptar",
-                confirmButtonColor : "#0a7dd6",
+                confirmButtonColor: "#0a7dd6",
             });
         } catch (error) {
             console.log(error.response.data);
@@ -139,11 +140,11 @@ export const CardProvider = ({ children }) => {
                 text: `${error.response.data.message}`,
                 icon: "error",
                 confirmButtonText: "Aceptar",
-                confirmButtonColor : "#0a7dd6",
+                confirmButtonColor: "#0a7dd6",
             });
         }
     };
-    const newTarjetaWithCustomer = async (tarjeta, id) => {
+    const newTarjetaWithCustomer = async (tarjeta, id, uuid) => {
         try {
             if (!configFile) {
                 // showAlert( "No tienes permiso", "error");
@@ -151,7 +152,7 @@ export const CardProvider = ({ children }) => {
             }
             const respuesta = await ApiBackend.post(
                 `cliente/${id}/tarjeta`,
-                tarjeta,
+                { tarjeta, uuid },
                 configFile
             );
             console.log(respuesta, "cliente Creado");
@@ -167,7 +168,7 @@ export const CardProvider = ({ children }) => {
                 text: "Se Cargo la Tarjeta de forma correcta",
                 icon: "success",
                 confirmButtonText: "Aceptar",
-                confirmButtonColor : "#0a7dd6",
+                confirmButtonColor: "#0a7dd6",
             });
         } catch (error) {
             console.log(error);
@@ -176,7 +177,7 @@ export const CardProvider = ({ children }) => {
                 text: `${error}`,
                 icon: "error",
                 confirmButtonText: "Aceptar",
-                confirmButtonColor : "#0a7dd6",
+                confirmButtonColor: "#0a7dd6",
             });
         }
     };
