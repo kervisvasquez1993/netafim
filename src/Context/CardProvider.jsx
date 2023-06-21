@@ -38,9 +38,6 @@ export const CardProvider = ({ children }) => {
     const submitNewTaerjeta = async ({ card, id = {}, uuid = "" }) => {
         const src_card = card.get("src_img");
         if (id) {
-            console.log("sin id");
-            console.log("card sin id", card.get("src_img"));
-
             await newTarjeta(src_card, uuid);
         } else {
             console.log("con id");
@@ -126,7 +123,7 @@ export const CardProvider = ({ children }) => {
             // agregar a la lista de tarjetas
             setCardsBusiness([...cardsBusiness, respuesta.data.data]);
             // setCustomers([...customers, respuesta.data.data]);
-            navigate(-1);
+            
             Swal.fire({
                 customClass: {
                     confirmButton: "bg-main",

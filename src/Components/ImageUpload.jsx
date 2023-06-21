@@ -50,6 +50,17 @@ function ImageUploader() {
                     await submitNewTaerjeta({ card: formData, uuid });
                 }
             }
+            setSelectedFiles([]);
+            Swal.fire({
+              customClass: {
+                  confirmButton: "bg-main",
+              },
+              title: "Tarjetas cargadas correctamente",
+              text: "Para visualizar puede ir a la sección: tarjetas de presentacion",
+              icon: "success",
+              confirmButtonText: "Aceptar",
+              confirmButtonColor: "#0a7dd6",
+          });
 
             setIsLoading(false);
         } catch (error) {
@@ -61,6 +72,7 @@ function ImageUploader() {
                 confirmButtonText: "Aceptar",
             });
         }
+
     };
 
     function getFormDataValues(formData) {
