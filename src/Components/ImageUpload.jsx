@@ -44,10 +44,12 @@ function ImageUploader() {
             if (params.id) {
                 console.log("params.id", params.id);
                 console.log(uuid, "uuidtest")
+                
                 await submitNewTaerjeta({card : formData, id : params.id, uuid: uuid});
             } else {
                 console.log("params.id sin esto");
                 console.log(uuid, "uuidtest")
+                console.log(formData, "formData antes del provider")
                 await submitNewTaerjeta({card : formData, uuid : uuid});
             }
 

@@ -38,7 +38,7 @@ export const CardProvider = ({ children }) => {
     const submitNewTaerjeta = async ({ card, id = {}, uuid = "" }) => {
         if (id) {
             console.log("sin id");
-            console.log("card", card);
+            console.log("card sin id", card);
             await newTarjeta(card, uuid);
         } else {
             console.log("con id");
