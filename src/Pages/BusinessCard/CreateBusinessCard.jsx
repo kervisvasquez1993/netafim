@@ -6,9 +6,7 @@ import ImageUploader from "../../Components/ImageUpload";
 import HeaderBack from "../../Components/HeaderBack";
 
 const CreateBusinessCard = () => {
-    const saludar = () => {
-        console.log("hola");
-    };
+    
     return (
         <>
             <HeadersOne />
